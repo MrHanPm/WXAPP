@@ -1,0 +1,16 @@
+<import src="../component/forum-header/index" />
+<view class="container">
+    <template is="forumHeader" data="{{userInfo,browse}}"/>
+    <view class="front">
+        <text class="title">{{title}}</text>
+        <view class="timeAndTag">
+            <text class="title-time">{{titleTime}}</text>
+            <text class="tag">路上</text>
+        </view>
+        <view class="titleContent"><text>{{titleContent}}</text></view>
+        <view class="perfect">
+            <image src="../../resources/image/perfect.png"></image>
+        </view>
+    </view>
+</view>
+

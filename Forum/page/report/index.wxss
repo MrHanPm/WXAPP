@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.ttf') format('truetype');
+}
+.warn{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #999999;
+    letter-spacing: 0;
+    line-height: 32rpx;
+    margin-top: 30rpx;
+    margin-bottom: 28rpx;
+}
+.warn:before{
+    content: '\e63e';
+    font-family: 'iconfont';
+    float: left;
+    vertical-align: middle;
+    font-size: 30rpx;
+    color: #E64340;
+    margin-left: 30rpx;
+    margin-right: 10rpx;
+}

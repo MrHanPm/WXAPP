@@ -1,0 +1,7 @@
+<view class="attentions">
+    <image src="src"></image>
+    <text class="forum-name">北奔重卡</text>
+    <view class="cancle-attention">
+        <text>取消关注</text>
+    </view>
+</view>

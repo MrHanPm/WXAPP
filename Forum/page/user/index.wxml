@@ -1,0 +1,42 @@
+<view class="user-header">
+    <view class="mi_personal">
+        <image class="mi_personal-photo" src="{{userInfo.avatarUrl}}"></image>
+        <view class="mi_personal-name">人畜无害酒酱</view>
+        <view class="level all-grade2"></view>
+    </view>
+    <view class="mi_sign">已签到</view>
+    <view class="mi_w-back">
+        <image class="mi_w-back-img" src="../../resources/image/w-back.png"></image>
+    </view>
+</view>
+<view class="mi_front">
+    <view class="mi_gold">
+        <image class="mi_gold-img" src="../../resources/image/gold.png"></image>
+        <text class="mi_gold-num">5600</text>
+    </view>
+    <view class="mi_exp">
+        <view class="mi_progress">
+            <progress  percent="20" color="#0BC1FC" stroke-width="6" />
+        </view>
+        <view class="mi_express">
+            <text class="mi_now-exp">2999</text>
+            <text class="mi_total-exp">/3900</text>
+        </view>
+    </view>
+</view>
+<view class="mi_footer">
+    <view class="mi_sec">
+        <text class="mi_forum my">我的帖子</text>
+    </view>
+    <view class="mi_sec">
+        <text class="mi_forum friends">好友的帖子</text>
+    </view>
+    <view class="mi_sec">
+        <text class="mi_forum focus">我关注的论坛</text>
+    </view>
+</view>
+<view class="mi_sec-setting">
+    <view class="mi_sec">
+        <text class="mi_forum set">设置</text>
+    </view>
+</view>

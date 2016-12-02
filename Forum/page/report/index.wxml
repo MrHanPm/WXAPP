@@ -1,0 +1,10 @@
+<import src="../component/report/index" />
+<view class="warn">请选择举报原因</view>
+<view class="container">
+    <template is="report" />
+    <template is="report" />
+    <template is="report" />
+    <template is="report" />
+    <template is="report" />
+    <template is="report" />
+</view>

@@ -1,0 +1,40 @@
+<template name="forumHeader">
+    <view class="header">
+        <image src="{{userInfo.avatarUrl}} "class="avatar"></image>
+        <view class="user-info">
+            <view class="user-wrap">
+                <text class="name">{{userInfo.nickName}}</text>
+                <text class="level grade5"></text>
+            </view>
+        </view> 
+        <view class="browse">{{browse}}</view>
+    </view>
+</template>
+
+
+<template name="date">
+    <view class="header">
+        <image src="{{userInfo.avatarUrl}} "class="date-avatar"></image>
+        <view class="date-user-info">
+            <view class="date-user-wrap">
+                <text class="date-name">{{userInfo.nickName}}</text>
+                <text class="date-level"></text>
+            </view>
+            <view class="date-date">{{date}}</view>
+        </view>
+        <view class="date-flour">{{flour}}</view>    
+    </view>
+</template>
+
+<template name="friends">
+    <view class="header">
+        <image src="{{userInfo.avatarUrl}} "class="date-avatar"></image>
+        <view class="date-user-info">
+            <view class="date-user-wrap">
+                <text class="date-name">{{userInfo.nickName}}</text>
+            </view>
+            <view class="time">1分钟前</view>
+        </view>
+        <view class="reply">8080</view>    
+    </view>
+</template>

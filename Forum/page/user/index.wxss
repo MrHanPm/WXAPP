@@ -1,0 +1,199 @@
+/* page/user/index.wxss */
+
+.user-header{
+    position: relative;
+    background: #375697; 
+    height:352rpx;
+}
+.mi_personal{
+    text-align: center;
+    padding-top: 30rpx;
+}
+.mi_personal-photo{
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;  
+}
+.mi_personal-name{
+    font-family: PingFangSC-Regular;
+    font-size: 36rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 36rpx;
+    margin-top: 26rpx;
+}
+.level{
+    width: 130rpx;
+    margin-top: 20rpx;
+}
+.mi_sign{
+    position: absolute;
+    width: 134rpx;
+    height: 56rpx;
+    border: 1rpx solid rgba(255,255,255,0.30);
+    border-radius: 14px 0 0 14px;
+    font-family: PingFang-SC-Medium;
+    font-size: 26rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 56rpx;
+    text-align: center;
+    right: 2rpx;
+    top: 0;
+    margin-top: 82rpx;
+}
+.mi_w-back{
+    position: absolute;
+    width: 100%;
+    height: 74rpx;
+    bottom: 0;
+    left: 0;
+}
+.mi_w-back-img{
+    width: 100%;
+    height: 74rpx;
+}
+.mi_front{
+    background: #fff;
+    height: 98rpx;
+}
+.mi_gold{
+    position: relative;
+    float: left;
+    width: 50%;
+}
+.mi_gold-num{
+    position: absolute;
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #888888;
+    letter-spacing: 0;
+    line-height: 26rpx;
+    left: 50%; 
+    top: 0;
+    margin-top:60rpx; 
+    transform: translate(-50%);
+}
+.mi_gold-img{
+    position: absolute;
+    width: 40rpx;
+    height: 40rpx;
+    top: 0;
+    margin-top: 12rpx;
+    left: 50%;
+    margin-left: -20rpx;
+}
+.mi_exp{
+    position: relative;
+    width: 50%;
+    float: right;
+}
+.mi_exp:before{
+    display: block;
+    height: 98rpx;
+    content: '';
+    border-left: 2rpx solid #eee;
+}
+.mi_progress{
+    position: absolute;
+    display: block;
+    width: 88rpx;
+    border-radius: 8rpx;
+    text-align: center;
+    top: 0;
+    left: 50%;
+    margin-top: 26rpx;
+    margin-left: -44rpx;
+}
+.mi_express{
+    position: absolute;
+    top: 0;
+    margin-top: 60rpx;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    line-height: 26rpx;
+    letter-spacing: 0;
+    
+}
+.mi_now-exp{  
+    color: #3A3A3A;
+}
+.mi_total-exp{  
+    color: #353535;  
+}
+
+.mi_footer{
+    background: #fff;
+    margin-top: 20rpx;
+}
+.mi_sec{
+    position: relative;
+    height: 88rpx;
+    vertical-align: middle;
+    margin: 0 30rpx;
+    border-bottom: 4rpx solid #eee;
+}
+.mi_forum{
+    font-family: PingFangSC-Regular;
+    font-size: 34rpx;
+    color: #333333;
+    letter-spacing: 0;
+    line-height: 88rpx;
+}
+.mi_my:before{
+    content: '\e651';
+    font-family: 'forum';
+    font-size: 32rpx;
+    color: #B2B2B2;
+    vertical-align: middle;
+    margin-left: 40rpx;
+    margin-right: 30rpx;
+}
+.mi_forum:after{
+    content: '';
+    float: right;
+    width: 20rpx;
+    height: 20rpx;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -10rpx;
+    margin-right: 42rpx;
+    border-top:1rpx solid #B2B2B2; 
+    border-right: 1rpx solid #B2B2B2;
+    transform: rotate(45deg);
+}
+.mi_friends:before{
+    content: '\e64f';
+    font-family: 'forum';
+    font-size: 32rpx;
+    color: #B2B2B2;
+    vertical-align: middle;
+    margin-left: 40rpx;
+    margin-right: 30rpx;
+}
+.mi_focus:before{
+    content: '\e652';
+    font-family: 'forum';
+    font-size: 32rpx;
+    color: #B2B2B2;
+    vertical-align: middle;
+    margin-left: 40rpx;
+    margin-right: 30rpx;
+}
+.mi_set:before{
+    content: '\e650';
+    font-family: 'forum';
+    font-size: 32rpx;
+    color: #B2B2B2;
+    vertical-align: middle;
+    margin-left: 40rpx;
+    margin-right: 30rpx;
+}
+.mi_sec-setting{
+    position: relative;
+    background: #fff;
+    margin-top: 20rpx;
+}

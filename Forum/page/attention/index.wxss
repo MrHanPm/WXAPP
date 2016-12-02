@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'iconfont'; 
+  src: url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.ttf') format('truetype');
+}
+.attentions{
+    background: #fff;
+    height: 120rpx;
+    margin-top: 4rpx;
+    border-bottom: 2rpx solid #E5E5E5;
+}
+.attentions image{
+    float: left;
+    width: 120rpx;
+    height: 80rpx;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    background: red;
+}
+.attentions .forum-name{
+    float: left;
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #353535;
+    letter-spacing: 0;
+    line-height:120rpx;
+    margin-left: 16rpx;
+}
+.cancle-attention{
+    float: right;
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    line-height: 22rpx;
+    color: #FFFFFF;
+    padding: 16rpx 22rpx 16rpx 20rpx;
+    background: #A2B4CC;
+    border-radius: 2px;
+    margin-top: 32rpx;
+    margin-right: 40rpx;
+}
+.cancle-attention:before{
+    content: '\e63f';
+    font-family: 'iconfont';
+    font-size: 16rpx;
+    margin-right: 12rpx;
+    float: left;
+}

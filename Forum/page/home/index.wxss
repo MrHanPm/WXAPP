@@ -1,0 +1,135 @@
+/*头部部分*/
+.home-header{
+    height: 140rpx;
+    overflow: hidden;
+    background:#375697;
+    padding: 0 85px 0 75px;
+    background-size: cover;
+}
+.portrait{
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #fff;
+}
+.user{
+    font-size: 14px;
+    display: block;
+    color: #fff;
+    height: 14px;
+    line-height: 14px;
+    padding: 11px 0 5px;
+    margin-top: 7px;
+}
+.sign{
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    width: 72px;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #FFFFFF;
+}
+.sign:before{
+    margin: 12px 8px 0 0;
+    content: '\e601';
+    font-family: 'forum';
+    height: 12px;
+    line-height: 12px;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/*轮播*/
+.solid_view{
+    height: 224rpx;
+    white-space:nowrap;
+    background: #fff;
+    margin-top: 20rpx;
+}
+.scroll{
+    display: inline-block;
+    width: 112rpx;
+    padding-left: 61rpx;
+    vertical-align: top;
+    text-align: center;
+}
+.scroll-img{
+    width: 88rpx;
+    height: 88rpx;
+    margin-top: 40rpx;
+    margin-left:11rpx; 
+    border: 1px solid #3B5998;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.scroll_ico{
+    font-family: 'forum';
+    color: #3B5998;
+    padding-top: 14rpx;
+    font-size: 36rpx;
+}
+.scroll_hot_ico:after{content: '\e62e';}
+.scroll_fol_ico:after{content: '\e627';}
+.scroll_add_ico:after{content: '\e632';}
+.scroll text{
+    display: block;
+    width: 100%;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: 28rpx;
+    margin-top: 28rpx;
+    text-align: center
+}
+
+/*公告*/
+.hot_box{
+    font-weight: 400;
+    list-style-type: none;
+    border-top: 4rpx solid #f5f5f5;
+    background: #fff;
+    height: 66rpx;  
+    overflow: hidden;
+    position: relative;
+    padding-left: 148rpx;
+}
+.hot_box:before{
+    content: '卡车之家';
+    font-size: 24rpx;
+    position: absolute;
+    left: 30rpx;
+    top: 12rpx;
+}
+swiper-item{
+    display: block;  
+}
+.notice-content:before{
+    content: '';
+    border-left: 2rpx solid #eee;
+    margin-right:16rpx;
+}
+.notice-content{
+    height:66rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #353535;
+    letter-spacing: 0;
+    line-height: 66rpx;
+}
+
+

@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_z6ffhu0iy8i1kyb9.ttf') format('truetype');
+}
+.tabBar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100rpx;
+    border-top: 1px solid #DDD;
+    background: #FFF
+}
+.tabBar .inner{
+  padding: 0 20rpx;
+}
+.tabBar .item {
+    position: relative;
+    padding-top: 20rpx;
+    text-align: center;
+    width: 25%;
+    display: inline-block;
+}
+.tabBar .item text{
+    position: absolute;
+    font-size: 26rpx;
+    color: #A2B4CC;
+    letter-spacing: 0;
+    line-height: 26rpx;
+    left: 50%;
+    margin-left: -26rpx;
+    top: 50%;
+    margin-top: 32rpx;
+}
+.tabBar .home:before{
+    content: '\e62b';
+    font-family: 'iconfont';
+    font-size: 30rpx;
+    color: #A2B4CC;
+}
+.tabBar .zan:before{
+    content: '\e631';
+    font-family: 'iconfont';
+    font-size: 30rpx;
+    color: #A2B4CC;  
+}
+.tabBar .comment:before{
+    content: '\e62f';
+    font-family: 'iconfont';
+    font-size: 30rpx;
+    color: #A2B4CC;  
+}
+
+.tabBar .forward:before{
+    content: '\e62a';
+    font-family: 'iconfont';
+    font-size: 30rpx;
+    color: #A2B4CC;  
+}

@@ -1,0 +1,96 @@
+<scroll-view scroll-y="true">
+    <view class="home-header">
+        <view>
+            <image src="http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg" class="portrait"></image>
+            <text class="user">登陆</text>
+        </view>
+        <view class="sign">签到</view>
+    </view>
+    <!--轮播-->
+    <scroll-view scroll-x="true" class="solid_view">
+        <view class="scroll" >
+            <view class="scroll-img">
+                <view class="scroll_ico scroll_hot_ico"> </view>
+            </view>
+            <text>十大热贴</text>
+        </view>
+
+        <view class="scroll" >
+            <view class="scroll-img">
+                <view class="scroll_ico scroll_fol_ico"> </view>
+            </view>
+            <text>精华</text>
+        </view>
+        <block wx:for="{{myFol}}">
+            <view class="scroll" id="{{item.id}}">
+                <view class="scroll-img"><image src="{{item.image}}"></image></view>
+                <text>{{item.swiperName}}</text>
+            </view>
+        </block>
+        <view class="scroll" >
+            <view class="scroll-img">
+                <view class="scroll_ico scroll_add_ico"> </view>
+            </view>
+            <text>添加</text>
+        </view>
+    </scroll-view>
+    <!--公告-->
+    <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true"  class="hot_box">
+        <block wx:for="{{hotNews}}">
+            <swiper-item>
+                <navigator url="../note/index?id={{item.mInfo.id}}">
+                    <text class="notice-content">{{item.title}}</text>
+                </navigator>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <!--评论-->
+    <block wx:for="{{newList}}">
+        <view class="personal">
+            <view class="header">
+                <navigator url="../note/index?id={{item.tid}}">
+                <image src="{{item.avatar}}" class="avatar"></image>
+                </navigator>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <navigator url="../note/index?id={{item.tid}}" style="float:left;">
+                        <text class="name">{{item.author}}</text>
+                        </navigator>
+                        <text class="level all-grade{{item.score.level}}"></text>
+                    </view>
+                    <view class="time">
+                        {{item.lastpost}}
+                        <text class="tag">{{item.className}}</text>
+                    </view>
+                </view>
+                <view class="browse">{{item.views}}</view>
+            </view>
+
+            <view class="content">
+                <navigator url="../note/index?id={{item.tid}}">
+                <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+                <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
+                <text class="reply">{{item.subject}}</text>
+                <text class="title">{{item.text}}</text>
+                <view class="gallery3">
+                    <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:for-index="idx">
+                        <view wx:if="{{idx < 3}}" style="height: {{ item.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
+                            <image src="{{imgItem}}" mode="aspectFill"></image>
+                        </view>
+                    </block>
+                    <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
+                </view>
+                </navigator>
+            </view>
+
+            <view class="footer">
+                <text class="prise {{item.rcmd ? 'blueAct' : ''}}"
+                        data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
+                        bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
+                <text class="discuss">{{item.replies > 0 ? item.replies : "回复"}}</text>
+                <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+            </view>
+        </view>
+    </block>
+</scroll-view>

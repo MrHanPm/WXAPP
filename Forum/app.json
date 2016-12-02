@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "page/index",
+    "page/home/index",
+    "page/note/index",
+    "page/user/index"
+
+  ],
+  "window": {
+    "navigationBarTextStyle": "#ffffff",
+    "navigationBarTitleText": "卡车之家论坛",
+    "navigationBarBackgroundColor": "#375697",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#A2B4CC",
+    "selectedColor": "#375697",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "page/home/index",
+      "iconPath": "resources/tabBar/lt.png",
+      "selectedIconPath": "resources/tabBar/lt_s.png",
+      "text": "论坛"
+    }, {
+      "pagePath": "page/user/index",
+      "iconPath": "resources/tabBar/mi.png",
+      "selectedIconPath": "resources/tabBar/mi_s.png",
+      "text": "我的"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

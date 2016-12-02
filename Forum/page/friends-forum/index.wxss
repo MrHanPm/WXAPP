@@ -1,0 +1,31 @@
+.container{
+    margin: 4rpx 0 16rpx 0;
+}
+.title{
+    font-family: PingFang-SC-Medium;
+    font-size: 32rpx;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: 32rpx;
+    padding: 0 30rpx;
+}
+.content{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #888888;
+    letter-spacing: 0;
+    line-height: 42rpx;
+    padding: 10rpx 30rpx 30rpx 30rpx;
+}
+.image{
+    display: inline-block;
+    padding: 2rpx 2rpx;
+    vertical-align: middle;
+    background: #2459A6;
+    border-radius: 4rpx;
+    font-family: PingFang-SC-Medium;
+    font-size: 22rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 22rpx;    
+}

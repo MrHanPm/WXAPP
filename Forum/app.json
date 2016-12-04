@@ -3,7 +3,8 @@
     "page/index",
     "page/home/index",
     "page/note/index",
-    "page/user/index"
+    "page/user/index",
+    "page/noteTb/index"
 
   ],
   "window": {

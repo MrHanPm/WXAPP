@@ -2,41 +2,73 @@ const XHR = require('../../requests/request.js')
 var APP = getApp()
 Page({
     data:{
+        img: 'http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg',
+        loading: true,
+        scrollTop: '',
+        showFA: false,
+
+
         nowPage: 1,
-        noteList: {}
+        tid: '',
+        thread: {},
+        postlist: []
     },
     onLoad:function(options) {
+        // this.setData({tid: options.id})
         this.upData(options.id)
     },
-    upData:function(id) {
+    upData:function(tid) {
+        let tids
+        if(tid) {
+            tids = tid
+        } else {
+            tids = this.data.tid
+        }
         let newPage = this.data.nowPage
-        XHR.getDetail({tid:id, page: newPage},
-            (db) => {
-                if(db.status === 0) {
-                    this.setData({
-                        noteList: db.data
-                    })
+        if (this.data.loading) {
+            this.setData({loading: false})
+            XHR.getDetail({tid: tid, page: newPage},
+                (db) => {
+                    if(db.status === 0) {
+                        newPage++
+                        this.setData({
+                            thread: db.data.thread,
+                            postlist: db.data.postlist
+                        })
+                    }
                 }
-            }
-        )
+            )
+        }
+    },
+    loadMore:function() {
+        this.upData()
     },
     onReady:function(){
-        if(this.data.noteList.thread.subject){
-            wx.setNavigationBarTitle({
-              title: this.data.noteList.thread.subject
+        // if(this.data.noteList.thread.subject){
+        //     wx.setNavigationBarTitle({
+        //       title: this.data.noteList.thread.subject
+        //     })
+        // }
+    },
+    goTop:function() {
+        this.setData({scrollTop: 'HD'})
+    },
+    onSol:function(e) {
+        if (e.detail.scrollTop > 560){
+            this.setData({
+                showFA: true,
+                scrollTop:''
+            })
+        } else {
+            this.setData({
+                showFA: false
             })
         }
     },
-    onShow:function(){
-        
-
+    toBack:function() {
+        wx.navigateBack({delta:1})
     },
-    onHide:function(){
-    // 页面隐藏
-
-    },
-    onUnload:function(){
-    // 页面关闭
-
-    }
+    onShow:function(){},
+    onHide:function(){},
+    onUnload:function(){}
 })

@@ -1,37 +1,90 @@
-<scroll-view scroll-y="true">
+<import src="../component/more/index"/>
+<scroll-view scroll-y="true" lower-threshold="134" scroll-into-view="{{scrollTop}}" bindscrolltolower="loadMore" bindscroll="onSol">
     <!--评论-->
-<!--     <block wx:for="{{noteList}}"> -->
 
-    <view class="container">
-        <view class="header">
-            <image src="{{noteList.thread.avatar}} "class="avatar"></image>
-            <view class="user-info">
-                <view class="user-wrap">
-                    <text class="name">{{noteList.thread.author}}</text>
-                    <text class="level grade{{noteList.thread.score.level}}"></text>
+        <view class="personal" id="HD">
+            <view class="header">
+                <image src="{{thread.avatar?thread.avatar:img}}" class="avatar" data-tid="{{thread.tid}}" bindtap="goUser"></image>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <text class="name" data-tid="{{thread.tid}}" bindtap="goMsg">{{thread.author}}</text>
+                        <text class="level all-grade{{thread.score.level}}"></text>
+                    </view>
+                    <view class="time">
+                        {{thread.lastpost}}
+                        <text class="tag">{{thread.className}}</text>
+                    </view>
                 </view>
-            </view> 
-            <view class="browse">{{noteList.thread.views}}</view>
-        </view>
-        <view class="front">
-            <text class="title">{{noteList.thread.subject}}</text>
-            <view class="timeAndTag">
-                <text class="title-time">{{noteList.thread.dateline}}</text>
-                <text class="tag">{{noteList.thread.className}}</text>
+                <view class="browse">{{thread.views}}</view>
             </view>
-            <view class="titleContent"><text>{{noteList.thread.text}}</text></view>
-            <view class="perfect">
-                <image src="../../resources/image/perfect.png"></image>
-            </view>
-            <view class="perfect" wx:if="{{noteList.thread.digest > 0 && noteList.thread.digest !== 2}}">
-                <image src="../../resources/image/perfect.png"></image>
-            </view>
-            <view class="perfect" wx:if="{{noteList.thread.digest == 2}}">
-                <image src="../../resources/image/perfect.png"></image>
-            </view>
-        </view>
-    </view>
 
+            <view class="content" data-tid="{{thread.tid}}" bindtap="goMsg">
+                <view class="perfect" wx:if="{{thread.digest > 0 && thread.digest !== 2}}">精</view>
+                <view class="perfect" wx:if="{{thread.digest == 2}}">正能量</view>
+                <text class="reply">{{thread.subject}}</text>
+                <text class="title">{{thread.text}}</text>
+                <view class="gallery3">
+                    <block wx:for="{{thread.images}}" wx:for-item="imgItem" wx:for-index="idx">
+                        <view wx:if="{{idx < 3}}" style="height: {{ thread.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
+                            <image src="{{imgItem}}" mode="aspectFill"></image>
+                        </view>
+                    </block>
+                    <view class="img-num" wx:if="{{thread.images.length > 3}}">{{thread.images.length}}</view>
+                </view>
+            </view>
+            <view class="best-btn"></view>
+        </view>
+    
+    <block wx:for="{{postlist}}">
+        <view class="personal">
+            <view class="header">
+                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
+                        <text class="level all-grade{{item.score.level}}"></text>
+                    </view>
+                    <view class="time">
+                        {{item.lastpost}}
+                        <text class="tag">{{item.className}}</text>
+                    </view>
+                </view>
+                <view class="browse">{{item.views}}</view>
+            </view>
 
-    <!-- </block> -->
+            <view class="content" data-tid="{{item.tid}}" bindtap="goMsg">
+                <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+                <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
+                <text class="reply">{{item.subject}}</text>
+                <text class="title">{{item.message}}</text>
+                <view class="gallery3">
+                    <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:for-index="idx">
+                        <view wx:if="{{idx < 3}}" style="height: {{ item.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
+                            <image src="{{imgItem}}" mode="aspectFill"></image>
+                        </view>
+                    </block>
+                    <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <template is="loMore" data="{{txt: postlist.length > 0 ? true : false}}" />
 </scroll-view>
+<view class="tabBar">
+  <view class="inner">
+    <view bindtap="" class="item">
+      <view class="home">首页</view>
+    </view>
+    <view bindtap="" class="item">
+      <view class="zan">{{thread.recommend_add > 0 ? thread.recommend_add : "点赞"}}</view>
+    </view>
+    <view bindtap="" class="item">
+      <view class="comment">{{thread.replies > 0 ? thread.replies : "回复"}}</view>
+    </view>
+    <view bindtap="" class="item">
+      <view class="forward">{{thread.sharetimes > 0 ? thread.sharetimes : "转发"}}</view>
+    </view>
+  </view>
+</view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="bottom:260rpx"></view>
+<view class="to-return" bindtap="toBack">返回</view>

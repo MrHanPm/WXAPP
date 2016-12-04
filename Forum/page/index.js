@@ -1,5 +1,5 @@
 const URL = require('../config.js')
-const UT = require( '../util/util.js' )
+// const UT = require( '../util/util.js' )
 const XHR = require('../requests/request.js')
 var APPS = getApp()
 Page({
@@ -47,9 +47,8 @@ Page({
         wx.login({
           success: (res) => {
             // this.showTopTip('获取用户登录态失败！')
-            console.log(res,URL, UT.dataTimeFormatter(1480499515))
+            // console.log(res,URL, UT.dataTimeFormatter(1480499515))
             if (res.code) {
-
               // XHR.getLaud({tid: 1190646},
               //   (db) => {
 

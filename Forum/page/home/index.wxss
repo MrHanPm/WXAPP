@@ -76,7 +76,7 @@
 .scroll_ico{
     font-family: 'forum';
     color: #3B5998;
-    padding-top: 14rpx;
+    line-height: 88rpx;
     font-size: 36rpx;
 }
 .scroll_hot_ico:after{content: '\e62e';}

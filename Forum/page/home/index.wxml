@@ -1,5 +1,6 @@
-<scroll-view scroll-y="true">
-    <view class="home-header">
+<import src="../component/more/index"/>
+<scroll-view scroll-y="true" lower-threshold="134" scroll-into-view="{{scrollTop}}" bindscrolltolower="loadMore" bindscroll="onSol">
+    <view class="home-header" id="HD">
         <view>
             <image src="http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg" class="portrait"></image>
             <text class="user">登陆</text>
@@ -9,17 +10,21 @@
     <!--轮播-->
     <scroll-view scroll-x="true" class="solid_view">
         <view class="scroll" >
+            <navigator url="../noteTb/index?b=1">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_hot_ico"> </view>
             </view>
             <text>十大热贴</text>
+            </navigator>
         </view>
 
         <view class="scroll" >
+            <navigator url="../noteTb/index?b=2">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_fol_ico"> </view>
             </view>
             <text>精华</text>
+            </navigator>
         </view>
         <block wx:for="{{myFol}}">
             <view class="scroll" id="{{item.id}}">
@@ -38,9 +43,7 @@
     <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true"  class="hot_box">
         <block wx:for="{{hotNews}}">
             <swiper-item>
-                <navigator url="../note/index?id={{item.mInfo.id}}">
-                    <text class="notice-content">{{item.title}}</text>
-                </navigator>
+                <text class="notice-content" data-tid="{{item.mInfo.id}}" bindtap="goMsg">{{item.title}}</text>
             </swiper-item>
         </block>
     </swiper>
@@ -49,14 +52,10 @@
     <block wx:for="{{newList}}">
         <view class="personal">
             <view class="header">
-                <navigator url="../note/index?id={{item.tid}}">
-                <image src="{{item.avatar}}" class="avatar"></image>
-                </navigator>
+                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
-                        <navigator url="../note/index?id={{item.tid}}" style="float:left;">
-                        <text class="name">{{item.author}}</text>
-                        </navigator>
+                        <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
                         <text class="level all-grade{{item.score.level}}"></text>
                     </view>
                     <view class="time">
@@ -66,9 +65,8 @@
                 </view>
                 <view class="browse">{{item.views}}</view>
             </view>
-
+            <navigator url="../note/index?id={{item.tid}}">
             <view class="content">
-                <navigator url="../note/index?id={{item.tid}}">
                 <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
                 <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
                 <text class="reply">{{item.subject}}</text>
@@ -81,16 +79,17 @@
                     </block>
                     <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
                 </view>
-                </navigator>
             </view>
-
+            </navigator>
             <view class="footer">
                 <text class="prise {{item.rcmd ? 'blueAct' : ''}}"
                         data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
                         bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
-                <text class="discuss">{{item.replies > 0 ? item.replies : "回复"}}</text>
+                <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
                 <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
             </view>
         </view>
     </block>
+    <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
 </scroll-view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>

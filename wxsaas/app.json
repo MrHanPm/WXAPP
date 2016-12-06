@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "page/index",
+    "page/form/login/login",
+    "page/form/login/logins",
+    "page/user/xs/index",
+    "page/user/tj/index",
+    "page/user/cr/index",
+    "page/user/fx/index"
+
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "卡销宝",
+    "navigationBarBackgroundColor": "black",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#09bb07",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "page/user/xs/index",
+      "iconPath": "resources/tabBar/xs.png",
+      "selectedIconPath": "resources/tabBar/xs_a.png",
+      "text": "线索"
+    }, {
+      "pagePath": "page/user/cr/index",
+      "iconPath": "resources/tabBar/cr.png",
+      "selectedIconPath": "resources/tabBar/cr_a.png",
+      "text": "CRM"
+    }, {
+      "pagePath": "page/user/tj/index",
+      "iconPath": "resources/tabBar/tj.png",
+      "selectedIconPath": "resources/tabBar/tj_a.png",
+      "text": "统计"
+    }, {
+      "pagePath": "page/user/fx/index",
+      "iconPath": "resources/tabBar/fx.png",
+      "selectedIconPath": "resources/tabBar/fx_a.png",
+      "text": "发现"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

@@ -1,0 +1,54 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+        <view class="page__title">验证登录</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{showTopTxt}}</view>
+
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" id="tel" maxlength="11" placeholder="请输入手机号" bindinput="bindKeyInput"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode {{iscode ? 'weui-cell_warn' : ''}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">图形码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" id="captcha" placeholder="请输入图形码" bindinput="bindKeyInput" />
+                </view>
+                <view class="weui-cell__ft warn_red" wx:if="{{iscode}}">
+                    <icon type="warn" size="23" color="#E64340"></icon>
+                </view>
+                <view class="weui-cell__ft">
+                    <image class="weui-vcode-img" src="{{codeSrc}}" style="width: 108px" bindtap="getVcode"></image>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" id="vercode" placeholder="请输入验证码" bindinput="bindKeyInput" />
+                </view>
+                <view class="weui-cell__ft">
+                    <button class="weui-vcode-btn msgBtn"  bindtap="getMsg" disabled="{{dsbMsg}}">{{btnTxt}}</button>
+                </view>
+            </view>
+        </view>
+        <view class="weui-footer__link tagetUrl" bindtap="goPage">使用密码登录</view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" disabled="{{subMsg}}" bindtap="goSub">确定</button>
+        </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom">
+        <view class="weui-footer__links">
+            <view class="weui-footer__link" bindtap="callPhone">4006-136-188</view>
+        </view>
+        <view class="weui-footer__text">手机号码仅用于登录和保护帐号安全</view>
+    </view>
+</view>

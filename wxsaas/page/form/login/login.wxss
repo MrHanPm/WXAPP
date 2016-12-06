@@ -1,0 +1,21 @@
+.warn_red{
+    position: absolute;
+    right: 110px;
+    top: 5px;
+}
+.tagetUrl{
+    padding-top: 16px;
+    text-align: right;
+    display: block;
+    margin:0 15px;
+}
+.tagetUrl:before{
+    border: 0;
+}
+.msgBtn{
+    border-radius: 0;
+    position: inherit;
+}
+.msgBtn:after{
+    display: none;
+}

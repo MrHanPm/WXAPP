@@ -1,0 +1,5 @@
+<view class="page">
+    <view>成功否？</view>
+    <mask hidden="{{hidden1}}" bindtap="maskHide" style="background-color: rgb(45,155,66);" hover-style="none"/>
+    <button type="default" bindtap="maskShow">弹出纯色</button>
+</view>

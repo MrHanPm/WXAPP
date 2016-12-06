@@ -106,7 +106,7 @@ Page({
     },
     goUser:function(e) {
         wx.navigateTo({
-            url: `../note/index?id=${e.target.dataset.tid}`
+            url: `../friends/index?id=${e.target.dataset.tid}`
         })
     },
     goMsg:function(e) {

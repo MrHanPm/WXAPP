@@ -26,17 +26,19 @@
 </view>
 <view class="mi_footer">
     <view class="mi_sec">
-        <text class="mi_forum my">我的帖子</text>
+        <text class="mi_forum">我的帖子</text>
     </view>
     <view class="mi_sec">
-        <text class="mi_forum friends">好友的帖子</text>
+        <text class="mi_forum mi_friends">好友的帖子</text>
     </view>
     <view class="mi_sec">
-        <text class="mi_forum focus">我关注的论坛</text>
+        <text class="mi_forum mi_focus">我关注的论坛</text>
     </view>
 </view>
 <view class="mi_sec-setting">
+    <navigator url="../setting/index">
     <view class="mi_sec">
-        <text class="mi_forum set">设置</text>
+        <text class="mi_forum mi_set">设置</text>
     </view>
+    </navigator>
 </view>

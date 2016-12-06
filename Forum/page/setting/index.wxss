@@ -5,7 +5,6 @@
     margin-top: 42rpx; 
 }
 .about .about-us{
-    font-family: PingFangSC-Regular;
     font-size: 34rpx;
     color: #333333;
     letter-spacing: 0;
@@ -15,8 +14,8 @@
 .about:after{
     content: '';
     float: right;
-    width: 20rpx;
-    height: 20rpx;
+    width: 17rpx;
+    height: 17rpx;
     position: absolute;
     top: 50%;
     right: 0;
@@ -34,7 +33,6 @@
     
 }
 .version-text{
-    font-family: PingFangSC-Regular;
     font-size: 34rpx;
     color: #333333;
     letter-spacing: 0;
@@ -43,7 +41,6 @@
 }
 .version-num{
     float: right;
-    font-family: PingFangSC-Regular;
     font-size: 34rpx;
     color: #888888;
     letter-spacing: 0;
@@ -51,13 +48,5 @@
     margin-right: 30rpx;  
 }
 .exit{
-    background: #E64340;
-    border-radius: 5px;
-    font-family: PingFang-SC-Regular;
-    font-size: 36rpx;
-    color: #fff;
-    padding: 20rpx 272rpx 18rpx 274rpx;
-    margin-top: 182rpx;
-    margin-left: 30rpx;
-    margin-right: 30rpx;
+    padding:180rpx 30rpx 0;
 }

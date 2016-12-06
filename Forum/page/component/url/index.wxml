@@ -1,6 +1,5 @@
-<navigator url="../setting/index"><view>设置</view></navigator>
+
 <navigator url="../attention/index"><view>设置2</view></navigator>
-<navigator url="../detail-forum/index"><view>设置3</view></navigator>
-<navigator url="../friends-forum/index"><view>设置4</view></navigator>
-<navigator url="../friends-informations/index"><view>设置5</view></navigator>
+<navigator url="../bindTel/index"><view>设置2</view></navigator>
+
 <navigator url="../report/index"><view>设置6</view></navigator>

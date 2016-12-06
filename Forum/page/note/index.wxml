@@ -4,7 +4,7 @@
 
     <view class="mi_box" id="HD">
         <view class="mi_box_header">
-            <image src="{{thread.avatar?thread.avatar:img}}" class="mi_ico" data-tid="{{thread.tid}}" bindtap="goUser"></image>
+            <image src="{{thread.avatar?thread.avatar:img}}" class="mi_ico" data-tid="{{thread.authorid}}" bindtap="goUser"></image>
             <view class="mi_info">
                 <text class="name" data-tid="{{thread.tid}}" bindtap="goMsg">{{thread.author}}</text>
                 <text class="level grade grade{{thread.score.level}}"></text>
@@ -31,7 +31,7 @@
             <block wx:for="{{comments}}" wx:for-item="co_item">
                 <view class="mi_cot_box">
                     <view class="mi_cot_hed">
-                        <image src="{{co_item.avatar?co_item.avatar:img}}" class="mi_ico" data-tid="{{co_item.tid}}" bindtap="goUser" style="margin-top:0;"></image>
+                        <image src="{{co_item.avatar?co_item.avatar:img}}" class="mi_ico" data-tid="{{co_item.authorid}}" bindtap="goUser" style="margin-top:0;"></image>
                         <view class="mi_info" style="margin-top:6rpx;">
                             <text class="name" data-tid="{{co_item.tid}}" bindtap="goMsg">{{co_item.author}}</text>
                         </view>
@@ -53,7 +53,7 @@
     <block wx:for="{{hots}}">
         <view class="personal mt_box">
             <view class="header">
-                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
@@ -102,7 +102,7 @@
     <block wx:for="{{postlist}}">
         <view class="personal mt_box">
             <view class="header">
-                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>

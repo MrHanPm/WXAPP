@@ -116,6 +116,11 @@ Page({
             )
         }
     },
+    goUser:function(e) {
+        wx.navigateTo({
+            url: `../friends/index?id=${e.target.dataset.tid}`
+        })
+    },
     goTop:function() {
         this.setData({scrollTop: 'HD'})
     },

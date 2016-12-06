@@ -1,8 +1,13 @@
+<navigator url="../user/index" redirect="true">
 <view class="about">
     <text class="about-us">关于我们</text>
 </view>
+</navigator>
 <view class="version">
     <text class="version-text">当前版本</text>
     <text class="version-num">1.0</text>
 </view>
-<view class="exit">退出登录</view>
+<view class="exit">
+    <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">退出登录</button>
+</view>
+

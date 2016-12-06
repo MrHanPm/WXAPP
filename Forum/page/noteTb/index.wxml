@@ -11,7 +11,7 @@
     <block wx:for="{{newList}}">
         <view class="personal">
             <view class="header">
-                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
@@ -59,7 +59,7 @@
     <block wx:for="{{eliteList}}">
         <view class="personal">
             <view class="header">
-                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>

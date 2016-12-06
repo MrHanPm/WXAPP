@@ -133,7 +133,7 @@
     height: 88rpx;
     vertical-align: middle;
     margin: 0 30rpx;
-    border-bottom: 4rpx solid #eee;
+    border-bottom: 2rpx solid #eee;
 }
 .mi_forum{
     font-family: PingFangSC-Regular;
@@ -142,20 +142,11 @@
     letter-spacing: 0;
     line-height: 88rpx;
 }
-.mi_my:before{
-    content: '\e651';
-    font-family: 'forum';
-    font-size: 32rpx;
-    color: #B2B2B2;
-    vertical-align: middle;
-    margin-left: 40rpx;
-    margin-right: 30rpx;
-}
 .mi_forum:after{
     content: '';
     float: right;
-    width: 20rpx;
-    height: 20rpx;
+    width: 17rpx;
+    height: 17rpx;
     position: absolute;
     top: 50%;
     right: 0;
@@ -165,32 +156,24 @@
     border-right: 1rpx solid #B2B2B2;
     transform: rotate(45deg);
 }
-.mi_friends:before{
-    content: '\e64f';
+.mi_forum:before{
+    content: '\e651';
     font-family: 'forum';
     font-size: 32rpx;
     color: #B2B2B2;
     vertical-align: middle;
-    margin-left: 40rpx;
+    margin-left: 20rpx;
     margin-right: 30rpx;
+}
+.mi_friends:before{
+    content: '\e64f';
+    
 }
 .mi_focus:before{
     content: '\e652';
-    font-family: 'forum';
-    font-size: 32rpx;
-    color: #B2B2B2;
-    vertical-align: middle;
-    margin-left: 40rpx;
-    margin-right: 30rpx;
 }
 .mi_set:before{
     content: '\e650';
-    font-family: 'forum';
-    font-size: 32rpx;
-    color: #B2B2B2;
-    vertical-align: middle;
-    margin-left: 40rpx;
-    margin-right: 30rpx;
 }
 .mi_sec-setting{
     position: relative;

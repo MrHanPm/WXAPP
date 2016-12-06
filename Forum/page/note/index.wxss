@@ -87,6 +87,7 @@ scroll-view{padding-bottom: 120rpx;box-sizing: border-box;}
     float: left;
     margin-top: 32rpx;
 }
+.mi_info .name{margin-top: 8rpx;}
 
 .mi_browse{
     float: right;

@@ -449,7 +449,27 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     margin-right: 6px;
 }
 
-
+/*举报样式*/
+.report-header{
+    height: 100rpx;
+    margin-left: 30rpx;
+    border-bottom: 4rpx solid #eee;
+}
+.report-contain{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #353535;
+    letter-spacing: 0;
+    line-height: 100rpx; 
+}
+.choose{float: right;font-family: 'forum';
+    font-size: 24rpx;
+    margin-right: 30rpx;
+    color: #375697;
+  }
+.choose:after{
+    content: '\e63d';
+}
 
 
 /*----选中样式----*/

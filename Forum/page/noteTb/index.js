@@ -1,26 +1,150 @@
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-
+const XHR = require('../../requests/request.js')
 Page({
     data: {
-        tabs: ["选项一", "选项二"],
-        activeIndex: "0",
-        sliderOffset: 0,
-        sliderLeft: 0
+        loading: true,
+        scrollTop: '',
+        showFA: false,
+        activeIndex: 0,
+        isLoding: true,
+
+        nowPage: 1,
+        eNowPage: 1,
+        newList:[],
+        eliteList:[],
+        loads: true,
     },
-    onLoad: function () {
-        var that = this;
-        wx.getSystemInfo({
-            success: function(res) {
-                that.setData({
-                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2
-                });
-            }
-        });
+    onLoad:function(options) {
+        this.setData({activeIndex: options.id})
+        this.upData()
+        this.upElite()
     },
-    tabClick: function (e) {
-        this.setData({
-            sliderOffset: e.currentTarget.offsetLeft,
-            activeIndex: e.currentTarget.id
-        });
+    onReady:function(){
+        if (this.data.activeIndex == '0') {
+            wx.setNavigationBarTitle({title: '十大热贴'})
+        } else {
+            wx.setNavigationBarTitle({title: '精华'})
+        }
+    },
+    upData:function() {
+        let newPage = this.data.nowPage
+        let newLists = this.data.newList
+        if (this.data.loading) {
+            this.setData({loading: false})
+            XHR.getHotTen({page: newPage},
+                (db) => {
+                    if(db.status === 0) {
+                        newPage++
+                        newLists.push(...db.data)
+                        this.setData({
+                            newList: newLists,
+                            nowPage: newPage,
+                            loading: true
+                        })
+                    }
+                }
+            )
+        }
+    },
+    upElite:function() {
+        let newPage = this.data.eNowPage
+        let newLists = this.data.eliteList
+        if (this.data.loads) {
+            this.setData({loads: false})
+            XHR.getElite({page: newPage},
+                (db) => {
+                    if(db.status === 0) {
+                        newPage++
+                        newLists.push(...db.data)
+                        this.setData({
+                            eliteList: newLists,
+                            eNowPage: newPage,
+                            loads: true
+                        })
+                    }
+                }
+            )
+        }
+    },
+    rcmdAdd:function(e) {
+        let tid = e.target.dataset.tid
+        let idx = e.target.dataset.idx
+        let dis = e.target.dataset.dis
+        let nowIndex = this.data.activeIndex
+        let newL
+        if( nowIndex == '0'){
+            newL = this.data.newList
+        }else{
+            newL = this.data.eliteList
+        }
+        // console.log( dis, idx, tid,'sssssssssss')
+        if(dis !== 'true') {
+            XHR.getLaud({tid: tid},
+                (db) => {
+                    if(db.status === 0) {
+                        if(db.data.recommend_count) {
+                           newL[idx]['recommend_add'] = db.data.recommend_count 
+                        }
+                        newL[idx]['rcmd'] = true
+                        if( nowIndex == '0'){
+                            this.setData({
+                                newList: newL
+                            })
+                        }else{
+                            this.setData({
+                                eliteList: newL
+                            })
+                        }
+                    }else{
+                        wx.showToast({
+                          title: db.data,
+                          duration: 2000
+                        })
+                    }
+                }
+            )
+        }
+    },
+    goUser:function(e) {
+        wx.navigateTo({
+            url: `../note/index?id=${e.target.dataset.tid}`
+        })
+    },
+    goMsg:function(e) {
+        wx.navigateTo({
+            url: `../note/index?id=${e.target.dataset.tid}`
+        })
+    },
+    loadMore:function() {
+        this.upData()
+    },
+    ldMore:function() {
+        this.upElite()
+    },
+    activeTab:function (e) {
+        let id = e.target.dataset.id
+        if (id == '0') {
+            wx.setNavigationBarTitle({title: '十大热贴'})
+        } else {
+            wx.setNavigationBarTitle({title: '精华'})
+        }
+        this.setData({activeIndex: id})
+    },
+    goTop:function() {
+        this.setData({scrollTop: 'HD'})
+    },
+    onSol:function(e) {
+        if (e.detail.scrollTop > 560){
+            this.setData({
+                showFA: true,
+                scrollTop:''
+            })
+        } else {
+            this.setData({
+                showFA: false
+            })
+        }
+    },
+    toBack:function() {
+        wx.navigateBack({delta:1})
     }
 });

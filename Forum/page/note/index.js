@@ -6,12 +6,15 @@ Page({
         loading: true,
         scrollTop: '',
         showFA: false,
+        isLoding: true,
 
 
         nowPage: 1,
         tid: '',
         thread: {},
-        postlist: []
+        postlist: [],
+        comments: [],
+        hots: []
     },
     onLoad:function(options) {
         // this.setData({tid: options.id})
@@ -31,9 +34,13 @@ Page({
                 (db) => {
                     if(db.status === 0) {
                         newPage++
+                        let da = `${db.data.thread.pid}`
                         this.setData({
                             thread: db.data.thread,
-                            postlist: db.data.postlist
+                            postlist: db.data.postlist,
+                            hots: db.data.hots,
+                            comments: db.data.comments[da],
+                            isLoding: db.data.postlist >= 20 ? true : false
                         })
                     }
                 }
@@ -44,11 +51,70 @@ Page({
         this.upData()
     },
     onReady:function(){
-        // if(this.data.noteList.thread.subject){
-        //     wx.setNavigationBarTitle({
-        //       title: this.data.noteList.thread.subject
-        //     })
-        // }
+        let txt = this.data.thread.subject
+        if(txt){
+            wx.setNavigationBarTitle({
+              title: txt
+            })
+        }
+    },
+    rcmdAdd:function(e) {
+        let tid = e.target.dataset.tid
+        let pid = e.target.dataset.pid
+        let idx = e.target.dataset.idx
+        let dis = e.target.dataset.dis
+        let newL = this.data.postlist
+        // console.log( dis, idx, tid,'sssssssssss')
+        if(dis !== 'true') {
+            XHR.getLaud({tid: tid,pid: pid},
+                (db) => {
+                    if(db.status === 0) {
+                        if(db.data.recommend_count) {
+                           newL[idx]['recommend_add'] = db.data.recommend_count 
+                        }
+                        newL[idx]['rcmd'] = true
+                        this.setData({
+                            postlist: newL
+                        })
+                    } else {
+                        // icon: 'info',
+                        wx.showToast({
+                          title: db.data,
+                          
+                          duration: 2000
+                        })
+                    }
+                }
+            )
+        }
+    },
+    miAdd:function(e){
+        let tid = e.target.dataset.tid
+        let dis = e.target.dataset.dis
+        let newL = this.data.thread
+        // console.log( dis, idx, tid,'sssssssssss')
+        if(dis !== 'true') {
+            XHR.getLaud({tid: tid},
+                (db) => {
+                    if(db.status === 0) {
+                        if(db.data.recommend_count) {
+                           newL['recommend_add'] = db.data.recommend_count 
+                        }
+                        newL['rcmd'] = true
+                        this.setData({
+                            thread: newL
+                        })
+                    } else {
+                        // icon: 'info',
+                        wx.showToast({
+                          title: db.data,
+                          
+                          duration: 2000
+                        })
+                    }
+                }
+            )
+        }
     },
     goTop:function() {
         this.setData({scrollTop: 'HD'})
@@ -67,6 +133,10 @@ Page({
     },
     toBack:function() {
         wx.navigateBack({delta:1})
+    },
+    goHome:function(){
+        let nub = getCurrentPages().length - 1
+        wx.navigateBack({delta: nub})
     },
     onShow:function(){},
     onHide:function(){},

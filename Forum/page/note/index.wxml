@@ -1,90 +1,168 @@
 <import src="../component/more/index"/>
-<scroll-view scroll-y="true" lower-threshold="134" scroll-into-view="{{scrollTop}}" bindscrolltolower="loadMore" bindscroll="onSol">
+<scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
     <!--评论-->
 
-        <view class="personal" id="HD">
-            <view class="header">
-                <image src="{{thread.avatar?thread.avatar:img}}" class="avatar" data-tid="{{thread.tid}}" bindtap="goUser"></image>
-                <view class="user-info">
-                    <view class="user-wrap">
-                        <text class="name" data-tid="{{thread.tid}}" bindtap="goMsg">{{thread.author}}</text>
-                        <text class="level all-grade{{thread.score.level}}"></text>
-                    </view>
-                    <view class="time">
-                        {{thread.lastpost}}
-                        <text class="tag">{{thread.className}}</text>
-                    </view>
-                </view>
-                <view class="browse">{{thread.views}}</view>
+    <view class="mi_box" id="HD">
+        <view class="mi_box_header">
+            <image src="{{thread.avatar?thread.avatar:img}}" class="mi_ico" data-tid="{{thread.tid}}" bindtap="goUser"></image>
+            <view class="mi_info">
+                <text class="name" data-tid="{{thread.tid}}" bindtap="goMsg">{{thread.author}}</text>
+                <text class="level grade grade{{thread.score.level}}"></text>
             </view>
-
-            <view class="content" data-tid="{{thread.tid}}" bindtap="goMsg">
-                <view class="perfect" wx:if="{{thread.digest > 0 && thread.digest !== 2}}">精</view>
-                <view class="perfect" wx:if="{{thread.digest == 2}}">正能量</view>
-                <text class="reply">{{thread.subject}}</text>
-                <text class="title">{{thread.text}}</text>
-                <view class="gallery3">
-                    <block wx:for="{{thread.images}}" wx:for-item="imgItem" wx:for-index="idx">
-                        <view wx:if="{{idx < 3}}" style="height: {{ thread.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
-                            <image src="{{imgItem}}" mode="aspectFill"></image>
-                        </view>
-                    </block>
-                    <view class="img-num" wx:if="{{thread.images.length > 3}}">{{thread.images.length}}</view>
-                </view>
-            </view>
-            <view class="best-btn"></view>
+            <view class="mi_browse">{{thread.views}}</view>
         </view>
-    
-    <block wx:for="{{postlist}}">
-        <view class="personal">
+
+        
+        <text class="mi_title">{{thread.subject}}</text>
+        <view class="mi_time">
+            {{thread.dateline}}
+            <text class="mi_tag">{{thread.className}}</text>
+        </view>
+        <view class="mi_msg">
+            <block wx:for="{{thread.message}}" wx:for-item="mitem">
+                <text wx:if="{{mitem.type == 'text'}}">{{mitem.text}}</text>
+                <text wx:if="{{mitem.type == 'url'}}">{{mitem.text}}</text>
+                <image wx:if="{{mitem.type == 'image'}}" src="{{mitem.text}}" style="{{mitem.attr == ''?'width:20px;height:20px;':''}}"></image>
+            </block>
+        </view>
+        
+        <view class="mi_cont_box" wx:if="{{comments.length > 0}}">
+            <text class="mi_cot">总结与点评</text>
+            <block wx:for="{{comments}}" wx:for-item="co_item">
+                <view class="mi_cot_box">
+                    <view class="mi_cot_hed">
+                        <image src="{{co_item.avatar?co_item.avatar:img}}" class="mi_ico" data-tid="{{co_item.tid}}" bindtap="goUser" style="margin-top:0;"></image>
+                        <view class="mi_info" style="margin-top:6rpx;">
+                            <text class="name" data-tid="{{co_item.tid}}" bindtap="goMsg">{{co_item.author}}</text>
+                        </view>
+                        <view class="mi_cot_time">{{co_item.dateline}}</view>
+                    </view>
+                    <view class="mi_cot_msg">{{co_item.comment}}</view>
+                </view>
+            </block>
+        </view>
+        <view class="mi_dre">
+            <text class="mi_dre_txt">北京市啦啦</text>
+            <view class="mi_dre_btn"></view>
+        </view>
+        <view class="best-btn" wx:if="{{thread.digest > '0' && thread.digest !== '2'}}"></view>
+        <view class="righted" wx:if="{{thread.digest == '2'}}"></view>
+    </view>
+    <!-- 热门回帖 -->
+    <view class="hot_msg_box" hidden="{{hots.length > 0 ? false : true}}">热门回帖</view>
+    <block wx:for="{{hots}}">
+        <view class="personal mt_box">
             <view class="header">
                 <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
-                        <text class="level all-grade{{item.score.level}}"></text>
+                        <!-- <text class="level all-grade{{item.score.level}}"></text> -->
                     </view>
                     <view class="time">
-                        {{item.lastpost}}
-                        <text class="tag">{{item.className}}</text>
+                        {{item.dateline}}
+                        <!-- <text class="tag">{{item.className}}</text> -->
                     </view>
                 </view>
-                <view class="browse">{{item.views}}</view>
+                <view class="mt_fb">{{item.floor}}</view>
             </view>
 
-            <view class="content" data-tid="{{item.tid}}" bindtap="goMsg">
-                <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
-                <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
-                <text class="reply">{{item.subject}}</text>
-                <text class="title">{{item.message}}</text>
-                <view class="gallery3">
-                    <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:for-index="idx">
-                        <view wx:if="{{idx < 3}}" style="height: {{ item.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
-                            <image src="{{imgItem}}" mode="aspectFill"></image>
-                        </view>
+            <view class="mf_con_box">
+                <view class="mf_txt">
+                    <view class="mf_txt_cal" wx:if="{{item.quote.length > 0}}">
+                        <view class="mf_txt_tt">{{item.quote[0].text}}<text>{{item.quote[1].text}}</text>{{item.quote[2].text}}</view>
+                        <block wx:for="{{item.quote}}" wx:for-item="quo" wx:for-index="uinx">
+                            <block wx:if="{{uinx > 2}}">
+                                <text wx:if="{{quo.type == 'text'}}">{{quo.text}}</text>
+                                <text wx:if="{{quo.type == 'url'}}">{{quo.text}}</text>
+                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}"></image>
+                            </block>
+                        </block>
+                    </view>
+                </view>
+                <view class="mf_txt">
+                    <block wx:for="{{item.message}}" wx:for-item="msgs">
+                        <text wx:if="{{msgs.type == 'text'}}">{{msgs.text}}</text>
+                        <text wx:if="{{msgs.type == 'url'}}">{{msgs.text}}</text>
+                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}"></image>
                     </block>
-                    <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
+                </view>
+                <view class="mi_dre" style="padding-top:2rpx">
+                    <view class="mi_dre_btn"></view>
+                    <view class="mi_cal_btn">回复</view>
+                    <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
+                          data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}" data-pid="{{item.pid}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
                 </view>
             </view>
         </view>
     </block>
-    <template is="loMore" data="{{txt: postlist.length > 0 ? true : false}}" />
+    <!-- 全部回帖 -->
+    <view class="all_msg_box">全部回帖<view class="mi_xl_btn">正序查看</view></view>
+    <!-- <view class="all_msg_box">全部回帖<view class="mi_xl_btn mi_xl_dx">倒序查看</view></view> -->
+    <block wx:for="{{postlist}}">
+        <view class="personal mt_box">
+            <view class="header">
+                <image src="{{item.avatar?item.avatar:img}}" class="avatar" data-tid="{{item.tid}}" bindtap="goUser"></image>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
+                    </view>
+                    <view class="time">
+                        {{item.dateline}}
+                    </view>
+                </view>
+                <view class="mt_fb">{{item.floor}}</view>
+            </view>
+
+            <view class="mf_con_box">
+                <view class="mf_txt">
+                    <view class="mf_txt_cal" wx:if="{{item.quote.length > 0}}">
+                        <view class="mf_txt_tt">{{item.quote[0].text}}<text>{{item.quote[1].text}}</text>{{item.quote[2].text}}</view>
+                        <block wx:for="{{item.quote}}" wx:for-item="quo" wx:for-index="uinx">
+                            <block wx:if="{{uinx > 2}}">
+                                <text wx:if="{{quo.type == 'text'}}">{{quo.text}}</text>
+                                <text wx:if="{{quo.type == 'url'}}">{{quo.text}}</text>
+                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}"></image>
+                            </block>
+                        </block>
+                    </view>
+                </view>
+                <view class="mf_txt">
+                    <block wx:for="{{item.message}}" wx:for-item="msgs">
+                        <text wx:if="{{msgs.type == 'text'}}">{{msgs.text}}</text>
+                        <text wx:if="{{msgs.type == 'url'}}">{{msgs.text}}</text>
+                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}"></image>
+                    </block>
+                </view>
+                <view class="mi_dre" style="padding-top:2rpx">
+                    <view class="mi_dre_btn"></view>
+                    <view class="mi_cal_btn">回复</view>
+                    <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
+                          data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" data-dis="{{item.rcmd}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <template is="loMore" data="{{txt: postlist.length > 0 ? true : false, isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
 </scroll-view>
 <view class="tabBar">
-  <view class="inner">
-    <view bindtap="" class="item">
-      <view class="home">首页</view>
+    <view bindtap="goHome" class="item">
+      <view class="icon home"></view>
+      <text>首页</text>
+    </view>
+    <view bindtap="" class="item {{thread.rcmd ? 'blueAct' : ''}}" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}" bindtap="miAdd">
+      <view class="icon zan" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}"><text>{{thread.recommend_add}}</text></view>
+      <text data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}">点赞</text>
     </view>
     <view bindtap="" class="item">
-      <view class="zan">{{thread.recommend_add > 0 ? thread.recommend_add : "点赞"}}</view>
+      <view class="icon comment"><text>{{thread.replies}}</text></view>
+      <text>回复</text>
     </view>
     <view bindtap="" class="item">
-      <view class="comment">{{thread.replies > 0 ? thread.replies : "回复"}}</view>
+      <view class="icon forward"><text>{{thread.sharetimes}}</text></view>
+      <text>转发</text>
     </view>
-    <view bindtap="" class="item">
-      <view class="forward">{{thread.sharetimes > 0 ? thread.sharetimes : "转发"}}</view>
-    </view>
-  </view>
 </view>
-<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="bottom:260rpx"></view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
 <view class="to-return" bindtap="toBack">返回</view>

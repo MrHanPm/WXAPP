@@ -60,7 +60,11 @@ function xhr( method, url, data, successCallback, errorCallback, completeCallbac
 function getHotTen(data, susCb, errCb, comCb ) {
     xhr(null, API.getHotTen(), data, susCb, errCb, comCb)
 }
-
+// 精华
+// page    int 否   页码
+function getElite(data, susCb, errCb, comCb ) {
+    xhr(null, API.getElite(), data, susCb, errCb, comCb)
+}
 // 最新帖子列表
 // page    int 否   页码
 function getNewList(data, susCb, errCb, comCb ) {
@@ -99,6 +103,7 @@ function getUserInfo(data, susCb, errCb, comCb ) {
 
 module.exports = {
     getHotTen: getHotTen,
+    getElite: getElite,
     getNewList: getNewList,
     getHotList: getHotList,
     getDetail: getDetail,

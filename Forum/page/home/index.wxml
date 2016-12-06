@@ -1,5 +1,7 @@
 <import src="../component/more/index"/>
-<scroll-view scroll-y="true" lower-threshold="134" scroll-into-view="{{scrollTop}}" bindscrolltolower="loadMore" bindscroll="onSol">
+<scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
+    <!-- 虚拟路由组件 -->
+    <include src="../component/url/index"/>
     <view class="home-header" id="HD">
         <view>
             <image src="http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg" class="portrait"></image>
@@ -10,7 +12,7 @@
     <!--轮播-->
     <scroll-view scroll-x="true" class="solid_view">
         <view class="scroll" >
-            <navigator url="../noteTb/index?b=1">
+            <navigator url="../noteTb/index?id=0">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_hot_ico"> </view>
             </view>
@@ -19,7 +21,7 @@
         </view>
 
         <view class="scroll" >
-            <navigator url="../noteTb/index?b=2">
+            <navigator url="../noteTb/index?id=1">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_fol_ico"> </view>
             </view>
@@ -59,7 +61,7 @@
                         <text class="level all-grade{{item.score.level}}"></text>
                     </view>
                     <view class="time">
-                        {{item.lastpost}}
+                        {{item.dateline}}
                         <text class="tag">{{item.className}}</text>
                     </view>
                 </view>
@@ -92,4 +94,4 @@
     </block>
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
 </scroll-view>
-<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="bottom:200rpx"></view>

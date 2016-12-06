@@ -21,6 +21,10 @@ const URL = require('../config.js')
 function getHotTen() {
     return URL + 'interface/app/wxapp.php?action=thread&method=topten'
 }
+// 精华
+function getElite() {
+    return URL + 'interface/app/wxapp.php?action=thread&method=best'
+}
 
 // 最新帖子列表
 function getNewList() {
@@ -64,6 +68,7 @@ function getCarTypeList() {
 
 module.exports = {
     getHotTen: getHotTen,
+    getElite: getElite,
     getNewList: getNewList,
     getHotList: getHotList,
     getDetail: getDetail,

@@ -62,6 +62,11 @@ Page({
                         this.setData({
                             newList: newL
                         })
+                    }else{
+                        wx.showToast({
+                          title: db.data,
+                          duration: 2000
+                        })
                     }
                 }
             )

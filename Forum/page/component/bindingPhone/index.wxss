@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_uphmsbnsgtit3xr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_uphmsbnsgtit3xr.ttf') format('truetype');
+}
+.binding-back{position: relative;width: 100%;height: 100%;background: rgba(0,0,0,0.60);position: fixed;top: 0;left: 0;}
+.bindingPhone{width: 692rpx;height: 528rpx;position: absolute;top: 320rpx;left: 28rpx;background: #FFFFFF;border-radius: 4rpx;}
+.binding-title{display: block;font-family: PingFangSC-Regular;font-size: 32rpx;line-height: 32rpx;color: #375697;padding-top: 30rpx;padding-left: 146rpx;}
+.Enter-phoneNumber{float:left;width: 440rpx;height: 88rpx;margin-top: 40rpx;margin-left: 20rpx;background: #FFFFFF;border: 1rpx solid #D0E3FA;border-radius: 6rpx;}
+.binding-code{display: inline-block;float: right;width: 182rpx;height: 88rpx;font-family: PingFangSC-Regular;font-size: 28rpx;color: #FFFFFF;background: #375697;border-radius: 6rpx;margin-right: 20rpx;margin-top: 40rpx;line-height: 88rpx;text-align: center;}
+.binding-message{display: inline-block;font-family: PingFangSC-Regular;font-size: 28rpx;color: #576B95;line-height: 28rpx;margin-top: 10rpx;margin-left: 30rpx;margin-bottom: 22rpx;}
+.coding{width: 650rpx;height: 88rpx;background: #FFFFFF;border: 1rpx solid #D0E3FA;border-radius: 6rpx;margin-left: 20rpx;}
+.binding-true{width: 650rpx;height: 88rpx;background: #375697;border-radius: 6rpx;font-family: PingFangSC-Regular;font-size: 32rpx;color: #FFFFFF;text-align: center;margin-top: 60rpx;margin-left: 20rpx;line-height: 88rpx;letter-spacing: 20rpx;}
+.binding-close:before{position: absolute;content: '\e639';font-family: 'iconfont';font-size: 38rpx;top: 0;margin-top: 912rpx;left: 0;margin-left: 348rpx;color: #FFFFFF;}

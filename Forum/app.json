@@ -4,6 +4,12 @@
     "page/home/index",
     "page/note/index",
     "page/user/index",
+    "page/attention/index",
+    "page/detail-forum/index",
+    "page/friends-forum/index",
+    "page/friends-informations/index",
+    "page/report/index",
+    "page/setting/index",
     "page/noteTb/index"
 
   ],

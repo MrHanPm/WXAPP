@@ -1,5 +1,5 @@
 <template name="noMore">
-  <view class="noMor">～我是有底线嘀～</view>
+  <view class="noMor" hidden="{{isShow ? true : false}}">{{txt}}</view>
 </template>
 
 
@@ -14,7 +14,7 @@
 
 
 <template name="loMore">
-    <view class="loading" style="margin:{{txt ? '80rpx auto' : '55% auto 0'}}">
+    <view class="loading" style="margin:{{txt ? '80rpx auto' : '55% auto 0'}}" hidden="{{isShow?false:true}}">
         <view class="loading-ring"></view>
     </view>
 </template>

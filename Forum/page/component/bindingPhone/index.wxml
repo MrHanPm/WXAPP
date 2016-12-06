@@ -1,0 +1,10 @@
+<view class="binding-back"></view>
+<view class="bindingPhone">
+  <text class="binding-title">只有绑定手机号才能操作哟~</text>
+  <input type="number" maxlength="11" auto-focus="true" placeholder="请输入您的手机号" class="Enter-phoneNumber" placeholder-style="font-family: PingFangSC-Regular;font-size: 32rpx;color: #888888;line-height: 32rpx;padding-left: 20rpx;" />
+  <view class="binding-code">获取校验码</view>
+  <text class="binding-message">收不到短信？试试语音校验码</text>
+  <input type="number" placeholder="请输入您收到的校验码" class="coding" placeholder-style="font-family: PingFangSC-Regular;font-size: 32rpx;color: #888888;line-height: 32rpx;padding-left: 20rpx;" />
+  <view class="binding-true">绑定</view>
+</view>
+<view class="binding-close"></view>

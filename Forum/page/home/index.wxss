@@ -106,11 +106,13 @@
     padding-left: 148rpx;
 }
 .hot_box:before{
-    content: '卡车之家';
+    content: '\e64a';
+    font-family: 'forum';
     font-size: 24rpx;
     position: absolute;
+    color: #F7604B;
     left: 30rpx;
-    top: 12rpx;
+    top: 16rpx;
 }
 swiper-item{
     display: block;  

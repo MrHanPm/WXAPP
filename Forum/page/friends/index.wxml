@@ -1,23 +1,24 @@
+<import src="../component/more/index"/>
 <view class="friends-header">
     <view class="friends-personal">
-        <image class="friends-photo" src="{{userInfo.avatarUrl}}"></image>
-        <view class="friends-name">烟不离手</view>
+        <image class="friends-photo" src="{{userInfo.headpic}}"></image>
+        <view class="friends-name">{{userInfo.nikename}}</view>
     </view>
     <view class="friends-integral">
         <text>积分:</text>
-        <text>4950</text>
+        <text>{{userInfo.integral}}</text>
     </view>
     <view class="friends-levels">
         <text>级别:</text>
-        <text>卡车助手</text>
+        <text>{{userInfo.score.title}}</text>
     </view>
     <view class="friends-fans">
         <text>粉丝:</text>
-        <text>12577</text>
+        <text>{{userInfo.fans}}</text>
     </view>
     <view class="friends-attention">
         <text>关注:</text>
-        <text>34</text>
+        <text>{{userInfo.friends}}</text>
     </view>
 </view>
 <view class="friends-forum">
@@ -27,59 +28,30 @@
 
 <view class="friends-front" hidden="{{viewTab ? false : true}}">
     <scroll-view scroll-y="true">
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
+        <block wx:for="{{toForum}}">
+            <view class="friends-content">
+                <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
+                <view class="conFot">
+                    <text class="content-time">{{item.lasttime}}</text>
+                    <text class="content-replies">{{item.replies}}回帖</text>
+                </view>
             </view>
-        </view>
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
-            </view>
-        </view>
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
-            </view>
-        </view>
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
-            </view>
-        </view>
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
-            </view>
-        </view>
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
-            </view>
-        </view>
+        </block>
+        <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
     </scroll-view>
 </view>
 <view class="friends-front" hidden="{{viewTab ? true : false}}">
     <scroll-view scroll-y="true">
-        <view class="friends-content">
-            <text class="content-title">没有什么能够阻挡，我对自由的向往！！没有什么能够阻挡，我对自由的向往！！</text>
-            <view class="conFot">
-                <text class="content-time">2015-7-29 12:34</text>
-                <text class="content-replies">1888回帖</text>
+        <block wx:for="{{goForum}}">
+            <view class="friends-content">
+                <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
+                <view class="conFot">
+                    <text class="content-time">{{item.lasttime}}</text>
+                    <text class="content-replies">{{item.replies}}回帖</text>
+                </view>
             </view>
-        </view>
+        </block>
+        <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
     </scroll-view>
 </view>
 <button class="friends-add" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">添加关注</button>

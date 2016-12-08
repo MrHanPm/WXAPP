@@ -1,8 +1,8 @@
 <view class="user-header">
     <view class="mi_personal">
-        <image class="mi_personal-photo" src="{{userInfo.avatarUrl}}"></image>
-        <view class="mi_personal-name">人畜无害酒酱</view>
-        <view class="level all-grade2"></view>
+        <image class="mi_personal-photo" src="{{isUserInfo ? userInfo.avatarUrl : userInfo.avatarUrl}}"></image>
+        <view class="mi_personal-name">{{isUserInfo ? userInfo.nickName : userInfo.nickName}}</view>
+        <view class="level all-grade4"></view>
     </view>
     <view class="mi_sign">已签到</view>
     <view class="mi_w-back">
@@ -25,15 +25,21 @@
     </view>
 </view>
 <view class="mi_footer">
+    <navigator url="../userNote/index">
     <view class="mi_sec">
         <text class="mi_forum">我的帖子</text>
     </view>
+    </navigator>
+    <navigator url="../userFriends/index">
     <view class="mi_sec">
         <text class="mi_forum mi_friends">好友的帖子</text>
     </view>
+    </navigator>
+    <navigator url="../userForm/index">
     <view class="mi_sec">
         <text class="mi_forum mi_focus">我关注的论坛</text>
     </view>
+    </navigator>
 </view>
 <view class="mi_sec-setting">
     <navigator url="../setting/index">

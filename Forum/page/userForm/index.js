@@ -1,0 +1,5 @@
+
+var APPS = getApp()
+Page({
+    
+})

@@ -1,0 +1,31 @@
+.te_head{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 102rpx;
+  border-top: 2rpx solid #eee;
+  padding:0 30rpx;
+  background: #fff;
+  z-index: 6;
+}
+.te_head_box{
+  border-radius: 8rpx;
+  height: 60rpx;
+  width: 100%;
+  margin-top: 21rpx;
+  border: 2rpx solid #375697;
+}
+.te_item{
+  display: inline-block;
+  width: 50%;
+  line-height: 60rpx;
+  text-align: center;
+  color: #375697;
+  font-size: 32rpx;
+}
+.te_head_box .active{
+  background: #375697;
+  color: #fff;
+}
+.viewBox{height:100%;padding-top: 103rpx;box-sizing: border-box;}

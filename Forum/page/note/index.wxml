@@ -42,8 +42,8 @@
             </block>
         </view>
         <view class="mi_dre">
-            <text class="mi_dre_txt">北京市啦啦</text>
-            <view class="mi_dre_btn"></view>
+            <text class="mi_dre_txt">北京市</text>
+            <view class="mi_dre_btn" data-tid="{{thread.tid}}" bindtap="Report"></view>
         </view>
         <view class="best-btn" wx:if="{{thread.digest > '0' && thread.digest !== '2'}}"></view>
         <view class="righted" wx:if="{{thread.digest == '2'}}"></view>
@@ -97,8 +97,10 @@
         </view>
     </block>
     <!-- 全部回帖 -->
-    <view class="all_msg_box">全部回帖<view class="mi_xl_btn">正序查看</view></view>
-    <!-- <view class="all_msg_box">全部回帖<view class="mi_xl_btn mi_xl_dx">倒序查看</view></view> -->
+    <view class="all_msg_box">全部回帖
+        <view class="mi_xl_btn" hidden="{{sortX ? false : true}}" bindtap="sortActiv">正序查看</view>
+        <view class="mi_xl_btn mi_xl_dx" hidden="{{sortX ? true : false}}" bindtap="sortActiv">倒序查看</view>
+    </view>
     <block wx:for="{{postlist}}">
         <view class="personal mt_box">
             <view class="header">
@@ -136,7 +138,7 @@
                 </view>
                 <view class="mi_dre" style="padding-top:2rpx">
                     <view class="mi_dre_btn"></view>
-                    <view class="mi_cal_btn">回复</view>
+                    <view class="mi_cal_btn" bindtap="goToMsg">回复</view>
                     <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
                           data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" data-dis="{{item.rcmd}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
                 </view>
@@ -155,7 +157,7 @@
       <view class="icon zan" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}"><text>{{thread.recommend_add}}</text></view>
       <text data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}">点赞</text>
     </view>
-    <view bindtap="" class="item">
+    <view bindtap="goToMsg" class="item">
       <view class="icon comment"><text>{{thread.replies}}</text></view>
       <text>回复</text>
     </view>
@@ -166,3 +168,8 @@
 </view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
 <view class="to-return" bindtap="toBack">返回</view>
+<mask hidden="{{showForm}}" bindtap="hideGoToMsg" hover-style="none"/>
+<view class="textarea_box" hidden="{{showForm}}">
+    <textarea placeholder="回帖是一种美德…" class="txt_input" focus="{{focus}}" bindinput="txtInput"></textarea>
+    <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="warn">发表</button>
+</view>

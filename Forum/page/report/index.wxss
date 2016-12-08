@@ -17,3 +17,10 @@
     margin-left: 30rpx;
     margin-right: 10rpx;
 }
+
+.sub_btn{
+    margin-top: 200rpx;
+    padding: 0 30rpx;
+
+}
+.wa_box{background: #fff;}

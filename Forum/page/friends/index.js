@@ -1,19 +1,42 @@
-var app = getApp();
+const XHR = require('../../requests/request.js')
+
 Page({
   data:{
+      viewTab: false,
       userInfo:{},
+      toForum:[],  // ����
+      goForum:[]   // ����
 
-      viewTab: false
   },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this;
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo,
-      })
-    })
+    let uid = options.id
+    let toJson = {method:'posts', uid:uid}
+    let goJson = {method:'replies', uid:uid}
+    this.userMsg(uid)
+    this.userForum(toJson)
+    this.userForum(goJson)
+  },
+  userMsg:function (uid) {
+    XHR.getUserInfo({exituid:uid},
+        (db) => {
+          if(db.status === 0) {
+            this.setData({userInfo: db.data})
+          }
+        }
+    )
+  },
+  userForum:function (obj) {
+    XHR.getToForum(obj,
+      (db) => {
+        if(db.status === 0) {
+          if(obj.method == 'posts') {
+            this.setData({toForum: db.data})
+          } else {
+            this.setData({goForum: db.data})
+          }
+        }
+      }
+    )
   },
   checkView:function(e){
     let v = e.target.dataset.v
@@ -22,6 +45,11 @@ Page({
     }else{
       this.setData({viewTab: false})
     }
+  },
+  goMsg:function(e) {
+    wx.redirectTo({
+        url: `../note/index?id=${e.target.dataset.tid}`
+    })
   },
   onReady:function(){
   },

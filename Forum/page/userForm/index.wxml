@@ -1,0 +1,5 @@
+<view class="attentions">
+    <image src="{{item.img}}" class="USERPIC"></image>
+    <text class="att_forum-name">{{item.info}}重卡</text>
+    <view class="cancle-attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">取消关注</view>
+</view>

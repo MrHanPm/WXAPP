@@ -1,5 +1,0 @@
-<template name="report">
-    <view class="report-header">
-        <view class="report-contain"><view class="choose"></view>广告垃圾</view>      
-    </view>
-<template>

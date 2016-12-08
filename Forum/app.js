@@ -1,35 +1,24 @@
 App({
-    onLaunch: function () {
+    // onLaunch: function () {
         
-    },
-    onShow: function () {
-        // console.log('App Show')
-    },
-    onHide: function () {
-        // console.log('App Hide')
-    },
-    globalData: {
-        hasLogin: false,
-        wxCode: ''
-    },
-    SystemInfo: '',
-    getUserInfo:function(cb){
-        var that = this
-        if(this.globalData.userInfo){
-          typeof cb == "function" && cb(this.globalData.userInfo)
-        }else{
-          //调用登录接口
-          wx.login({
-            success: function () {
-              wx.getUserInfo({
-                success: function (res) {
-                  that.globalData.userInfo = res.userInfo
-                  typeof cb == "function" && cb(that.globalData.userInfo)
-                }
-              })
-            }
-          })
-        }
-    },
+    // },
+    // onShow: function () {
+
+    // },
+    // onHide: function () {
+
+    // },
+    // globalData: {
+    //     
+    //     wxCode: ''
+    // },
+    HASLOGIN: false,  // 用户是否登录
+    WXCODE: '',     
+    SystemInfo: '',    // 系统信息
+    SESSIONID:'',   
+    USERINFO:'',    // 微信版用户信息
+
     debug: true //程序调试
-});
+})
+
+// _USERINFO  本地储存版，线上用户信息

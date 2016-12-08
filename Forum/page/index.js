@@ -24,7 +24,7 @@ Page({
             that.setData({
                 showTopTips: false
             })
-        }, 3000);
+        }, 3000)
     },
     onShow: function () {
         let self = this;
@@ -46,24 +46,36 @@ Page({
 
         wx.login({
           success: (res) => {
-            // this.showTopTip('获取用户登录态失败！')
-            // console.log(res,URL, UT.dataTimeFormatter(1480499515))
-            if (res.code) {
-              // XHR.getLaud({tid: 1190646},
-              //   (db) => {
+            APPS.WXCODE = res.code
 
-              //   }
-              // )
-              APPS.globalData.wxCode = res.code;
-              APPS.globalData.hasLogin = true;
+            wx.getUserInfo({
+                success: (resData) => {
+                  // console.log(resData)
+                  // console.log(resData.encryptData)
+                  // console.log(resData.encryptedData)
+                  // console.log(resData.iv)
+                  // console.log(resData.signature)
+                  APPS.USERINFO = resData
+                }
+            })
 
-              wx.redirectTo({
-                url: 'home/index'
-              });
-            } else {
-              this.showTopTip(res.errMsg)
-            }
+            XHR.getHotTen({wxcode: res.code},
+              (db) => {
+                if(db.status === 0){
+                  APPS.SESSIONID = db.data
+                  wx.redirectTo({
+                    url: 'home/index'
+                  });
+                }else{
+                  this.showTopTip(db.data)
+                }
+              },
+              () => {
+                this.showTopTip('网络错误！稍后重试～')
+              }
+            )
+
           }
-        });
+        })
     }
-});
+})

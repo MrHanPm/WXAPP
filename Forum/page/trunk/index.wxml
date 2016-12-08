@@ -1,0 +1,35 @@
+<import src="../component/more/index"/>
+<scroll-view scroll-y="true" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
+<text class="tr_txt tr_txt_hot" id="HD">热门车型</text>
+<block wx:for="{{htoTrunk}}">
+    <view class="attentions">
+        <image src="{{item.img}}"></image>
+        <text class="att_forum-name">{{item.info}}</text>
+        <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">取消关注</view>
+        <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">添加关注</view>
+    </view>
+</block>
+
+
+<block wx:for="{{AZS}}">
+    <text class="tr_txt" id="{{item}}">{{item}}</text>
+    <block wx:for="{{clubList[index]}}" wx:for-item="ims" wx:for-index="idx">
+    <view class="attentions">
+        <image src="{{ims.imgurl}}"></image>
+        <text class="att_forum-name">{{ims.name}}</text>
+        <view wx:if="{{ims.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{ims.tagid}}" data-dix="{{idx}}">取消关注</view>
+        <view wx:if="{{ims.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{ims.tagid}}" data-dix="{{idx}}">添加关注</view>
+    </view>
+    </block>
+</block>
+</scroll-view>
+<view class="fl_AZ {{hoverAZ ? 'fl_hov_Az':''}}" style="top:{{tops}}rpx">
+    <block wx:for="{{AZS}}">
+        <view class="fl_txt" data-id="{{item}}" bindtap="goTop">{{item}}</view>
+    </block>
+</view>
+<text class="alt_abox {{isShowAZ ? 'is_alt_abox':''}}">{{scrollTop}}</text>
+
+<view class="tru_loding" hidden="{{isLoding ? false : true}}">
+    <template is="loMore" data="{{txt: false, isShow: isLoding}}" />
+</view>

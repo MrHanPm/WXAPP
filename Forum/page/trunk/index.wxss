@@ -1,0 +1,53 @@
+.tr_txt{
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 28rpx;
+    color: #999;
+    text-indent: 20rpx;
+    display: block;
+}
+.tr_txt_hot{
+    height: 56rpx;
+    line-height: 56rpx;
+    color: #375697;
+}
+.fl_AZ{
+    position: fixed;
+    width: 40rpx;
+    top: 0;
+    right: 0;
+    padding-right: 10rpx;
+}
+.fl_hov_Az{
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    padding: 20rpx 0;
+    margin-top: -10rpx;
+}
+.fl_txt{
+    font-size: 24rpx;
+    height: 40rpx;
+    text-align: center;
+    color: #999;
+    line-height: 40rpx;
+}
+
+.alt_abox{
+    display: block;
+    position: absolute;
+    height: 140rpx;
+    width: 140rpx;
+    border-radius: 10rpx;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    line-height: 140rpx;
+    font-size: 70rpx;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin:-70rpx 0 0 -70rpx;
+    z-index: 99;
+    opacity: 0;
+    transition: all .3s;
+}
+.is_alt_abox{opacity: 1;}

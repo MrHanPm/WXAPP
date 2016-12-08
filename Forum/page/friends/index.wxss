@@ -17,7 +17,6 @@
     border-radius:50%; 
 }
 .friends-name{
-    font-family:PingFangSC-Regular;
     font-size: 34rpx;
     color: #FFFFFF;
     line-height: 34rpx;
@@ -32,7 +31,6 @@
 }
 .friends-integral text{
     padding-right: 20rpx;
-    font-family: PingFangSC-Regular;
     font-size: 26rpx;
     color: #FFFFFF;
     
@@ -44,7 +42,7 @@
     margin-top: 20rpx;
 }
 .friends-levels text{
-    font-family: PingFangSC-Regular;
+    padding-right: 20rpx;
     font-size: 26rpx;
     color: #FFFFFF;
 }
@@ -56,7 +54,7 @@
     margin-top: 30rpx;
 }
 .friends-fans text{
-    font-family: PingFangSC-Regular;
+
     font-size: 28rpx;
     color: #FFFFFF;
     letter-spacing: 0;
@@ -69,7 +67,7 @@
     margin-top: 30rpx;
 }
 .friends-attention text{
-    font-family: PingFangSC-Regular;
+
     font-size: 28rpx;
     color: #FFFFFF;
     letter-spacing: 0;
@@ -107,6 +105,7 @@
     height: 100%;
     box-sizing: border-box;
     padding-top: 482rpx;
+    padding-bottom: 88rpx;
 }
 .friends-content{
     padding:0 30rpx;
@@ -146,13 +145,16 @@
     width: 100%;
     bottom: 0;
     left: 0;
+    height: 88rpx;
     background: #375697;
     color: #fff;
+    border-radius: 0;
+    z-index: 7;
 }
 
 .contentBigger-title{
     display: block;
-    font-family: PingFangSC-Regular;
+
     font-size: 32rpx;
     color: #000000;
     letter-spacing: 0;

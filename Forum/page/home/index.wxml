@@ -1,13 +1,18 @@
 <import src="../component/more/index"/>
 <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
     <!-- 虚拟路由组件 -->
-    <include src="../component/url/index"/>
+    <!-- <include src="../component/url/index"/> -->
     <view class="home-header" id="HD">
-        <view>
-            <image src="http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg" class="portrait"></image>
-            <text class="user">登陆</text>
-        </view>
-        <view class="sign">签到</view>
+        <image src="{{isUserInfo ? userInfo.avatarUrl : userInfo.avatarUrl}}" class="portrait"></image>
+        <view class="portraitPic USERPIC"></view>
+        
+        <text hidden="{{HASLOGIN ? true : false}}">请登录</text>
+        <text hidden="{{HASLOGIN ? false : true}}">{{isUserInfo ? userInfo.nickName : userInfo.nickName}}</text>
+        <text class="level grade grade2" wx:if="{{HASLOGIN}}"></text>
+        <view wx:if="{{HASLOGIN}}" class="pt_pictxt">122卡路里</view>
+        
+        <view hidden="{{HASLOGIN ? true : false}}" class="sign" bindtap="Register">签到</view>
+        <view hidden="{{HASLOGIN ? false : true}}" class="isokSign">已签到</view>
     </view>
     <!--轮播-->
     <scroll-view scroll-x="true" class="solid_view">
@@ -35,10 +40,12 @@
             </view>
         </block>
         <view class="scroll" >
+            <navigator url="../trunk/index">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_add_ico"> </view>
             </view>
             <text>添加</text>
+            </navigator>
         </view>
     </scroll-view>
     <!--公告-->
@@ -92,6 +99,7 @@
             </view>
         </view>
     </block>
-    <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
+    <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'服务错误，暂无数据～',isShow: isLoding}}" />
 </scroll-view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="bottom:200rpx"></view>

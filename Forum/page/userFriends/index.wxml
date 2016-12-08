@@ -1,0 +1,23 @@
+<view class="personal">
+    <view class="header">
+        <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
+        <view class="user-info">
+            <view class="user-wrap">
+                <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}dd</text>
+            </view>
+            <view class="time">
+                {{item.dateline}}dd
+                <text class="tag">{{item.className}}dd</text>
+            </view>
+        </view>
+        <view class="browse">{{item.views}}</view>
+    </view>
+    <navigator url="../note/index?id={{item.tid}}">
+    <view class="content">
+        <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+        <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
+        <text class="reply">{{item.subject}}正能量正能量</text>
+        <text class="title">{{item.text}}正能量正能量正能量</text>
+    </view>
+    </navigator>
+</view>

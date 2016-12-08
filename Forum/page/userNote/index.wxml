@@ -1,0 +1,105 @@
+<import src="../component/more/index"/>
+<view class="te_head">
+    <view class="te_head_box">
+        <text class="te_item {{activeIndex == '0' ? 'active' : ''}}" data-id="0" bindtap="activeTab">十大热贴</text>
+        <text class="te_item {{activeIndex != '0' ? 'active' : ''}}" data-id="1" bindtap="activeTab">精华</text>
+    </view>
+</view>
+<view hidden="{{activeIndex != '0' ? true : false}}" class="viewBox">
+<scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
+    <view id="HD" style="display:none"></view>
+    <block wx:for="{{newList}}">
+        <view class="personal">
+            <view class="header">
+                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
+                        <text class="level all-grade{{item.score.level}}"></text>
+                    </view>
+                    <view class="time">
+                        {{item.dateline}}
+                        <text class="tag">{{item.className}}</text>
+                    </view>
+                </view>
+                <view class="browse">{{item.views}}</view>
+            </view>
+            <navigator url="../note/index?id={{item.tid}}">
+            <view class="content">
+                <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+                <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
+                <text class="reply">{{item.subject}}</text>
+                <text class="title">{{item.text}}</text>
+                <view class="gallery3">
+                    <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:for-index="idx">
+                        <view wx:if="{{idx < 3}}" style="height: {{ item.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
+                            <image src="{{imgItem}}" mode="aspectFill"></image>
+                        </view>
+                    </block>
+                    <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
+                </view>
+            </view>
+            </navigator>
+            <view class="footer">
+                <text class="prise {{item.rcmd ? 'blueAct' : ''}}"
+                        data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
+                        bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
+                <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
+                <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+            </view>
+        </view>
+    </block>
+    <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
+</scroll-view>
+</view>
+<view hidden="{{activeIndex == '0' ? true : false}}" class="viewBox">
+<scroll-view scroll-y="true" scroll-into-view="{{scrollTop}}" lower-threshold="134" bindscrolltolower="ldMore" bindscroll="onSol">
+    <view id="HD" style="display:none"></view>
+    <block wx:for="{{eliteList}}">
+        <view class="personal">
+            <view class="header">
+                <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
+                <view class="user-info">
+                    <view class="user-wrap">
+                        <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
+                        <text class="level all-grade{{item.score.level}}"></text>
+                    </view>
+                    <view class="time">
+                        {{item.dateline}}
+                        <text class="tag">{{item.className}}</text>
+                    </view>
+                </view>
+                <view class="browse">{{item.views}}</view>
+            </view>
+            <navigator url="../note/index?id={{item.tid}}">
+            <view class="content">
+                <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+                <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
+                <text class="reply">{{item.subject}}</text>
+                <text class="title">{{item.text}}</text>
+                <view class="gallery3">
+                    <block wx:for="{{item.images}}" wx:for-item="imgItem" wx:for-index="idx">
+                        <view wx:if="{{idx < 3}}" style="height: {{ item.images.length > 1 ? '224rpx' : '400rpx'}}" class="figure">
+                            <image src="{{imgItem}}" mode="aspectFill"></image>
+                        </view>
+                    </block>
+                    <view class="img-num" wx:if="{{item.images.length > 3}}">{{item.images.length}}</view>
+                </view>
+            </view>
+            </navigator>
+            <view class="footer">
+                <text class="prise {{item.rcmd ? 'blueAct' : ''}}"
+                        data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
+                        bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
+                <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
+                <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+            </view>
+        </view>
+    </block>
+    <template is="loMore" data="{{txt: eliteList.length > 0 ? true : false, isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
+</scroll-view>
+</view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
+<view class="to-return" bindtap="toBack">返回</view>

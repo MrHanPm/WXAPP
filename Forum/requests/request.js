@@ -40,6 +40,7 @@ function xhr( method, url, data, successCallback, errorCallback, completeCallbac
         }
     });
 }
+
 /**---------------BIND-------------------**/
 // 获取验证码
 // function getPhoneMsg(data, susCb, errCb, comCb ) {
@@ -53,7 +54,11 @@ function xhr( method, url, data, successCallback, errorCallback, completeCallbac
 // function bindTelPwd(data, susCb, errCb, comCb ) {
 //     xhr(null, API.bindTelPwd(), data, susCb, errCb, comCb)
 // }
-
+/**---------------TOOL-------------------**/
+// 车型列表
+function getTrunk(data, susCb, errCb, comCb ) {
+    xhr(null, API.getTrunk(), data, susCb, errCb, comCb)
+}
 /**---------------帖子-------------------**/
 // 十大热贴
 // page    int 否   页码
@@ -94,19 +99,32 @@ function getLaud(data, susCb, errCb, comCb ) {
 
 /**---------------用户-------------------**/
 // 获取用户信息接口
-// newbuddyid  int 是   好友uid
+// exituid  int 是   用户uid  (自己时不传)
 function getUserInfo(data, susCb, errCb, comCb ) {
     xhr(null, API.getUserInfo(), data, susCb, errCb, comCb)
 }
-
+// 用户主贴  and  用户回帖
+// method    posts主贴 / replies 回帖
+// uid  int 是   用户id，不传递为登录用户
+function getToForum(data, susCb, errCb, comCb ) {
+    xhr(null, API.getToForum(), data, susCb, errCb, comCb)
+}
+// 多功能调用
+// msg (post/get)
+function postWrite(msg, data, susCb, errCb, comCb ) {
+    xhr(msg, API.postWrite(), data, susCb, errCb, comCb)
+}
 /**---------------FORM-------------------**/
 
 module.exports = {
     getHotTen: getHotTen,
     getElite: getElite,
+    getTrunk: getTrunk,
     getNewList: getNewList,
     getHotList: getHotList,
     getDetail: getDetail,
     getLaud: getLaud,
-    getUserInfo: getUserInfo
+    getToForum: getToForum,
+    getUserInfo: getUserInfo,
+    postWrite: postWrite
 };

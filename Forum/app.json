@@ -1,16 +1,19 @@
 {
   "pages": [
-    "page/user/index",
+
     "page/index",
     "page/home/index",
     "page/note/index",
     "page/bindTel/index",
-    
-    "page/attention/index",
+    "page/user/index",
+    "page/trunk/index",
     "page/friends/index",
     "page/report/index",
     "page/setting/index",
-    "page/noteTb/index"
+    "page/noteTb/index",
+    "page/userForm/index",
+    "page/userFriends/index",
+    "page/userNote/index"
 
   ],
   "window": {

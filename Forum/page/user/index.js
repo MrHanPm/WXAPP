@@ -1,19 +1,28 @@
-// page/user/index.js
-var app = getApp();
+var APPS = getApp()
+
 Page({
   data:{
       userInfo:{},
   },
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this;
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo,
+  onLoad:function(){
+    let usin = wx.getStorageSync('_USERINFO')
+    let wxus = APPS.USERINFO
+    if(usin){
+      this.setData({
+        userInfo:usin
       })
-    })
+    }else{
+      this.setData({
+        userInfo:wxus
+      })
+    }
   },
+
+
+
+
+
+
   onReady:function(){
     // 页面渲染完成
   },

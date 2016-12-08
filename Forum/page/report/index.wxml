@@ -1,10 +1,16 @@
-<import src="../component/report/index" />
+
 <view class="warn">请选择举报原因</view>
-<view class="container">
-    <template is="report" />
-    <template is="report" />
-    <template is="report" />
-    <template is="report" />
-    <template is="report" />
-    <template is="report" />
+<view class="wa_box">
+
+    <view class="report-header">
+        <view class="report-contain"><view class="choose"></view>广告垃圾</view>      
+    </view>
+
+    <view class="report-header">
+        <view class="report-contain"><view class="choose"></view>广告垃圾</view>      
+    </view>
+</view>
+
+<view class="sub_btn">
+    <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">提交</button>
 </view>

@@ -10,7 +10,7 @@
     height: 100rpx;
     border-top: 1px solid #DDD;
     background: #FFF;
-    z-index: 2000;
+    z-index: 999;
     display: flex;
 }
 .tabBar .item {
@@ -264,3 +264,25 @@ padding-bottom: 20rpx;
     color: #5f7fc1;
 }
 image{ max-width: 100%;}
+
+
+.textarea_box{
+    position: fixed;
+    z-index: 1003;
+    top: 0;
+    left: 0;
+    background: #FAFBFC;
+    height: 272rpx;
+    width: 100%;
+}
+.txt_input{
+    width: 95%;
+    display: block;
+    height: 160rpx;
+    margin: 20rpx auto 0;
+}
+.txt_sub_btn{
+    border-radius: 0;
+    border: 0;
+    border-top: 2rpx solid #eee;
+}

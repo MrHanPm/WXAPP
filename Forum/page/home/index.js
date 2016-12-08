@@ -1,22 +1,29 @@
 const XHR = require('../../requests/request.js')
-var APP = getApp()
+var APPS = getApp()
+
+let addId // 临时储存点击id
 Page({
     data:{
         autoplay: true,
         interval: 3000,
         duration: 1000,
 
-        loading: true,
+        loading: true,  // 延时加载数据
+        isLoding: true, // 是否加载
         scrollTop: '',
-        showFA: false,
+        showFA: false,   // 火箭图标
 
         nowPage: 1,
+        HASLOGIN: false, // 用户是否登录
+        userInfo:{},   // 获取的用户信息
+        isUserInfo: true, // 判断获取用户的信息是否完整
         hotNews: [],
         newList: [],
         myFol: []
     },
     onLoad:function() {
         this.upData()
+        this.GETUSERINFO()
     },
     upData:function() {
         let newPage = this.data.nowPage
@@ -40,18 +47,48 @@ Page({
                 }
             )
         }
-        
+    },
+    GETUSERINFO:function(){
+        let json = {}
+        json.action = 'member'
+        json.method = 'wechatLogin'
+        json.encryptData = APPS.USERINFO.encryptedData
+        json.iv = APPS.USERINFO.iv
+        json.session_id = APPS.SESSIONID
+        XHR.postWrite('get',json,
+            (db) => {
+                if(db.status === 0){
+                    this.setData({
+                        userInfo: APPS.USERINFO.userInfo,
+                        isUserInfo: true,
+                        HASLOGIN: true
+                    })
+                }else{
+                    this.setData({
+                        userInfo: APPS.USERINFO.userInfo,
+                        isUserInfo: false
+                    })
+                }
+            }
+        )
+    },
+    Register:function () {
+        this.setData({
+            HASLOGIN: true
+        })
     },
     loadMore:function() {
         this.upData()
     },
     rcmdAdd:function(e) {
         let tid = e.target.dataset.tid
+        let oldId = addId
+        addId = tid
         let idx = e.target.dataset.idx
         let dis = e.target.dataset.dis
         let newL = this.data.newList
         // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true') {
+        if(dis !== 'true' && oldId !== addId) {
             XHR.getLaud({tid: tid},
                 (db) => {
                     if(db.status === 0) {

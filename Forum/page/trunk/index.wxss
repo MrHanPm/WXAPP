@@ -51,3 +51,4 @@
     transition: all .3s;
 }
 .is_alt_abox{opacity: 1;}
+

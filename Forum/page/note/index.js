@@ -62,6 +62,29 @@ Page({
             )
         }
     },
+    upDataActiv:function(tid) {
+        let tids = tid
+        let newPage = this.data.nowPage
+        let newpostlist = this.data.postlist
+        if (this.data.loading && this.data.isLoding) {
+            this.setData({loading: false})
+            XHR.getDetail({tid: tid, page: newPage,items:21,sort:this.data.sortV},
+                (db) => {
+                    if(db.status === 0) {
+                        newPage++
+                        let Dlist = db.data.postlist
+                        newpostlist.push(...Dlist)
+                        this.setData({
+                            postlist: newpostlist,
+                            nowPage:newPage,
+                            loading: true,
+                            isLoding: Dlist.length >= 20 ? true : false
+                        })
+                    }
+                }
+            )
+        }
+    },
     loadMore:function() {
         this.upData(this.data.tid)
     },
@@ -81,7 +104,7 @@ Page({
                 sortX: true
             })
         }
-        this.upData(this.data.tid)
+        this.upDataActiv(this.data.tid)
     },
     onReady:function(){
         let txt = this.data.thread.subject

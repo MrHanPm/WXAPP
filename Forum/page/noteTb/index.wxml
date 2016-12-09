@@ -15,7 +15,7 @@
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
-                        <text class="level all-grade{{item.score.level}}"></text>
+                        <text class="level grade grade{{item.score.level}}"></text>
                     </view>
                     <view class="time">
                         {{item.dateline}}
@@ -63,7 +63,7 @@
                 <view class="user-info">
                     <view class="user-wrap">
                         <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
-                        <text class="level all-grade{{item.score.level}}"></text>
+                        <text class="level grade grade{{item.score.level}}"></text>
                     </view>
                     <view class="time">
                         {{item.dateline}}

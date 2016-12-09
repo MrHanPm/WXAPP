@@ -43,9 +43,10 @@ function xhr( method, url, data, successCallback, errorCallback, completeCallbac
 
 /**---------------BIND-------------------**/
 // 获取验证码
-// function getPhoneMsg(data, susCb, errCb, comCb ) {
-//     xhr(null, API.getPhoneMsg(), data, susCb, errCb, comCb)
-// }
+// mobile  string  是   接收短信手机号
+function getPhoneMsg(data, susCb, errCb, comCb ) {
+    xhr(null, API.getPhoneMsg(), data, susCb, errCb, comCb)
+}
 // //验证码登录
 // function getPhoneLog(data, susCb, errCb, comCb ) {
 //     xhr(null, API.getPhoneLog(), data, susCb, errCb, comCb)
@@ -109,10 +110,33 @@ function getUserInfo(data, susCb, errCb, comCb ) {
 function getToForum(data, susCb, errCb, comCb ) {
     xhr(null, API.getToForum(), data, susCb, errCb, comCb)
 }
+
 // 多功能调用
 // msg (post/get)
 function postWrite(msg, data, susCb, errCb, comCb ) {
     xhr(msg, API.postWrite(), data, susCb, errCb, comCb)
+}
+
+// 签到
+function setSign(data, susCb, errCb, comCb ) {
+    xhr(null, API.setSign(), data, susCb, errCb, comCb)
+}
+// 我关注的车型列表
+function getCarTypeList(data, susCb, errCb, comCb ) {
+    xhr(null, API.getCarTypeList(), data, susCb, errCb, comCb)
+}
+
+// 关注好友、取消关注接口
+// operation   string  是   操作类型 add 关注、delete 取消
+// newbuddyid  int 是   好友uid
+function addDelFriend(data, susCb, errCb, comCb ) {
+    xhr(null, API.addDelFriend(), data, susCb, errCb, comCb)
+}
+// 关注车型论坛
+// operation   string  是   favorites 收藏、delfavorites 取消收藏
+// id  int 是   主键id
+function addFavorties(data, susCb, errCb, comCb ) {
+    xhr(null, API.addFavorties(), data, susCb, errCb, comCb)
 }
 /**---------------FORM-------------------**/
 
@@ -126,5 +150,10 @@ module.exports = {
     getLaud: getLaud,
     getToForum: getToForum,
     getUserInfo: getUserInfo,
+    setSign: setSign,
+    addDelFriend: addDelFriend,
+    getCarTypeList: getCarTypeList,
+    addFavorties: addFavorties,
+    getPhoneMsg: getPhoneMsg,
     postWrite: postWrite
 };

@@ -2,14 +2,19 @@ var APPS = getApp()
 
 Page({
   data:{
-      userInfo:{},
+    isUserInfo:false,
+
+    userInfo:{}
   },
   onLoad:function(){
     let usin = wx.getStorageSync('_USERINFO')
-    let wxus = APPS.USERINFO
-    if(usin){
+    let wxus = APPS.USERINFO.userInfo
+
+    console.log(usin,wxus,454545454545)
+    if(usin.uid){
       this.setData({
-        userInfo:usin
+        userInfo:usin,
+        isUserInfo:APPS.HASLOGIN
       })
     }else{
       this.setData({

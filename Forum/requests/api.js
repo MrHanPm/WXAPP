@@ -2,10 +2,10 @@ const URL = require('../config.js')
 var APPS = getApp()
 // const SESSIONID = () => { return APPS.SESSIONID}
 /**---------------BIND-------------------**/
-// // 获取验证码
-// function getPhoneMsg() {
-//     return URL + 'User/SendSMSYanMa.aspx'
-// }
+// 获取验证码
+function getPhoneMsg() {
+    return URL + 'interface/app/wxapp.php?action=sms&method=sendCaptcha&sendtype=0&session_id=' + APPS.SESSIONID
+}
 // // 验证码登录
 // function getPhoneLog() {
 //     return URL + 'WXXiaoChengXu/XiaoChengXuBind.aspx'
@@ -48,7 +48,7 @@ function getDetail() {
 function getLaud() {
     return URL + 'interface/app/wxapp.php?action=thread&method=recommend&session_id=' + APPS.SESSIONID
 }
-// POST -----发帖----回帖-----上传图片-----关注车型论坛    
+// 多功能接口-----发帖----回帖-----上传图片-----关注车型论坛    
 function postWrite() {
     return URL + 'interface/app/wxapp.php'
 }
@@ -66,9 +66,23 @@ function getToForum() {
 
 // 我关注的车型列表
 function getCarTypeList() {
-    return URL + 'interface/app/wxapp.php?type=user&action=UserInfo&session_id=' + APPS.SESSIONID
+    return URL + 'interface/app/wxapp.php?type=empty&action=club&method=getFavList&operation=follow&session_id=' + APPS.SESSIONID
 }
 
+// 签到
+function setSign() {
+    return URL + 'interface/app/wxapp.php?action=member&method=sign&step=sign&session_id=' + APPS.SESSIONID
+}
+
+// 关注好友、取消关注接口
+function addDelFriend() {
+    return URL + 'interface/app/wxapp.php?action=AddFriend&type=empty&session_id=' + APPS.SESSIONID
+}
+
+// 关注车型论坛
+function addFavorties() {
+    return URL + 'interface/app/wxapp.php?action=AddFavorties&type=empty&idtype=follow&session_id=' + APPS.SESSIONID
+}
 /**---------------FORM-------------------**/
 
 
@@ -84,5 +98,10 @@ module.exports = {
     getTrunk: getTrunk,
     getToForum: getToForum,
     getUserInfo: getUserInfo,
+    setSign: setSign,
+    addDelFriend: addDelFriend,
+    getCarTypeList: getCarTypeList,
+    addFavorties: addFavorties,
+    getPhoneMsg: getPhoneMsg,
     postWrite: postWrite
 };

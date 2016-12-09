@@ -3,7 +3,6 @@ var APPS = getApp()
 Page({
   data:{
     loading: true,  // 延时加载数据
-    isLoding: true, // 是否加载
     tops: 0,
     isShowAZ:false,
     hoverAZ: false,
@@ -42,7 +41,8 @@ Page({
                     htoTrunk: db.data.hotclublist,
                     clubList: List,
                     AZS: AZD,
-                    tops:Tos
+                    tops:Tos,
+                    loading: false,  // 延时加载数据
                 })
             }
         }
@@ -57,8 +57,64 @@ Page({
             });
         }, 800)
   },
-
-
+  addFavorties:function(e){
+    let dix = e.target.dataset.dix
+    let inx = e.target.dataset.inx
+    let htoTrunk = this.data.htoTrunk
+    let clubList = this.data.clubList
+    XHR.addFavorties({operation:'favorites',id:e.target.dataset.id,description:e.target.dataset.img},
+      (db) => {
+        if(db.status === 0){
+          if(inx == 'false'){
+            htoTrunk[dix].isfav = true
+            this.setData({htoTrunk:htoTrunk})
+          }else{
+            clubList[inx][dix].isfav = true
+            this.setData({clubList:clubList})
+          }
+        }else{
+          wx.showModal({
+            title: '最多只能关注10个哦～',
+            showCancel: false,
+            success: function(res) {
+              // if (res.confirm) {
+              //   console.log('用户点击确定')
+              // }
+            }
+          })
+        }
+      }
+    )
+  },
+  delFavorties:function(e){
+    let dix = e.target.dataset.dix
+    let inx = e.target.dataset.inx
+    let htoTrunk = this.data.htoTrunk
+    let clubList = this.data.clubList
+    XHR.addFavorties({operation:'delfavorites',id:e.target.dataset.id},
+      (db) => {
+        if(db.status === 0){
+          if(inx == 'false'){
+            htoTrunk[dix].isfav = false
+            this.setData({htoTrunk:htoTrunk})
+          }else{
+            clubList[inx][dix].isfav = false
+            this.setData({clubList:clubList})
+          }
+        }else{
+          wx.showModal({
+            title: '最多只能关注10个哦～',
+            showCancel: false,
+            success: function(res) {
+              // if (res.confirm) {
+              //   console.log('用户点击确定')
+              // }
+            }
+          })
+        }
+      }
+    )
+  },
 
 
 

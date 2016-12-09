@@ -1,0 +1,27 @@
+.attentions{
+    height: 140rpx;
+    border-top: 2rpx solid #e5e5e5;
+}
+.attentions image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-left: 32rpx;
+}
+.att_mrt{
+    margin-right: 30rpx;
+    margin-top: 42rpx;
+}
+
+.name_top{
+font-size: 32rpx;
+color: #333333;
+line-height: 32rpx;
+padding-top: 30rpx;
+}
+.name_fot{
+font-size: 28rpx;
+color: #999999;
+padding-top: 20rpx;
+line-height: 20rpx;
+}

@@ -5,8 +5,8 @@
     <view class="attentions">
         <image src="{{item.img}}"></image>
         <text class="att_forum-name">{{item.info}}</text>
-        <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">取消关注</view>
-        <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">添加关注</view>
+        <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-inx="false" data-dix="{{index}}" data-img="{{item.img}}" bindtap="delFavorties">取消关注</view>
+        <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-inx="false" data-dix="{{index}}" data-img="{{item.img}}" bindtap="addFavorties">添加关注</view>
     </view>
 </block>
 
@@ -17,8 +17,8 @@
     <view class="attentions">
         <image src="{{ims.imgurl}}"></image>
         <text class="att_forum-name">{{ims.name}}</text>
-        <view wx:if="{{ims.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{ims.tagid}}" data-dix="{{idx}}">取消关注</view>
-        <view wx:if="{{ims.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{ims.tagid}}" data-dix="{{idx}}">添加关注</view>
+        <view wx:if="{{ims.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{ims.tagid}}" data-inx="{{index}}" data-dix="{{idx}}" data-img="{{ims.imgurl}}" bindtap="delFavorties">取消关注</view>
+        <view wx:if="{{ims.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{ims.tagid}}" data-inx="{{index}}" data-dix="{{idx}}" data-img="{{ims.imgurl}}" bindtap="addFavorties">添加关注</view>
     </view>
     </block>
 </block>
@@ -29,7 +29,6 @@
     </block>
 </view>
 <text class="alt_abox {{isShowAZ ? 'is_alt_abox':''}}">{{scrollTop}}</text>
-
-<view class="tru_loding" hidden="{{isLoding ? false : true}}">
-    <template is="loMore" data="{{txt: false, isShow: isLoding}}" />
+<view class="tru_loding" hidden="{{loading?false:true}}">
+    <template is="loMore" data="{{txt: false, isShow: true}}" />
 </view>

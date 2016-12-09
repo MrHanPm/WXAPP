@@ -1,8 +1,8 @@
 <view class="user-header">
     <view class="mi_personal">
-        <image class="mi_personal-photo" src="{{isUserInfo ? userInfo.avatarUrl : userInfo.avatarUrl}}"></image>
-        <view class="mi_personal-name">{{isUserInfo ? userInfo.nickName : userInfo.nickName}}</view>
-        <view class="level all-grade4"></view>
+        <image class="mi_personal-photo" src="{{isUserInfo ? userInfo.avatar : userInfo.avatarUrl}}"></image>
+        <view class="mi_personal-name">{{isUserInfo ? userInfo.username : userInfo.nickName}}</view>
+        <view hidden="{{isUserInfo?false:true}}" class="level all-grade{{userInfo.score.level}}"></view>
     </view>
     <view class="mi_sign">已签到</view>
     <view class="mi_w-back">

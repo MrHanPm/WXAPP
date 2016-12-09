@@ -90,6 +90,9 @@
     border-radius: 50%;
     overflow: hidden;
 }
+.scroll-img image{
+    height: 88rpx;
+}
 .scroll_ico{
     font-family: 'forum';
     color: #3B5998;
@@ -102,13 +105,13 @@
 .scroll text{
     display: block;
     width: 100%;
-    font-family: PingFangSC-Regular;
+    overflow: hidden;
     font-size: 28rpx;
     color: #000000;
     letter-spacing: 0;
     line-height: 28rpx;
     margin-top: 28rpx;
-    text-align: center
+    text-align: center;
 }
 
 /*公告*/

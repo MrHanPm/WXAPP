@@ -1,0 +1,28 @@
+<form>
+  <text class="post-title">标题</text>
+  <input class="post-input" placeholder="请输入标题" />
+  <text class="post-title">正文</text>
+  <view class="post-maintext">
+    <textarea class="post-textarea" placeholder="请输入正文" />
+  </view>
+  <text class="post-sync">该贴可同步到以下论坛</text>
+  <view class="post-forum post-first {{postOne==true ? 'post-click' : ''}}" bindtap="postFirst">庆铃轻卡论坛</view>
+  <view class="post-forum {{postTwo==true ? 'post-click' : ''}}" bindtap="postSecond">江铃轻卡论坛</view>
+  <view class="post-forum {{postThree==true ? 'post-click' : ''}}" bindtap="postThird">开瑞绿卡论坛</view>
+  <button class="post-complete" formType="submit">发表</button>
+</form>
+<view class="post-keyboard" style="display:none">
+  <view class="post-select">
+    <view class="post-feels post-commen"></view>
+    <view class="post-pic post-commen"></view>
+    <view class="post-photo post-commen"></view>
+  </view>
+  <view class="post-keyContent" >
+    <view class="images-list">
+      <block wx:for="{{imageList}}">
+        <image class="post-selectPhoto-image" data-src="{{item}}" src="{{item}}" />
+      </block>
+      <view class="post-selectPhoto-image post-selectPhoto" bindtap="chooseImage"></view>
+    </view>
+  </view>
+</view>

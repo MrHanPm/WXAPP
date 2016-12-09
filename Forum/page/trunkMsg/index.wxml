@@ -1,67 +1,16 @@
 <import src="../component/more/index"/>
 <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
-    <!-- 虚拟路由组件 -->
-    <!-- <include src="../component/url/index"/> -->
-    <view class="home-header" id="HD">
-        <image src="{{isUserInfo ? userInfo.avatar : userInfo.avatarUrl}}" class="portrait"></image>
-        <view class="portraitPic USERPIC"></view>
-        
-        <text hidden="{{HASLOGIN ? true : false}}">请登录</text>
-        <text hidden="{{HASLOGIN ? false : true}}">{{isUserInfo ? userInfo.nickname : userInfo.nickName}}</text>
-        <text class="level grade grade{{userInfo.score.level}}" wx:if="{{HASLOGIN}}"></text>
-        <view wx:if="{{HASLOGIN}}" class="pt_pictxt">{{userInfo.extcredits8}}卡路里</view>
-        
-        <view wx:if="{{HASLOGIN}}" hidden="{{signDay > 0 ? true : false}}" class="sign" bindtap="goSign">签到</view>
-        <view wx:if="{{HASLOGIN}}" hidden="{{signDay > 0 ? false : true}}" class="isokSign">已签到{{signDay}}天</view>
 
-        <view wx:if="{{HASLOGIN ? false : true}}" class="isokSign" bindtap="bindTel">登录</view>
+<view class="attentions" id="HD">
+    <image src="{{Trunk.img}}"></image>
+    <view class="att_forum-name">
+        <view class="name_top">{{Trunk.info}}ddd</view>
+        <view class="name_fot">{{Trunk.info}}ddd</view>
     </view>
-    <!--轮播-->
-    <scroll-view scroll-x="true" class="solid_view">
-        <view class="scroll" >
-            <navigator url="../noteTb/index?id=0">
-            <view class="scroll-img">
-                <view class="scroll_ico scroll_hot_ico"> </view>
-            </view>
-            <text>十大热贴</text>
-            </navigator>
-        </view>
+    <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-img="" bindtap="delFavorties">取消关注</view>
+    <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-img="{{item.img}}" bindtap="addFavorties">添加关注</view>
+</view>
 
-        <view class="scroll" >
-            <navigator url="../noteTb/index?id=1">
-            <view class="scroll-img">
-                <view class="scroll_ico scroll_fol_ico"> </view>
-            </view>
-            <text>精华</text>
-            </navigator>
-        </view>
-        <block wx:for="{{myFol}}">
-            <view class="scroll">
-                <navigator url="../trunkMsg/index?id={{item.tagid}}">
-                <view class="scroll-img"><image src="{{item.imgurl}}" mode="aspectFill"></image></view>
-                <text>{{item.name}}</text>
-                </navigator>
-            </view>
-        </block>
-        <view wx:if="{{HASLOGIN}}" class="scroll" >
-            <navigator url="../trunk/index">
-            <view class="scroll-img">
-                <view class="scroll_ico scroll_add_ico"> </view>
-            </view>
-            <text>添加</text>
-            </navigator>
-        </view>
-    </scroll-view>
-    <!--公告-->
-    <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true"  class="hot_box">
-        <block wx:for="{{hotNews}}">
-            <swiper-item>
-                <text class="notice-content" data-tid="{{item.mInfo.id}}" bindtap="goMsg">{{item.title}}</text>
-            </swiper-item>
-        </block>
-    </swiper>
-
-    <!--评论-->
     <block wx:for="{{newList}}">
         <view class="personal">
             <view class="header">
@@ -103,8 +52,8 @@
             </view>
         </view>
     </block>
+
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
     <template is="noMore" data="{{txt:'服务错误，暂无数据～',isShow: isLoding}}" />
 </scroll-view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:44rpx"></view>
-<view class="help" bindtap="goAddForum" style=""></view>

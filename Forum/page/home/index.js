@@ -16,14 +16,16 @@ Page({
         nowPage: 1,
         HASLOGIN: false, // 用户是否登录
         userInfo:{},   // 获取的用户信息
-        isUserInfo: true, // 判断获取用户的信息是否完整
-        hotNews: [],
+        isUserInfo: false, // 判断获取用户的信息是否完整
+        signDay: 0,       // 签到几天
+        hotNews: [],     // 公告
         newList: [],
-        myFol: []
+        myFol: []     // 关注的车型
     },
     onLoad:function() {
         this.upData()
         this.GETUSERINFO()
+        this.getCarList()
     },
     upData:function() {
         let newPage = this.data.nowPage
@@ -58,24 +60,29 @@ Page({
         XHR.postWrite('get',json,
             (db) => {
                 if(db.status === 0){
+                    APPS.HASLOGIN = true
+                    wx.setStorageSync('_USERINFO',db.data) // 储存线上数据
                     this.setData({
-                        userInfo: APPS.USERINFO.userInfo,
+                        userInfo: db.data,
                         isUserInfo: true,
                         HASLOGIN: true
                     })
                 }else{
                     this.setData({
-                        userInfo: APPS.USERINFO.userInfo,
-                        isUserInfo: false
+                        userInfo: APPS.USERINFO.userInfo
                     })
                 }
             }
         )
     },
-    Register:function () {
-        this.setData({
-            HASLOGIN: true
-        })
+    getCarList:function(){
+        XHR.getCarTypeList('',
+            (db) => {
+                this.setData({
+                    myFol: db.data
+                })
+            }
+        )
     },
     loadMore:function() {
         this.upData()
@@ -109,6 +116,27 @@ Page({
             )
         }
     },
+    goSign:function(){
+        XHR.setSign('',
+            (db) => {
+                if(db.status === 0){
+                    this.setData({
+                        signDay: db.data.resign
+                    })
+                }else{
+                    wx.showModal({
+                      title: '您已经签到，不能重复签到',
+                      showCancel: false,
+                      success: function(res) {
+                        // if (res.confirm) {
+                        //   console.log('用户点击确定')
+                        // }
+                      }
+                    })
+                }
+            }
+        )
+    },
     goTop:function() {
         this.setData({scrollTop: 'HD'})
     },
@@ -133,6 +161,23 @@ Page({
         wx.navigateTo({
             url: `../note/index?id=${e.target.dataset.tid}`
         })
+    },
+    goAddForum:function() {
+        wx.navigateTo({
+            url: '../postForum/index'
+            // url: '../user/index'
+        })
+    },
+    bindTel:function (){
+        wx.navigateTo({
+            url: '../bindTel/index'
+        })
+    },
+    onShow:function(){
+        if(APPS.HASLOGIN){    // 判断是否登录，是否更新数据
+            this.GETUSERINFO()
+            this.getCarList()
+        }
     }
 })
 

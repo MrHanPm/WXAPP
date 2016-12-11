@@ -170,6 +170,6 @@
 <view class="to-return" bindtap="toBack">返回</view>
 <mask hidden="{{showForm}}" bindtap="hideGoToMsg" hover-style="none"/>
 <view class="textarea_box" hidden="{{showForm}}">
-    <textarea placeholder="回帖是一种美德…" class="txt_input" focus="{{focus}}" bindinput="txtInput"></textarea>
+    <input class="txt_input" placeholder="回帖是一种美德…" focus="{{focus}}" bindinput="txtInput" />
     <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="warn">发表</button>
 </view>

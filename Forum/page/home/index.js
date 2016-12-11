@@ -125,7 +125,8 @@ Page({
                     })
                 }else{
                     wx.showModal({
-                      title: '您已经签到，不能重复签到',
+                      title: '提示',
+                      content:'您已经签到，不能重复签到',
                       showCancel: false,
                       success: function(res) {
                         // if (res.confirm) {
@@ -164,8 +165,8 @@ Page({
     },
     goAddForum:function() {
         wx.navigateTo({
-            url: '../postForum/index'
-            // url: '../user/index'
+           // url: '../postForum/index'
+            url: '../user/index'
         })
     },
     bindTel:function (){

@@ -37,7 +37,10 @@
                 </view>
             </view>
         </block>
-        <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
+        <template is="loMore" data="{{txt: toForum.length > 0 ? true : false}}" />
+        <view hidden="{{toForum.length !== 0}}">
+        <template is="isNull" />
+        </view>
     </scroll-view>
 </view>
 <view class="friends-front" hidden="{{viewTab ? true : false}}">
@@ -51,7 +54,10 @@
                 </view>
             </view>
         </block>
-        <template is="loMore" data="{{txt: newList.length > 0 ? true : false}}" />
+        <template is="loMore" data="{{txt: goForum.length > 0 ? true : false}}" />
+        <view hidden="{{goForum.length !== 0}}">
+        <template is="isNull" />
+        </view>
     </scroll-view>
 </view>
 <button class="friends-add" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">添加关注</button>

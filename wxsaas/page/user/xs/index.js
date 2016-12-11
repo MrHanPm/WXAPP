@@ -1,3 +1,4 @@
+const XHR = require('../../../requests/request.js')
 
 Page({
     data: {
@@ -24,8 +25,19 @@ Page({
             }
         });
     },
+// 待跟进
+    RobList: function () {
+        XHR.getRobList()
+    },
+// 跟进中
+    ClueUpList: function () {
+        XHR.getClueUpList()
+    },
+// 已成交
+    CluesList: function () {
+        XHR.getCluesList()
+    },
     tabClick: function (e) {
-        // console.log(e)
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
@@ -42,4 +54,8 @@ Page({
         console.log(e, 'loadMore')
 
     }
+
+
+
+
 });

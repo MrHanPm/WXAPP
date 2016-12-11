@@ -106,5 +106,5 @@
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
     <template is="noMore" data="{{txt:'服务错误，暂无数据～',isShow: isLoding}}" />
 </scroll-view>
-<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:44rpx"></view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:48rpx"></view>
 <view class="help" bindtap="goAddForum" style=""></view>

@@ -83,6 +83,7 @@ Page({
         }else{
           wx.showModal({
             title: '最多只能关注10个哦～',
+            content:'',
             showCancel: false,
             success: function(res) {
               // if (res.confirm) {

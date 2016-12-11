@@ -57,7 +57,7 @@
     content: '\e648';
 }
 .blueAct text,.blueAct .icon{color: #3B5998;}
-scroll-view{padding-bottom: 120rpx;box-sizing: border-box;}
+scroll-view{padding-bottom: 101rpx;box-sizing: border-box;}
 
 
 
@@ -276,13 +276,21 @@ image{ max-width: 100%;}
     width: 100%;
 }
 .txt_input{
-    width: 95%;
+    width: 100%;
     display: block;
     height: 160rpx;
     margin: 20rpx auto 0;
+    line-height: 22rpx;
+    text-overflow:initial;
+    overflow-y: scroll;
+    white-space: pre;
+    vertical-align: top;
 }
 .txt_sub_btn{
     border-radius: 0;
     border: 0;
     border-top: 2rpx solid #eee;
+}
+.txt_sub_btn:after{
+    border:0;
 }

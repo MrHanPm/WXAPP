@@ -1,5 +1,16 @@
-<view class="attentions">
-    <image src="{{item.img}}" class="USERPIC"></image>
-    <text class="att_forum-name">{{item.info}}重卡</text>
-    <view class="cancle-attention att_mrt" data-id="{{item.classid}}" data-dix="{{index}}">取消关注</view>
+<import src="../component/more/index"/>
+<scroll-view scroll-y="true">
+<block wx:for="{{myFol}}">
+    <view class="attentions">
+        <image src="{{item.imgurl}}"></image>
+        <text class="att_forum-name">{{item.name}}</text>
+        <view class="cancle-attention" data-id="{{item.tagid}}" data-dix="{{index}}" bindtap="delFavorties">取消关注</view>
+    </view>
+</block>
+</scroll-view>
+<view class="tru_loding" hidden="{{loading?false:true}}">
+    <template is="loMore" data="{{txt: false, isShow: true}}" />
+</view>
+<view hidden="{{myFol.length !== 0}}">
+<template is="isNull" />
 </view>

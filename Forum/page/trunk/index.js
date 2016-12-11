@@ -74,7 +74,8 @@ Page({
           }
         }else{
           wx.showModal({
-            title: '最多只能关注10个哦～',
+            title: '提示',
+            content:'最多只能关注10个哦～',
             showCancel: false,
             success: function(res) {
               // if (res.confirm) {

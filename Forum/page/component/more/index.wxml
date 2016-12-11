@@ -12,6 +12,10 @@
   <view class="noDataBox"></view>
 </template>
 
+<!--空数据-->
+<template name="isNull">
+  <view class="noNullBox"></view>
+</template>
 
 <template name="loMore">
     <view class="loading" style="margin:{{txt ? '80rpx auto' : '48% auto 0'}}" hidden="{{isShow?false:true}}">

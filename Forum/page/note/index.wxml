@@ -138,7 +138,7 @@
                 </view>
                 <view class="mi_dre" style="padding-top:2rpx">
                     <view class="mi_dre_btn"></view>
-                    <view class="mi_cal_btn" bindtap="goToMsg">回复</view>
+                    <view class="mi_cal_btn" data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" bindtap="goToMsg">回复</view>
                     <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
                           data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" data-dis="{{item.rcmd}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
                 </view>
@@ -157,9 +157,9 @@
       <view class="icon zan" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}"><text>{{thread.recommend_add}}</text></view>
       <text data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}">点赞</text>
     </view>
-    <view bindtap="goToMsg" class="item">
-      <view class="icon comment"><text>{{thread.replies}}</text></view>
-      <text>回复</text>
+    <view bindtap="goToMsg" class="item" data-pid="false">
+      <view class="icon comment" data-pid="false"><text>{{thread.replies}}</text></view>
+      <text data-pid="false">回复</text>
     </view>
     <view bindtap="" class="item">
       <view class="icon forward"><text>{{thread.sharetimes}}</text></view>
@@ -170,6 +170,6 @@
 <view class="to-return" bindtap="toBack">返回</view>
 <mask hidden="{{showForm}}" bindtap="hideGoToMsg" hover-style="none"/>
 <view class="textarea_box" hidden="{{showForm}}">
-    <input class="txt_input" placeholder="回帖是一种美德…" focus="{{focus}}" bindinput="txtInput" />
-    <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="warn">发表</button>
+    <input class="txt_input" placeholder="回帖是一种美德…" focus="{{focus}}" bindinput="txtInput" value="{{inputValue}}" />
+    <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="postWrite">发表</button>
 </view>

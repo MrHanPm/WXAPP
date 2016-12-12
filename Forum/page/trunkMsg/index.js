@@ -22,16 +22,27 @@ Page({
       let newLists = this.data.newList
       if (this.data.loading) {
           this.setData({loading: false})
-          XHR.getHotTen({page: newPage,tagid:Tid},
+          XHR.getHotList({page: newPage,tagid:Tid},
               (db) => {
                   if(db.status === 0) {
+                    if(db.data.club.threads > 0) {
                       newPage++
-                      newLists.push(...db.data)
+                      newLists.push(...db.data.threadlist)
+                      this.setData({
+                          newList: newLists,
+                          nowPage: newPage,
+                          Trunk: db.data.club,
+                          loading: true
+                      })
+                    }else{
+                      newPage++
+                      newLists.push(...db.data.threadlist)
                       this.setData({
                           newList: newLists,
                           nowPage: newPage,
                           loading: true
                       })
+                    }
                   }
               }
           )
@@ -66,60 +77,27 @@ Page({
       })
   },
   addFavorties:function(e){
-    let dix = e.target.dataset.dix
-    let inx = e.target.dataset.inx
-    let htoTrunk = this.data.htoTrunk
-    let clubList = this.data.clubList
+    let Trunk = this.data.Trunk
     XHR.addFavorties({operation:'favorites',id:e.target.dataset.id,description:e.target.dataset.img},
       (db) => {
         if(db.status === 0){
-          if(inx == 'false'){
-            htoTrunk[dix].isfav = true
-            this.setData({htoTrunk:htoTrunk})
-          }else{
-            clubList[inx][dix].isfav = true
-            this.setData({clubList:clubList})
-          }
+            Trunk.followed = true
+            this.setData({Trunk: Trunk})
         }else{
-          wx.showModal({
-            title: '最多只能关注10个哦～',
-            content:'',
-            showCancel: false,
-            success: function(res) {
-              // if (res.confirm) {
-              //   console.log('用户点击确定')
-              // }
-            }
-          })
+
         }
       }
     )
   },
   delFavorties:function(e){
-    let dix = e.target.dataset.dix
-    let inx = e.target.dataset.inx
-    let htoTrunk = this.data.htoTrunk
-    let clubList = this.data.clubList
+    let Trunk = this.data.Trunk
     XHR.addFavorties({operation:'delfavorites',id:e.target.dataset.id},
       (db) => {
         if(db.status === 0){
-          if(inx == 'false'){
-            htoTrunk[dix].isfav = false
-            this.setData({htoTrunk:htoTrunk})
-          }else{
-            clubList[inx][dix].isfav = false
-            this.setData({clubList:clubList})
-          }
+            Trunk.followed = false
+            this.setData({Trunk: Trunk})
         }else{
-          wx.showModal({
-            title: '最多只能关注10个哦～',
-            showCancel: false,
-            success: function(res) {
-              // if (res.confirm) {
-              //   console.log('用户点击确定')
-              // }
-            }
-          })
+         
         }
       }
     )
@@ -152,6 +130,9 @@ Page({
               }
           )
       }
+  },
+  toBack:function() {
+      wx.navigateBack({delta:1})
   }
 
 

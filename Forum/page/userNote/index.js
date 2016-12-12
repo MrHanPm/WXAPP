@@ -6,6 +6,9 @@ Page({
         scrollTop: '',
         showFA: false,     // 火箭图标
         isLoding: true,    // 是否加载
+
+        isLoding_M: true, // 回帖
+        loads: true, // 回帖 延时加载数据
         activeIndex: 0,
         
 
@@ -13,7 +16,7 @@ Page({
         eNowPage: 1,
         newList:[],
         eliteList:[],
-        loads: true,
+        
     },
     onLoad:function(options) {
         this.setData({activeIndex: options.id})
@@ -21,27 +24,37 @@ Page({
         this.upElite()
     },
     onReady:function(){
-        if (this.data.activeIndex == '0') {
-            wx.setNavigationBarTitle({title: '十大热贴'})
-        } else {
-            wx.setNavigationBarTitle({title: '精华'})
-        }
+        // if (this.data.activeIndex == '0') {
+        //     wx.setNavigationBarTitle({title: '我的主贴'})
+        // } else {
+        //     wx.setNavigationBarTitle({title: '我的回帖'})
+        // }
     },
     upData:function() {
         let newPage = this.data.nowPage
         let newLists = this.data.newList
         if (this.data.loading) {
             this.setData({loading: false})
-            XHR.getHotTen({page: newPage},
+            XHR.getToForum({method:'posts', page: newPage},
                 (db) => {
                     if(db.status === 0) {
-                        newPage++
-                        newLists.push(...db.data)
-                        this.setData({
-                            newList: newLists,
-                            nowPage: newPage,
-                            loading: true
-                        })
+                        if(db.data.length < 20){
+                            newLists.push(...db.data)
+                            this.setData({
+                                newList: newLists,
+                                nowPage: newPage,
+                                loading: false,
+                                isLoding: false
+                            })
+                        }else{
+                            newPage++
+                            newLists.push(...db.data)
+                            this.setData({
+                                newList: newLists,
+                                nowPage: newPage,
+                                loading: true
+                            })
+                        }
                     }
                 }
             )
@@ -52,69 +65,40 @@ Page({
         let newLists = this.data.eliteList
         if (this.data.loads) {
             this.setData({loads: false})
-            XHR.getElite({page: newPage},
+            XHR.getToForum({method:'replies', page: newPage},
                 (db) => {
                     if(db.status === 0) {
-                        newPage++
-                        newLists.push(...db.data)
-                        this.setData({
-                            eliteList: newLists,
-                            eNowPage: newPage,
-                            loads: true
-                        })
-                    }
-                }
-            )
-        }
-    },
-    rcmdAdd:function(e) {
-        let tid = e.target.dataset.tid
-        let oldId = addId
-        addId = tid
-        let idx = e.target.dataset.idx
-        let dis = e.target.dataset.dis
-        let nowIndex = this.data.activeIndex
-        let newL
-        if( nowIndex == '0'){
-            newL = this.data.newList
-        }else{
-            newL = this.data.eliteList
-        }
-        // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true' && oldId !== addId) {
-            XHR.getLaud({tid: tid},
-                (db) => {
-                    if(db.status === 0) {
-                        if(db.data.recommend_count) {
-                           newL[idx]['recommend_add'] = db.data.recommend_count 
-                        }
-                        newL[idx]['rcmd'] = true
-                        if( nowIndex == '0'){
+                        if(db.data.length < 20){
+                            newLists.push(...db.data)
                             this.setData({
-                                newList: newL
+                                eliteList: newLists,
+                                eNowPage: newPage,
+                                loads: false,
+                                isLoding_M: false
                             })
                         }else{
+                            newPage++
+                            newLists.push(...db.data)
                             this.setData({
-                                eliteList: newL
+                                eliteList: newLists,
+                                eNowPage: newPage,
+                                loads: true
                             })
                         }
-                    }else{
-                        wx.showToast({
-                          title: db.data,
-                          duration: 2000
-                        })
+                        
                     }
                 }
             )
         }
     },
+    
     goUser:function(e) {
-        wx.navigateTo({
+        wx.redirectTo({
             url: `../friends/index?id=${e.target.dataset.tid}`
         })
     },
     goMsg:function(e) {
-        wx.navigateTo({
+        wx.redirectTo({
             url: `../note/index?id=${e.target.dataset.tid}`
         })
     },
@@ -126,11 +110,11 @@ Page({
     },
     activeTab:function (e) {
         let id = e.target.dataset.id
-        if (id == '0') {
-            wx.setNavigationBarTitle({title: '十大热贴'})
-        } else {
-            wx.setNavigationBarTitle({title: '精华'})
-        }
+        // if (id == '0') {
+        //     wx.setNavigationBarTitle({title: '我的主贴'})
+        // } else {
+        //     wx.setNavigationBarTitle({title: '我的回帖'})
+        // }
         this.setData({activeIndex: id})
     },
     goTop:function() {

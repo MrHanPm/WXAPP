@@ -1,0 +1,16 @@
+.about-us{
+    padding: 30rpx;
+    background: #fff;
+}
+.caption{
+    line-height: 60rpx;
+    color: #333;
+    font-size: 32rpx;
+}
+.about-us text{
+    display: block;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #333;
+    margin: 20rpx 0;
+}

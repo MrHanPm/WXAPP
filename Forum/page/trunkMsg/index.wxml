@@ -2,13 +2,13 @@
 <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
 
 <view class="attentions" id="HD">
-    <image src="{{Trunk.img}}"></image>
+    <image src="{{Trunk.club.icon}}" mode="aspectFill"></image>
     <view class="att_forum-name">
-        <view class="name_top">{{Trunk.info}}ddd</view>
-        <view class="name_fot">{{Trunk.info}}ddd</view>
+        <view class="name_top">{{Trunk.club.tagname}}</view>
+        <view class="name_fot">{{Trunk.threads}}篇帖子</view>
     </view>
-    <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-img="" bindtap="delFavorties">取消关注</view>
-    <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-img="{{item.img}}" bindtap="addFavorties">添加关注</view>
+    <view wx:if="{{Trunk.followed?true:false}}" class="cancle-attention att_mrt" data-id="{{Trunk.club.tagid}}" bindtap="delFavorties">取消关注</view>
+    <view wx:if="{{Trunk.followed?false:true}}" class="cancl_attention att_mrt" data-id="{{Trunk.club.tagid}}" data-img="{{Trunk.club.icon}}" bindtap="addFavorties">添加关注</view>
 </view>
 
     <block wx:for="{{newList}}">
@@ -56,4 +56,5 @@
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
     <template is="noMore" data="{{txt:'服务错误，暂无数据～',isShow: isLoding}}" />
 </scroll-view>
-<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:44rpx"></view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
+<view class="to-return" bindtap="toBack">返回</view>

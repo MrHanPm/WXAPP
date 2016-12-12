@@ -13,10 +13,13 @@ Page({
     getCarList:function(){
         XHR.getCarTypeList('',
             (db) => {
-                this.setData({
-                    myFol: db.data,
-                    loading: false
-                })
+                if(db.status === 0){
+                    this.setData({
+                        myFol: db.data,
+                        loading: false
+                    })
+                }
+                
             }
         )
     },

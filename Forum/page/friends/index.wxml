@@ -32,7 +32,7 @@
             <view class="friends-content">
                 <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
                 <view class="conFot">
-                    <text class="content-time">{{item.lasttime}}</text>
+                    <text class="content-time">{{item.dateline}}</text>
                     <text class="content-replies">{{item.replies}}回帖</text>
                 </view>
             </view>
@@ -49,8 +49,8 @@
             <view class="friends-content">
                 <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
                 <view class="conFot">
-                    <text class="content-time">{{item.lasttime}}</text>
-                    <text class="content-replies">{{item.replies}}回帖</text>
+                    <text class="content-time">{{item.dateline}}</text>
+                    <!-- <text class="content-replies">{{item.replies}}回帖</text> -->
                 </view>
             </view>
         </block>
@@ -60,4 +60,5 @@
         </view>
     </scroll-view>
 </view>
-<button class="friends-add" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">添加关注</button>
+<button wx:if="{{userInfo.isfriend == '0'}}" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="addFriend">添加关注</button>
+<button wx:if="{{userInfo.isfriend == '1'}}" type="warn" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="delFriend">取消关注</button>

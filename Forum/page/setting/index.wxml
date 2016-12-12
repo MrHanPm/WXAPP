@@ -1,4 +1,4 @@
-<navigator url="../user/index" redirect="true">
+<navigator url="../aboutUs/index" redirect="true">
 <view class="about">
     <text class="about-us">关于我们</text>
 </view>

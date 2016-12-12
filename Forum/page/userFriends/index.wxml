@@ -1,23 +1,37 @@
-<view class="personal">
-    <view class="header">
-        <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
-        <view class="user-info">
-            <view class="user-wrap">
-                <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}dd</text>
+<import src="../component/more/index"/>
+<scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
+<view id="HD"></view>
+<block wx:for="{{dataList}}">
+    <view class="personal">
+        <view class="header">
+            <image src="{{item.avatar}}" class="avatar" data-tid="{{item.authorid}}" bindtap="goUser"></image>
+            <view class="user-info">
+                <view class="user-wrap">
+                    <text class="name" data-tid="{{item.tid}}" bindtap="goMsg">{{item.author}}</text>
+                </view>
+                <view class="time">
+                    {{item.dateline}}
+                    <!-- <text class="tag">{{item.className}}</text> -->
+                </view>
             </view>
-            <view class="time">
-                {{item.dateline}}dd
-                <text class="tag">{{item.className}}dd</text>
-            </view>
+            <view class="browse browse_view">{{item.views}}</view>
         </view>
-        <view class="browse">{{item.views}}</view>
+        <navigator url="../note/index?id={{item.tid}}" redirect="true">
+        <view class="content">
+            <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
+            <view class="perfect" wx:if="{{item.digest == 2}}"></view>
+            <text class="reply">{{item.subject}}</text>
+            <text class="title">{{item.text}}</text>
+        </view>
+        </navigator>
     </view>
-    <navigator url="../note/index?id={{item.tid}}">
-    <view class="content">
-        <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
-        <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
-        <text class="reply">{{item.subject}}正能量正能量</text>
-        <text class="title">{{item.text}}正能量正能量正能量</text>
-    </view>
-    </navigator>
+</block>
+<template is="loMore" data="{{txt: dataList.length > 0 ? true : false, isShow: isLoding}}" />
+<view hidden="{{dataList.length !== 0}}">
+    <template is="isNull" />
 </view>
+<view hidden="{{dataList.length === 0}}">
+<template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
+</view>
+</scroll-view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:48rpx"></view>

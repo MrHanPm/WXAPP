@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "page/index",
     "page/home/index",
     "page/note/index",
@@ -14,6 +13,7 @@
     "page/noteTb/index",
     "page/userForm/index",
     "page/userFriends/index",
+    "page/aboutUs/index",
     "page/postForum/index",
     "page/userNote/index"
 

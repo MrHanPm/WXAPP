@@ -1,5 +1,5 @@
 const XHR = require('../../requests/request.js')
-// var APP = getApp()
+var APPS = getApp()
 let addId // 临时储存点击id
 
 Page({
@@ -18,6 +18,7 @@ Page({
 
         nowPage: 1,
         tid: '',
+        pid: '',
         thread: {},
         postlist: [],
         comments: [],
@@ -39,7 +40,7 @@ Page({
         }
         let newPage = this.data.nowPage
         let newpostlist = this.data.postlist
-        if (this.data.loading && this.data.isLoding) {
+        if (this.data.loading) {
             this.setData({loading: false})
             XHR.getDetail({tid: tid, page: newPage,items:21,sort:this.data.sortV},
                 (db) => {
@@ -66,7 +67,7 @@ Page({
         let tids = tid
         let newPage = this.data.nowPage
         let newpostlist = this.data.postlist
-        if (this.data.loading && this.data.isLoding) {
+        if (this.data.loading) {
             this.setData({loading: false})
             XHR.getDetail({tid: tid, page: newPage,items:21,sort:this.data.sortV},
                 (db) => {
@@ -182,8 +183,35 @@ Page({
           inputValue:e.detail.value
         })
     },
-    goToMsg:function(){
-        this.setData({showForm:false,focus:true})
+    postWrite:function(){
+        let json = {}
+        json.action = 'post'
+        json.type = 'terminal'
+        json.method = 'reply'
+        json.ismob = 5
+        json.getpid = 1
+        json.session_id = APPS.SESSIONID
+        json.message = this.data.inputValue
+        json.tid = this.data.tid
+        json.pid = this.data.pid
+        if(this.data.pid == 'false'){
+            json.pid = null
+        }
+        json.attachment = ''
+        XHR.postWrite('post',json,
+            (db) => {
+                if(db.status === 0){
+                    this.setData({
+                        showForm:true,
+                        inputValue: ''
+                    })
+                    this.sortActiv()
+                }
+            }
+        )
+    },
+    goToMsg:function(e){
+        this.setData({showForm:false,focus:true,pid:e.target.dataset.pid})
     },
     hideGoToMsg:function(){
         this.setData({showForm:true})

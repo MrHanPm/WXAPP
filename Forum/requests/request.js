@@ -18,10 +18,11 @@ function xhr( method, url, data, successCallback, errorCallback, completeCallbac
         console.log( 'requestData url: ', url )
     }
     method = method ? method.toUpperCase() : 'GET'
+    let heads = method == 'GET' ? 'application/json' : 'application/x-www-from-urlencoded'
     wx.request({
         url: url,
         data: data,
-        header: { 'Content-Type': 'application/json' },
+        header: { 'Content-Type': heads },
         method: method,
         success: function( res ) {
             if( APP.debug ) {
@@ -125,7 +126,10 @@ function setSign(data, susCb, errCb, comCb ) {
 function getCarTypeList(data, susCb, errCb, comCb ) {
     xhr(null, API.getCarTypeList(), data, susCb, errCb, comCb)
 }
-
+// 好友的帖子
+function getFriendsForum(data, susCb, errCb, comCb ) {
+    xhr(null, API.getFriendsForum(), data, susCb, errCb, comCb)
+}
 // 关注好友、取消关注接口
 // operation   string  是   操作类型 add 关注、delete 取消
 // newbuddyid  int 是   好友uid
@@ -155,5 +159,6 @@ module.exports = {
     getCarTypeList: getCarTypeList,
     addFavorties: addFavorties,
     getPhoneMsg: getPhoneMsg,
+    getFriendsForum:getFriendsForum,
     postWrite: postWrite
 };

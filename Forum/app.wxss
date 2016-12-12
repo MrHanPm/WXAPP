@@ -320,7 +320,11 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     font-size: 20rpx;
     margin: 2rpx 10rpx 0 0;
 }
-
+.header .browse_view:before{
+    content: '\e640';
+    font-size: 24rpx;
+    color: #B2B2B2;
+}
 .content{
     position: relative;
     min-height: 48rpx;
@@ -405,7 +409,7 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     color: #fff;
     font-size: 20rpx;
     line-height: 36rpx;
-    z-index: 100;
+    z-index: 2;
 }
 .img-num:before{
     font-family: "forum";
@@ -548,12 +552,12 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     text-align: center;
 }
 .noNullBox:before{
-    content: '\e63f';
+    content: '\e64b';
     font-family: 'forum';
     color: #c8c8cd;
     display: block;
-    font-size: 50rpx;
-    margin-top:45%;
+    font-size: 120rpx;
+    margin-top:250rpx;
 }
 .noNullBox:after{
     content: '～暂无数据～';
@@ -574,3 +578,24 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     width: 100%;
     z-index: 888;
 }
+
+/*----顶部红色提醒----*/
+.weui-toptips {
+  position: fixed;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #FFFFFF;
+  z-index: 5000;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.weui-toptips_warn {
+  background-color: rgba(255,7,7,.80);
+}
+

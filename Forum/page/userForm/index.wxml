@@ -12,5 +12,5 @@
     <template is="loMore" data="{{txt: false, isShow: true}}" />
 </view>
 <view hidden="{{myFol.length !== 0}}">
-<template is="isNull" />
+    <template is="isNull" />
 </view>

@@ -166,7 +166,8 @@ Page({
     goAddForum:function() {
         wx.navigateTo({
            // url: '../postForum/index'
-            url: '../user/index'
+            // url: '../user/index'
+           url: '../bindTel/index'
         })
     },
     bindTel:function (){

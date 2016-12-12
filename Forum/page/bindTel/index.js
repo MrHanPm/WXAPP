@@ -3,16 +3,29 @@ const UT = require( '../../util/util.js' )
 var APPS = getApp()
 Page({
     data:{
+        showTopTips: false, // 是否显示提醒
+        showTopTxt: ' ', // 显示提醒文字
+
         USERINFO: {},
 
         tel: '',
         vercode: ''
     },
-    onLoad:function() {
-        let usd = APPS.USERINFO.userInfo
-        console.log(usd,4444444)
+    ALT: function (txt) {
+        var that = this;
         this.setData({
-            USERINFO: usd
+            showTopTips: true,
+            showTopTxt: txt
+        });
+        setTimeout(function(){
+            that.setData({
+                showTopTips: false
+            });
+        }, 3000);
+    },
+    onLoad:function() {
+        this.setData({
+            USERINFO: APPS.USERINFO.userInfo
         })
     },
     bindKeyInput: function (e) {
@@ -29,10 +42,21 @@ Page({
             this.ALT('手机号不正确');
             return false;
         }
-        if(!UT.isNo(this.data.captcha)){
-            this.ALT('请输入图形码');
-            return false;
-        }
         return true;
     },
+    getPhoneMsg: function (){
+        if(this.checkForm()){
+            let json = {}
+            json.action='sms'
+            json.sendtype = 0
+            json.session_id = APPS.SESSIONID
+            json.method='sendCaptcha'
+            json.mobile=this.data.tel
+            XHR.postWrite('post',json,
+                () => {
+
+                }
+            )
+        }
+    }
 })

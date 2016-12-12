@@ -83,6 +83,10 @@ function addDelFriend() {
 function addFavorties() {
     return URL + 'interface/app/wxapp.php?action=AddFavorties&type=empty&idtype=follow&session_id=' + APPS.SESSIONID
 }
+// 好友的帖子
+function getFriendsForum() {
+    return URL + 'interface/app/wxapp.php?action=member&method=friendsPosts&session_id=' + APPS.SESSIONID
+}
 /**---------------FORM-------------------**/
 
 
@@ -103,5 +107,6 @@ module.exports = {
     getCarTypeList: getCarTypeList,
     addFavorties: addFavorties,
     getPhoneMsg: getPhoneMsg,
+    getFriendsForum:getFriendsForum,
     postWrite: postWrite
 };

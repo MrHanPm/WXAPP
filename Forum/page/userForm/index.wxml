@@ -2,7 +2,9 @@
 <scroll-view scroll-y="true">
 <block wx:for="{{myFol}}">
     <view class="attentions">
+        <navigator url="../trunkMsg/index?id={{item.tagid}}" redirect="true" hover-class="none">
         <image src="{{item.imgurl}}"></image>
+        </navigator>
         <text class="att_forum-name">{{item.name}}</text>
         <view class="cancle-attention" data-id="{{item.tagid}}" data-dix="{{index}}" bindtap="delFavorties">取消关注</view>
     </view>
@@ -11,6 +13,13 @@
 <view class="tru_loding" hidden="{{loading?false:true}}">
     <template is="loMore" data="{{txt: false, isShow: true}}" />
 </view>
-<view hidden="{{myFol.length !== 0}}">
-    <template is="isNull" />
+
+
+<view class="container" wx:if="{{myFol.length === 0}}">
+    <view class="blank-img"></view>
+    <view class="blank-text">您还没有关注论坛哦</view>
+    <view class="blank-secondText">快去看看哪些是你感兴趣的吧！</view>
+    <navigator url="../trunk/index" redirect="true" hover-class="none">
+    <view class="blank-add">添加关注</view>
+    </navigator>
 </view>

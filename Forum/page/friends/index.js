@@ -20,7 +20,8 @@ Page({
     this.userForum(goJson)
   },
   userMsg:function (uid) {
-    XHR.getUserInfo({exituid:uid},
+    let usIf = wx.getStorageSync('_USERINFO')
+    XHR.getUserInfo({newbuddyid:usIf.uid,exituid:uid},
         (db) => {
           if(db.status === 0) {
             this.setData({userInfo: db.data})
@@ -60,7 +61,7 @@ Page({
       subDisb: true
     })
     let userInfo = this.data.userInfo
-    XHR.addDelFriend({operation:'add',uid:e.target.dataset.uid},
+    XHR.addDelFriend({operation:'add',newbuddyid:e.target.dataset.uid},
       (db) => {
         if(db.status === 0){
           userInfo.isfriend = 1
@@ -89,7 +90,7 @@ Page({
       subDisb: true
     })
     let userInfo = this.data.userInfo
-    XHR.delDelFriend({operation:'delete',uid:e.target.dataset.uid},
+    XHR.addDelFriend({operation:'delete',newbuddyid:e.target.dataset.uid},
       (db) => {
         if(db.status === 0){
           userInfo.isfriend = 0

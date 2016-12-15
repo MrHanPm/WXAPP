@@ -1,28 +1,149 @@
-<form>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{showTopTxt}}</view>
+<form class="page__bd" catchsubmit="formSubmit">
   <text class="post-title">标题</text>
-  <input class="post-input" placeholder="请输入标题" />
+  <input class="post-input" placeholder="请输入标题" name="subject"/>
   <text class="post-title">正文</text>
   <view class="post-maintext">
-    <textarea class="post-textarea" placeholder="请输入正文" />
+    <textarea class="post-textarea" placeholder="请输入正文" name="message" value="{{message}}" bindblur="getMsgVlue" bindfocus="hideGoToMsg"/>
   </view>
-  <text class="post-sync">该贴可同步到以下论坛</text>
-  <view class="post-forum post-first {{postOne==true ? 'post-click' : ''}}" bindtap="postFirst">庆铃轻卡论坛</view>
-  <view class="post-forum {{postTwo==true ? 'post-click' : ''}}" bindtap="postSecond">江铃轻卡论坛</view>
-  <view class="post-forum {{postThree==true ? 'post-click' : ''}}" bindtap="postThird">开瑞绿卡论坛</view>
-  <button class="post-complete" formType="submit">发表</button>
+
+    <view class="post-sync" wx:if="{{myFol.length > 0 }}">该贴可同步到以下论坛</view>
+
+    <scroll-view scroll-x="true" class="checkBoxFrom">
+    <block wx:for="{{myFol}}">
+      <view class="post-forum {{item.isok ? 'post-click' : ''}}" data-id="{{item.tagid}}" data-inx="{{index}}" data-is="{{item.isok}}" bindtap="poTagid">{{item.name}}</view>
+    </block>
+    </scroll-view>
+
+    <button class="post-complete" disabled="{{disBtn}}" loading="{{binLoding}}"  formType="submit">发表</button>
 </form>
-<view class="post-keyboard" style="display:none">
+
+<mask hidden="{{showForm}}" bindtap="hideGoToMsg" hover-style="none"/>
+<view class="post-keyboard">
   <view class="post-select">
-    <view class="post-feels post-commen"></view>
-    <view class="post-pic post-commen"></view>
-    <view class="post-photo post-commen"></view>
+    <view class="post-feels post-commen {{showSmal ? '' : 'Pactive'}}" bindtap="addSmal"></view>
+    <view class="post-pic post-commen {{showPic ? '' : 'Pactive'}}" bindtap="addPhoto"></view>
+    <view class="post-photo post-commen" bindtap="addChooseImage"></view>
   </view>
-  <view class="post-keyContent" >
+
+  <view class="post-keyContent" hidden="{{showPic}}">
     <view class="images-list">
       <block wx:for="{{imageList}}">
-        <image class="post-selectPhoto-image" data-src="{{item}}" src="{{item}}" />
+        <view class="post-selectPhoto-image poimg_box" bindtap="delPic" data-inx="{{index}}">
+          <image class="post_selectPhoto_image" data-src="{{item}}" src="{{item}}" mode="aspectFill" />
+        </view>
       </block>
       <view class="post-selectPhoto-image post-selectPhoto" bindtap="chooseImage"></view>
     </view>
+  </view>
+
+
+
+
+    <view class="post-keyContent" hidden="{{showSmal}}">
+    <swiper indicator-dots="true" duration="{{duration}}">
+      <swiper-item>
+          <view class="swiper-item">
+            <view data-title="[微笑]" class="icon-phiz" bindtap="addPhiz" style="background-position:-0px 0;"></view>
+            <view data-title="[撇嘴]" class="icon-phiz" bindtap="addPhiz" style="background-position:-24px 0;"></view>
+            <view data-title="[色]" class="icon-phiz" bindtap="addPhiz" style="background-position:-48px 0;"></view>
+            <view data-title="[发呆]" class="icon-phiz" bindtap="addPhiz" style="background-position:-72px 0;"></view>
+            <view data-title="[得意]" class="icon-phiz" bindtap="addPhiz" style="background-position:-96px 0;"></view>
+            <view data-title="[流泪]" class="icon-phiz" bindtap="addPhiz" style="background-position:-120px 0;"></view>
+            <view data-title="[害羞]" class="icon-phiz" bindtap="addPhiz" style="background-position:-144px 0;"></view>
+            <view data-title="[闭嘴]" class="icon-phiz" bindtap="addPhiz" style="background-position:-168px 0;"></view>
+            <view data-title="[睡]" class="icon-phiz" bindtap="addPhiz" style="background-position:-192px 0;"></view>
+            <view data-title="[大哭]" class="icon-phiz" bindtap="addPhiz" style="background-position:-216px 0;"></view>
+            <view data-title="[尴尬]" class="icon-phiz" bindtap="addPhiz" style="background-position:-240px 0;"></view>
+            <view data-title="[发怒]" class="icon-phiz" bindtap="addPhiz" style="background-position:-264px 0;"></view>
+            <view data-title="[调皮]" class="icon-phiz" bindtap="addPhiz" style="background-position:-288px 0;"></view>
+            <view data-title="[嘻嘻]" class="icon-phiz" bindtap="addPhiz" style="background-position:-312px 0;"></view>
+            <view data-title="[惊讶]" class="icon-phiz" bindtap="addPhiz" style="background-position:-336px 0;"></view>
+            <view data-title="[难过]" class="icon-phiz" bindtap="addPhiz" style="background-position:-360px 0;"></view>
+            <view data-title="[酷]" class="icon-phiz" bindtap="addPhiz" style="background-position:-384px 0;"></view>
+            <view data-title="[冷汗]" class="icon-phiz" bindtap="addPhiz" style="background-position:-408px 0;"></view>
+            <view data-title="[抓狂]" class="icon-phiz" bindtap="addPhiz" style="background-position:-432px 0;"></view>
+            <view data-title="[吐]" class="icon-phiz" bindtap="addPhiz" style="background-position:-456px 0;"></view>
+            <view data-title="[偷笑]" class="icon-phiz" bindtap="addPhiz" style="background-position:-480px 0;"></view>
+            <view data-title="[可爱]" class="icon-phiz" bindtap="addPhiz" style="background-position:-504px 0;"></view>
+            <view data-title="[白眼]" class="icon-phiz" bindtap="addPhiz" style="background-position:-528px 0;"></view>
+            <view data-title="[傲慢]" class="icon-phiz" bindtap="addPhiz" style="background-position:-552px 0;"></view>
+            <view data-title="[饥饿]" class="icon-phiz" bindtap="addPhiz" style="background-position:-576px 0;"></view>
+            <view data-title="[困]" class="icon-phiz" bindtap="addPhiz" style="background-position:-600px 0;"></view>
+            <view data-title="[惊恐]" class="icon-phiz" bindtap="addPhiz" style="background-position:-624px 0;"></view>
+            <view data-title="[汗]" class="icon-phiz" bindtap="addPhiz" style="background-position:-648px 0;"></view>
+            <view data-title="[憨笑]" class="icon-phiz" bindtap="addPhiz" style="background-position:-672px 0;"></view>
+            <view data-title="[大兵]" class="icon-phiz" bindtap="addPhiz" style="background-position:-696px 0;"></view>
+            <view data-title="[奋斗]" class="icon-phiz" bindtap="addPhiz" style="background-position:-720px 0;"></view>
+            <view data-title="[咒骂]" class="icon-phiz" bindtap="addPhiz" style="background-position:-744px 0;"></view>
+            <view data-title="[疑问]" class="icon-phiz" bindtap="addPhiz" style="background-position:-768px 0;"></view>
+            <view data-title="[嘘]" class="icon-phiz" bindtap="addPhiz" style="background-position:-792px 0;"></view>
+            <view data-title="[晕]" class="icon-phiz" bindtap="addPhiz" style="background-position:-816px 0;"></view>
+            <view data-title="[折磨]" class="icon-phiz" bindtap="addPhiz" style="background-position:-840px 0;"></view>
+          </view>
+      </swiper-item>
+      <swiper-item>
+          <view class="swiper-item">
+            <view data-title="[衰]" class="icon-phiz" bindtap="addPhiz" style="background-position:-864px 0;"></view>
+            <view data-title="[骷髅]" class="icon-phiz" bindtap="addPhiz" style="background-position:-888px 0;"></view>
+            <view data-title="[敲打]" class="icon-phiz" bindtap="addPhiz" style="background-position:-912px 0;"></view>
+            <view data-title="[再见]" class="icon-phiz" bindtap="addPhiz" style="background-position:-936px 0;"></view>
+            <view data-title="[擦汗]" class="icon-phiz" bindtap="addPhiz" style="background-position:-960px 0;"></view>
+            <view data-title="[挖鼻]" class="icon-phiz" bindtap="addPhiz" style="background-position:-984px 0;"></view>
+            <view data-title="[鼓掌]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1008px 0;"></view>
+            <view data-title="[糗大了]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1032px 0;"></view>
+            <view data-title="[坏笑]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1056px 0;"></view>
+            <view data-title="[左哼哼]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1080px 0;"></view>
+            <view data-title="[右哼哼]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1104px 0;"></view>
+            <view data-title="[哈欠]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1128px 0;"></view>
+            <view data-title="[鄙视]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1152px 0;"></view>
+            <view data-title="[委屈]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1176px 0;"></view>
+            <view data-title="[快哭了]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1200px 0;"></view>
+            <view data-title="[阴险]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1224px 0;"></view>
+            <view data-title="[亲亲]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1248px 0;"></view>
+            <view data-title="[吓]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1272px 0;"></view>
+            <view data-title="[可怜]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1296px 0;"></view>
+            <view data-title="[菜刀]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1320px 0;"></view>
+            <view data-title="[西瓜]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1344px 0;"></view>
+            <view data-title="[啤酒]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1368px 0;"></view>
+            <view data-title="[篮球]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1392px 0;"></view>
+            <view data-title="[乒乓]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1416px 0;"></view>
+            <view data-title="[咖啡]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1440px 0;"></view>
+            <view data-title="[饭]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1464px 0;"></view>
+            <view data-title="[猪头]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1488px 0;"></view>
+            <view data-title="[玫瑰]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1512px 0;"></view>
+            <view data-title="[凋零]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1536px 0;"></view>
+            <view data-title="[示爱]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1560px 0;"></view>
+            <view data-title="[爱心]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1584px 0;"></view>
+            <view data-title="[心碎]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1608px 0;"></view>
+            <view data-title="[蛋糕]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1632px 0;"></view>
+            <view data-title="[闪电]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1656px 0;"></view>
+            <view data-title="[炸弹]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1680px 0;"></view>
+            <view data-title="[刀]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1704px 0;"></view>
+          </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item">
+          <view data-title="[足球]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1728px 0;"></view>
+          <view data-title="[瓢虫]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1752px 0;"></view>
+          <view data-title="[便便]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1776px 0;"></view>
+          <view data-title="[月亮]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1800px 0;"></view>
+          <view data-title="[太阳]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1824px 0;"></view>
+          <view data-title="[礼物]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1848px 0;"></view>
+          <view data-title="[拥抱]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1872px 0;"></view>
+          <view data-title="[强]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1896px 0;"></view>
+          <view data-title="[弱]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1920px 0;"></view>
+          <view data-title="[握手]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1944px 0;"></view>
+          <view data-title="[胜利]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1968px 0;"></view>
+          <view data-title="[抱拳]" class="icon-phiz" bindtap="addPhiz" style="background-position:-1992px 0;"></view>
+          <view data-title="[勾引]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2016px 0;"></view>
+          <view data-title="[拳头]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2040px 0;"></view>
+          <view data-title="[差劲]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2064px 0;"></view>
+          <view data-title="[爱你]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2088px 0;"></view>
+          <view data-title="[NO]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2112px 0;"></view>
+          <view data-title="[OK]" class="icon-phiz" bindtap="addPhiz" style="background-position:-2136px 0;"></view>
+        </view>
+      </swiper-item>
+    </swiper>
   </view>
 </view>

@@ -7,6 +7,7 @@ Page({
     isLoding: true, // 是否加载
     scrollTop: '',
     showFA: false,   // 火箭图标
+    ShareBox: true,  // 分享引导
 
     nowPage: 1,
     Tid:'',
@@ -32,7 +33,8 @@ Page({
                           newList: newLists,
                           nowPage: newPage,
                           Trunk: db.data.club,
-                          loading: true
+                          loading: true,
+                          isLoding: db.data.threadlist.length < 20 ? false : true
                       })
                     }else{
                       newPage++
@@ -40,7 +42,8 @@ Page({
                       this.setData({
                           newList: newLists,
                           nowPage: newPage,
-                          loading: true
+                          loading: true,
+                          isLoding: db.data.threadlist.length < 20 ? false : true
                       })
                     }
                   }
@@ -133,12 +136,24 @@ Page({
   },
   toBack:function() {
       wx.navigateBack({delta:1})
+  },
+  goAddForum:function(e) {
+      wx.redirectTo({
+         url: `../postForum/index?id=${e.target.dataset.id}`
+      })
+  },
+  ShareBox(){
+      if(this.data.ShareBox){
+          this.setData({
+              ShareBox: false
+          })
+      }else{
+          this.setData({
+              ShareBox: true
+          })
+      }
+      
   }
-
-
-
-
-
 
   // onReady:function(){
   //   // 页面渲染完成

@@ -23,7 +23,7 @@
                 </view>
                 <view class="browse browse_view">{{item.replies}}</view>
             </view>
-            <navigator url="../note/index?id={{item.tid}}">
+            <navigator url="../note/index?id={{item.tid}}" hover-class="none">
             <view class="content">
                 <!-- <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
                 <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view> -->
@@ -43,7 +43,7 @@
         </view>
     </block>
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
-    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
 </scroll-view>
 </view>
 <view hidden="{{activeIndex == '0' ? true : false}}" class="viewBox">
@@ -61,7 +61,7 @@
                     </view>
                 </view>
             </view>
-            <navigator url="../note/index?id={{item.tid}}">
+            <navigator url="../note/index?id={{item.tid}}" hover-class="none">
             <view class="content pad_box">
                 <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
                 <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>

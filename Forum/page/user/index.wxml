@@ -12,37 +12,37 @@
 <view class="mi_front">
     <view class="mi_gold">
         <image class="mi_gold-img" src="../../resources/image/gold.png"></image>
-        <text class="mi_gold-num">5600</text>
+        <text class="mi_gold-num">{{userInfo.extcredits8}}</text>
     </view>
     <view class="mi_exp">
         <view class="mi_progress">
-            <progress  percent="20" color="#0BC1FC" stroke-width="6" />
+            <progress  percent="{{per}}" color="#0BC1FC" stroke-width="6" active="true"/>
         </view>
         <view class="mi_express">
-            <text class="mi_now-exp">2999</text>
-            <text class="mi_total-exp">/3900</text>
+            <text class="mi_now-exp">{{userInfo.score.score}}</text>
+            <text class="mi_total-exp">/{{userInfo.score.uplimit}}</text>
         </view>
     </view>
 </view>
 <view class="mi_footer">
-    <navigator url="../userNote/index">
+    <navigator url="../userNote/index" hover-class="none">
     <view class="mi_sec">
         <text class="mi_forum">我的帖子</text>
     </view>
     </navigator>
-    <navigator url="../userFriends/index">
+    <navigator url="../userFriends/index" hover-class="none">
     <view class="mi_sec">
         <text class="mi_forum mi_friends">好友的帖子</text>
     </view>
     </navigator>
-    <navigator url="../userForm/index">
+    <navigator url="../userForm/index" hover-class="none">
     <view class="mi_sec">
         <text class="mi_forum mi_focus">我关注的论坛</text>
     </view>
     </navigator>
 </view>
 <view class="mi_sec-setting">
-    <navigator url="../setting/index">
+    <navigator url="../setting/index" hover-class="none">
     <view class="mi_sec">
         <text class="mi_forum mi_set">设置</text>
     </view>

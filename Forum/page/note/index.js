@@ -1,14 +1,18 @@
 const XHR = require('../../requests/request.js')
+const UT = require( '../../util/util.js' )
 var APPS = getApp()
 let addId // 临时储存点击id
 
 Page({
     data:{
+        showTopTips: false, // 是否显示提醒
+        showTopTxt: ' ', // 显示提醒文字
         img: 'http://face.360che.com/data/avatar/noavatar_big.gif-120x120.jpg',
         loading: true, // 延时加载数据
         scrollTop: '',
         showFA: false,  // 火箭图标
         isLoding: true,  // 是否加载
+        ShareBox: true,  // 分享引导
 
         subLoading:false, // 提交加载
         subDsb:false, // 提交限制
@@ -26,6 +30,18 @@ Page({
         inputValue: '',
         sortV:'',
         sortX: true
+    },
+    ALT: function (txt) {
+        var that = this;
+        this.setData({
+            showTopTips: true,
+            showTopTxt: txt
+        });
+        setTimeout(function(){
+            that.setData({
+                showTopTips: false
+            });
+        }, 3000);
     },
     onLoad:function(options) {
         this.setData({tid: options.id})
@@ -87,7 +103,7 @@ Page({
         }
     },
     loadMore:function() {
-        this.upData(this.data.tid)
+        this.upDataActiv(this.data.tid)
     },
     sortActiv:function(){
         if(this.data.sortX){
@@ -183,38 +199,65 @@ Page({
           inputValue:e.detail.value
         })
     },
+    addNotes(){
+        var that = this
+        setTimeout(() => {
+            that.postWrite()
+        }, 300);
+    },
     postWrite:function(){
-        let json = {}
-        json.action = 'post'
-        json.type = 'terminal'
-        json.method = 'reply'
-        json.ismob = 5
-        json.getpid = 1
-        json.session_id = APPS.SESSIONID
-        json.message = this.data.inputValue
-        json.tid = this.data.tid
-        json.pid = this.data.pid
-        if(this.data.pid == 'false'){
-            json.pid = null
-        }
-        json.attachment = ''
-        XHR.postWrite('post',json,
-            (db) => {
-                if(db.status === 0){
-                    this.setData({
-                        showForm:true,
-                        inputValue: ''
-                    })
-                    this.sortActiv()
-                }
+        if(this.checkForm()){
+            let json = {}
+            this.setData({
+                subLoading:true, // 提交加载
+                subDsb:true // 提交限制
+            })
+            json.action = 'post'
+            json.type = 'terminal'
+            json.method = 'reply'
+            json.ismob = 5
+            json.getpid = 1
+            json.session_id = APPS.SESSIONID
+            json.message = this.data.inputValue
+            json.tid = this.data.tid
+            json.pid = this.data.pid
+            if(this.data.pid == 'false'){
+                json.pid = null
             }
-        )
+            json.attachment = ''
+            XHR.postWrite('post',json,
+                (db) => {
+                    if(db.status === 0){
+                        this.setData({
+                            showForm:true,
+                            subLoading:false, // 提交加载
+                            subDsb:false, // 提交限制
+                            inputValue: ''
+                        })
+                        this.sortActiv()
+                    }
+                }
+            )
+        }
     },
     goToMsg:function(e){
-        this.setData({showForm:false,focus:true,pid:e.target.dataset.pid})
+        if(APPS.HASLOGIN){
+            this.setData({showForm:false,focus:true,pid:e.target.dataset.pid})
+        }else{
+            wx.redirectTo({
+               url: '../bindTel/index'
+            })
+        }
     },
     hideGoToMsg:function(){
         this.setData({showForm:true})
+    },
+    checkForm: function () {
+        if(!UT.isNo(this.data.inputValue)){
+            this.ALT('不能为空，不能低于一个字符');
+            return false;
+        }
+        return true;
     },
     Report:function(e){
         let tid = e.target.dataset.tid
@@ -257,6 +300,18 @@ Page({
     goHome:function(){
         let nub = getCurrentPages().length - 1
         wx.navigateBack({delta: nub})
+    },
+    ShareBox(){
+        if(this.data.ShareBox){
+            this.setData({
+                ShareBox: false
+            })
+        }else{
+            this.setData({
+                ShareBox: true
+            })
+        }
+        
     },
     onShow:function(){},
     onHide:function(){},

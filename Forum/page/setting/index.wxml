@@ -1,4 +1,4 @@
-<navigator url="../aboutUs/index" redirect="true">
+<navigator url="../aboutUs/index" redirect="true" hover-class="none">
 <view class="about">
     <text class="about-us">关于我们</text>
 </view>
@@ -8,6 +8,6 @@
     <text class="version-num">1.0</text>
 </view>
 <view class="exit">
-    <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="warn">退出登录</button>
+    <button type="warn" loading="{{loading}}" disabled="{{disabled}}" bindtap="outBtn">退出登录</button>
 </view>
 

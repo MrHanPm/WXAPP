@@ -3,7 +3,9 @@
 <text class="tr_txt tr_txt_hot" id="HD">热门车型</text>
 <block wx:for="{{htoTrunk}}">
     <view class="attentions">
+        <navigator url="../trunkMsg/index?id={{item.classid}}" redirect="true" hover-class="none">
         <image src="{{item.img}}"></image>
+        </navigator>
         <text class="att_forum-name">{{item.info}}</text>
         <view wx:if="{{item.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{item.classid}}" data-inx="false" data-dix="{{index}}" data-img="{{item.img}}" bindtap="delFavorties">取消关注</view>
         <view wx:if="{{item.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{item.classid}}" data-inx="false" data-dix="{{index}}" data-img="{{item.img}}" bindtap="addFavorties">添加关注</view>
@@ -15,7 +17,9 @@
     <text class="tr_txt" id="{{item}}">{{item}}</text>
     <block wx:for="{{clubList[index]}}" wx:for-item="ims" wx:for-index="idx">
     <view class="attentions">
+        <navigator url="../trunkMsg/index?id={{ims.tagid}}" redirect="true" hover-class="none">
         <image src="{{ims.imgurl}}"></image>
+        </navigator>
         <text class="att_forum-name">{{ims.name}}</text>
         <view wx:if="{{ims.isfav?true:false}}" class="cancle-attention att_mrt" data-id="{{ims.tagid}}" data-inx="{{index}}" data-dix="{{idx}}" data-img="{{ims.imgurl}}" bindtap="delFavorties">取消关注</view>
         <view wx:if="{{ims.isfav?false:true}}" class="cancl_attention att_mrt" data-id="{{ims.tagid}}" data-inx="{{index}}" data-dix="{{idx}}" data-img="{{ims.imgurl}}" bindtap="addFavorties">添加关注</view>

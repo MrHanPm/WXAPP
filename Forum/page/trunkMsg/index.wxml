@@ -27,7 +27,7 @@
                 </view>
                 <view class="browse">{{item.views}}</view>
             </view>
-            <navigator url="../note/index?id={{item.tid}}">
+            <navigator url="../note/index?id={{item.tid}}" hover-class="none">
             <view class="content">
                 <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
                 <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
@@ -48,13 +48,17 @@
                         data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
                         bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
                 <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
-                <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+                <text class="share" bindtap="ShareBox">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
             </view>
         </view>
     </block>
 
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
-    <template is="noMore" data="{{txt:'服务错误，暂无数据～',isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'～我是有底线滴～',isShow: isLoding}}" />
 </scroll-view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
 <view class="to-return" bindtap="toBack">返回</view>
+<view class="help" bindtap="goAddForum" data-id="{{Trunk.club.tagid}}" style="bottom:40rpx;right:0;"></view>
+
+<mask hidden="{{ShareBox}}" bindtap="ShareBox" hover-style="none"/>
+<view hidden="{{ShareBox}}" class="ShareBoxBg"></view>

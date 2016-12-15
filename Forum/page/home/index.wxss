@@ -6,6 +6,12 @@
     padding: 20rpx 170rpx 0 150rpx;
     background-size: cover;
     color: #fff;
+    vertical-align: top;
+}
+.level{vertical-align: top;}
+.letext{
+    display: inline-block;
+    font-size: 32rpx;
 }
 .portrait,.portraitPic{
     position: absolute;

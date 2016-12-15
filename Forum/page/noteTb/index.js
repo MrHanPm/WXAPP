@@ -7,7 +7,7 @@ Page({
         showFA: false,     // 火箭图标
         isLoding: true,    // 是否加载
         activeIndex: 0,
-        
+        ShareBox: true,  // 分享引导
 
         nowPage: 1,
         eNowPage: 1,
@@ -150,5 +150,17 @@ Page({
     },
     toBack:function() {
         wx.navigateBack({delta:1})
+    },
+    ShareBox(){
+        if(this.data.ShareBox){
+            this.setData({
+                ShareBox: false
+            })
+        }else{
+            this.setData({
+                ShareBox: true
+            })
+        }
+        
     }
 });

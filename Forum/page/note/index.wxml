@@ -1,4 +1,5 @@
 <import src="../component/more/index"/>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{showTopTxt}}</view>
 <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore" bindscroll="onSol" scroll-into-view="{{scrollTop}}">
     <!--评论-->
 
@@ -22,7 +23,7 @@
             <block wx:for="{{thread.message}}" wx:for-item="mitem">
                 <text wx:if="{{mitem.type == 'text'}}">{{mitem.text}}</text>
                 <text wx:if="{{mitem.type == 'url'}}">{{mitem.text}}</text>
-                <image wx:if="{{mitem.type == 'image'}}" src="{{mitem.text}}" style="{{mitem.attr == ''?'width:20px;height:20px;':''}}"></image>
+                <image wx:if="{{mitem.type == 'image'}}" src="{{mitem.text}}" style="{{mitem.attr == ''?'width:20px;height:20px;':''}}" mode="aspectFill"></image>
             </block>
         </view>
         
@@ -41,10 +42,10 @@
                 </view>
             </block>
         </view>
-        <view class="mi_dre">
+        <!-- <view class="mi_dre">
             <text class="mi_dre_txt">北京市</text>
             <view class="mi_dre_btn" data-tid="{{thread.tid}}" bindtap="Report"></view>
-        </view>
+        </view> -->
         <view class="best-btn" wx:if="{{thread.digest > '0' && thread.digest !== '2'}}"></view>
         <view class="righted" wx:if="{{thread.digest == '2'}}"></view>
     </view>
@@ -75,7 +76,7 @@
                             <block wx:if="{{uinx > 2}}">
                                 <text wx:if="{{quo.type == 'text'}}">{{quo.text}}</text>
                                 <text wx:if="{{quo.type == 'url'}}">{{quo.text}}</text>
-                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}"></image>
+                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}" mode="aspectFill"></image>
                             </block>
                         </block>
                     </view>
@@ -84,12 +85,12 @@
                     <block wx:for="{{item.message}}" wx:for-item="msgs">
                         <text wx:if="{{msgs.type == 'text'}}">{{msgs.text}}</text>
                         <text wx:if="{{msgs.type == 'url'}}">{{msgs.text}}</text>
-                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}"></image>
+                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}" mode="aspectFill"></image>
                     </block>
                 </view>
                 <view class="mi_dre" style="padding-top:2rpx">
-                    <view class="mi_dre_btn"></view>
-                    <view class="mi_cal_btn">回复</view>
+                    <!-- <view class="mi_dre_btn"></view> -->
+                    <view class="mi_cal_btn" data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" bindtap="goToMsg">回复</view>
                     <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
                           data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}" data-pid="{{item.pid}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
                 </view>
@@ -124,7 +125,7 @@
                             <block wx:if="{{uinx > 2}}">
                                 <text wx:if="{{quo.type == 'text'}}">{{quo.text}}</text>
                                 <text wx:if="{{quo.type == 'url'}}">{{quo.text}}</text>
-                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}"></image>
+                                <image wx:if="{{quo.type == 'image'}}" src="{{quo.text}}" style="{{quo.attr == '' ? 'width:20px;height:20px;' : ''}}" mode="aspectFill"></image>
                             </block>
                         </block>
                     </view>
@@ -133,11 +134,11 @@
                     <block wx:for="{{item.message}}" wx:for-item="msgs">
                         <text wx:if="{{msgs.type == 'text'}}">{{msgs.text}}</text>
                         <text wx:if="{{msgs.type == 'url'}}">{{msgs.text}}</text>
-                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}"></image>
+                        <image wx:if="{{msgs.type == 'image'}}" src="{{msgs.text}}" style="{{msgs.attr == ''? 'width:20px;height:20px;' : ''}}" mode="aspectFill"></image>
                     </block>
                 </view>
                 <view class="mi_dre" style="padding-top:2rpx">
-                    <view class="mi_dre_btn"></view>
+                    <!-- <view class="mi_dre_btn"></view> -->
                     <view class="mi_cal_btn" data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" bindtap="goToMsg">回复</view>
                     <view class="mi_zan_btn {{item.rcmd ? 'blueAct' : ''}}"
                           data-idx="{{index}}" data-tid="{{item.tid}}" data-pid="{{item.pid}}" data-dis="{{item.rcmd}}" bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</view>
@@ -154,15 +155,15 @@
       <text>首页</text>
     </view>
     <view bindtap="" class="item {{thread.rcmd ? 'blueAct' : ''}}" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}" bindtap="miAdd">
-      <view class="icon zan" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}"><text>{{thread.recommend_add}}</text></view>
+      <view class="icon zan" data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}"><text hidden="{{thread.recommend_add>0?false:true}}">{{thread.recommend_add>999?'999+':thread.recommend_add}}</text></view>
       <text data-tid="{{thread.tid}}" data-dis="{{thread.rcmd}}">点赞</text>
     </view>
     <view bindtap="goToMsg" class="item" data-pid="false">
-      <view class="icon comment" data-pid="false"><text>{{thread.replies}}</text></view>
+      <view class="icon comment" data-pid="false"><text hidden="{{thread.replies>0?false:true}}">{{thread.replies>999?'999+':thread.replies}}</text></view>
       <text data-pid="false">回复</text>
     </view>
-    <view bindtap="" class="item">
-      <view class="icon forward"><text>{{thread.sharetimes}}</text></view>
+    <view bindtap="ShareBox" class="item">
+      <view class="icon forward"><text hidden="{{thread.sharetimes>0?false:true}}">{{thread.sharetimes>999?'999+':thread.sharetimes}}</text></view>
       <text>转发</text>
     </view>
 </view>
@@ -170,6 +171,9 @@
 <view class="to-return" bindtap="toBack">返回</view>
 <mask hidden="{{showForm}}" bindtap="hideGoToMsg" hover-style="none"/>
 <view class="textarea_box" hidden="{{showForm}}">
-    <input class="txt_input" placeholder="回帖是一种美德…" focus="{{focus}}" bindinput="txtInput" value="{{inputValue}}" />
-    <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="postWrite">发表</button>
+    <textarea class="txt_input" placeholder="回帖是一种美德…" bindblur="txtInput" value="{{inputValue}}" />
+    <button loading="{{subLoading}}" disabled="{{subDsb}}" class="txt_sub_btn" bindtap="addNotes">发表</button>
 </view>
+
+<mask hidden="{{ShareBox}}" bindtap="ShareBox" hover-style="none"/>
+<view hidden="{{ShareBox}}" class="ShareBoxBg"></view>

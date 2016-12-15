@@ -16,7 +16,7 @@
             </view>
             <view class="browse browse_view">{{item.views}}</view>
         </view>
-        <navigator url="../note/index?id={{item.tid}}" redirect="true">
+        <navigator url="../note/index?id={{item.tid}}" redirect="true" hover-class="none">
         <view class="content">
             <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
             <view class="perfect" wx:if="{{item.digest == 2}}"></view>

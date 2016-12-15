@@ -4,25 +4,38 @@ Page({
   data:{
     isUserInfo:false,
 
-    userInfo:{}
+    userInfo:{},
+    per:0
   },
   onLoad:function(){
-    let usin = wx.getStorageSync('_USERINFO')
-    let wxus = APPS.USERINFO.userInfo
-
-    console.log(usin,wxus,454545454545)
-    if(usin.uid){
-      this.setData({
-        userInfo:usin,
-        isUserInfo:APPS.HASLOGIN
-      })
+    if(APPS.HASLOGIN){
+      let usin = wx.getStorageSync('_USERINFO')
+      let wxus = APPS.USERINFO.userInfo
+      if(usin.uid){
+        this.setData({
+          userInfo:usin,
+          isUserInfo:APPS.HASLOGIN,
+          per: this.GetPercent(usin.score.score,usin.score.uplimit)
+        })
+      }else{
+        this.setData({
+          userInfo:wxus
+        })
+      }
     }else{
-      this.setData({
-        userInfo:wxus
+      wx.redirectTo({
+          url: '../index'
       })
     }
   },
-
+  GetPercent(num, total) { 
+    num = parseFloat(num)
+    total = parseFloat(total)
+    if (isNaN(num) || isNaN(total)){ 
+      return "0"
+    }
+    return total <= 0 ? "0" : (Math.round(num / total * 10000) / 100.00)
+  },
 
 
 

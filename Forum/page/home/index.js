@@ -12,20 +12,27 @@ Page({
         isLoding: true, // 是否加载
         scrollTop: '',
         showFA: false,   // 火箭图标
+        ShareBox: true,  // 分享引导
 
         nowPage: 1,
         HASLOGIN: false, // 用户是否登录
         userInfo:{},   // 获取的用户信息
         isUserInfo: false, // 判断获取用户的信息是否完整
-        signDay: 0,       // 签到几天
         hotNews: [],     // 公告
         newList: [],
+        signDay: 0,   // 签到天数
         myFol: []     // 关注的车型
+    },
+    onPullDownRefresh(){
+        this.setData({
+            nowPage:1,
+            newList:[]
+        })
+        this.upData()
     },
     onLoad:function() {
         this.upData()
         this.GETUSERINFO()
-        this.getCarList()
     },
     upData:function() {
         let newPage = this.data.nowPage
@@ -45,6 +52,7 @@ Page({
                             nowPage: newPage,
                             loading: true
                         })
+                        wx.stopPullDownRefresh()
                     }
                 }
             )
@@ -67,6 +75,7 @@ Page({
                         isUserInfo: true,
                         HASLOGIN: true
                     })
+                    this.getCarList()
                 }else{
                     this.setData({
                         userInfo: APPS.USERINFO.userInfo
@@ -78,9 +87,11 @@ Page({
     getCarList:function(){
         XHR.getCarTypeList('',
             (db) => {
-                this.setData({
-                    myFol: db.data
-                })
+                if(db.status === 0){
+                    this.setData({
+                        myFol: db.data
+                    })
+                }
             }
         )
     },
@@ -120,7 +131,10 @@ Page({
         XHR.setSign('',
             (db) => {
                 if(db.status === 0){
+                    let usInf = this.data.userInfo
+                    usInf.signed = db.data.resign
                     this.setData({
+                        userInfo: usInf,
                         signDay: db.data.resign
                     })
                 }else{
@@ -164,14 +178,20 @@ Page({
         })
     },
     goAddForum:function() {
-        wx.navigateTo({
-           // url: '../postForum/index'
-            // url: '../user/index'
-           url: '../bindTel/index'
-        })
+        if(APPS.HASLOGIN){
+            wx.navigateTo({
+               url: '../postForum/index'
+                // url: '../user/index'
+               // url: '../bindTel/index'
+            })
+        }else{
+            wx.navigateTo({
+               url: '../bindTel/index'
+            })
+        }
     },
     bindTel:function (){
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../bindTel/index'
         })
     },
@@ -180,6 +200,18 @@ Page({
             this.GETUSERINFO()
             this.getCarList()
         }
+    },
+    ShareBox(){
+        if(this.data.ShareBox){
+            this.setData({
+                ShareBox: false
+            })
+        }else{
+            this.setData({
+                ShareBox: true
+            })
+        }
+        
     }
 })
 

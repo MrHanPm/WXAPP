@@ -2,11 +2,11 @@
 <view class="bindingPhone">
   <input type="number" maxlength="11" auto-focus="true" placeholder="请输入您的手机号" class="Enter-phoneNumber" placeholder-style="font-size: 32rpx;color: #888888;line-height: 32rpx;" id="tel" bindinput="bindKeyInput" value="{{tel}}"/>
   <view class="binding-code">
-    <button class="binding_btns" disabled="{{disabled}}" bindtap="getPhoneMsg">获取校验码</button>
+    <button class="binding_btns" disabled="{{getBtnPM}}" bindtap="getPhoneMsg">获取校验码</button>
   </view>
-  <text class="binding-message">收不到短信？<text>试试 语音校验码</text></text>
+  <view class="binding-message">收不到短信？<text hidden="{{getBtnPM ? false : true}}" bindtap="callPhoneMsg">试试 语音校验码</text></view>
   <input type="number" placeholder="请输入您收到的校验码" class="coding" placeholder-style="font-size: 32rpx;color: #888888;line-height: 32rpx;" id="vercode" bindinput="bindKeyInput" value="{{vercode}}"/>
-  <button class="binding-true" disabled="{{disabled}}" bindtap="warn">绑定</button>
+  <button class="binding-true" disabled="{{binBtnPM}}" loading="{{binLoding}}" bindtap="bindPhone">绑定</button>
 </view>
 <view class="binding_fot_box">
     <view class="my_pics">
@@ -14,5 +14,5 @@
         <text>{{USERINFO.nickName}}</text>
     </view>
     <text class="binding_close"></text>
-    <view class="che_ka">卡车之家账号</view>
+    <view class="che_ka">卡车之家</view>
 </view>

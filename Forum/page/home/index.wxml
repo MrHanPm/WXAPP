@@ -6,20 +6,20 @@
         <image src="{{isUserInfo ? userInfo.avatar : userInfo.avatarUrl}}" class="portrait"></image>
         <view class="portraitPic USERPIC"></view>
         
-        <text hidden="{{HASLOGIN ? true : false}}">请登录</text>
-        <text hidden="{{HASLOGIN ? false : true}}">{{isUserInfo ? userInfo.nickname : userInfo.nickName}}</text>
-        <text class="level grade grade{{userInfo.score.level}}" wx:if="{{HASLOGIN}}"></text>
+        <view hidden="{{HASLOGIN}}" class="letext">请登录</view>
+        <view wx:if="{{HASLOGIN}}" class="letext">{{isUserInfo ? userInfo.nickname : userInfo.nickName}}</view>
+        <view class="level grade letext grade{{userInfo.score.level}}" wx:if="{{HASLOGIN}}" style="margin-top:9rpx;"></view>
         <view wx:if="{{HASLOGIN}}" class="pt_pictxt">{{userInfo.extcredits8}}卡路里</view>
         
-        <view wx:if="{{HASLOGIN}}" hidden="{{signDay > 0 ? true : false}}" class="sign" bindtap="goSign">签到</view>
-        <view wx:if="{{HASLOGIN}}" hidden="{{signDay > 0 ? false : true}}" class="isokSign">已签到{{signDay}}天</view>
+        <view wx:if="{{HASLOGIN}}" hidden="{{userInfo.signed>0?true:false}}" class="sign" bindtap="goSign">签到</view>
+        <view wx:if="{{HASLOGIN}}" hidden="{{userInfo.signed>0?false:true}}" class="isokSign">已签到{{signDay>0?signDay+'天' : ''}}</view>
 
-        <view wx:if="{{HASLOGIN ? false : true}}" class="isokSign" bindtap="bindTel">登录</view>
+        <view hidden="{{HASLOGIN}}" class="isokSign" bindtap="bindTel">登录</view>
     </view>
     <!--轮播-->
     <scroll-view scroll-x="true" class="solid_view">
         <view class="scroll" >
-            <navigator url="../noteTb/index?id=0">
+            <navigator url="../noteTb/index?id=0" hover-class="none">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_hot_ico"> </view>
             </view>
@@ -28,7 +28,7 @@
         </view>
 
         <view class="scroll" >
-            <navigator url="../noteTb/index?id=1">
+            <navigator url="../noteTb/index?id=1" hover-class="none">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_fol_ico"> </view>
             </view>
@@ -37,14 +37,14 @@
         </view>
         <block wx:for="{{myFol}}">
             <view class="scroll">
-                <navigator url="../trunkMsg/index?id={{item.tagid}}">
+                <navigator url="../trunkMsg/index?id={{item.tagid}}" hover-class="none">
                 <view class="scroll-img"><image src="{{item.imgurl}}" mode="aspectFill"></image></view>
                 <text>{{item.name}}</text>
                 </navigator>
             </view>
         </block>
-        <view wx:if="{{HASLOGIN}}" class="scroll" >
-            <navigator url="../trunk/index">
+        <view wx:if="{{HASLOGIN}}" class="scroll">
+            <navigator url="../trunk/index" hover-class="none">
             <view class="scroll-img">
                 <view class="scroll_ico scroll_add_ico"> </view>
             </view>
@@ -78,7 +78,7 @@
                 </view>
                 <view class="browse">{{item.views}}</view>
             </view>
-            <navigator url="../note/index?id={{item.tid}}">
+            <navigator url="../note/index?id={{item.tid}}" hover-class="none">
             <view class="content">
                 <view class="perfect" wx:if="{{item.digest > 0 && item.digest !== 2}}">精</view>
                 <view class="perfect" wx:if="{{item.digest == 2}}">正能量</view>
@@ -99,7 +99,7 @@
                         data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
                         bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
                 <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
-                <text class="share">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+                <text class="share" bindtap="ShareBox">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
             </view>
         </view>
     </block>
@@ -108,3 +108,7 @@
 </scroll-view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:48rpx"></view>
 <view class="help" bindtap="goAddForum" style=""></view>
+
+
+<mask hidden="{{ShareBox}}" bindtap="ShareBox" hover-style="none"/>
+<view hidden="{{ShareBox}}" class="ShareBoxBg"></view>

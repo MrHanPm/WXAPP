@@ -18,7 +18,7 @@ App({
     SESSIONID:'',   
     USERINFO:'',    // 微信版用户信息
 
-    debug: true //程序调试
+    debug: false //程序调试
 })
 
 // _USERINFO  本地储存版，线上用户信息

@@ -1,3 +1,5 @@
+
+.header{height: 64rpx;}
 .te_head{
   position: fixed;
   top: 0;
@@ -28,11 +30,13 @@
 .viewBox{height:100%;padding-top: 103rpx;box-sizing: border-box;}
 
 
-.my_top10{margin-top: 20rpx; padding-left: 10rpx;}
+.my_top10{margin-top: 20rpx; padding-left: 10rpx;height: 56rpx;}
 
 .my_top10 .user-wrap{
 font-size: 28rpx;
+height: 56rpx;
 color: #888;
+overflow:visible;
 }
 .my_top10 .user-wrap text{
   color: #2459A6;

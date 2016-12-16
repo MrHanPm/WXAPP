@@ -23,3 +23,4 @@
     <view class="blank-add">添加关注</view>
     </navigator>
 </view>
+<view class="to-return" bindtap="toBack">返回</view>

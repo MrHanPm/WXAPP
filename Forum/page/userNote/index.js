@@ -2,12 +2,13 @@ const XHR = require('../../requests/request.js')
 let addId // 临时储存点击id
 Page({
     data: {
-        loading: true,     // 延时加载数据
+        
         scrollTop: '',
         showFA: false,     // 火箭图标
         isLoding: true,    // 是否加载
+        loading: true,     // 延时加载数据
 
-        isLoding_M: true, // 回帖
+        isLoding_M: true, // 回帖是否加载
         loads: true, // 回帖 延时加载数据
         activeIndex: 0,
         
@@ -38,17 +39,14 @@ Page({
             XHR.getToForum({method:'posts', page: newPage},
                 (db) => {
                     if(db.status === 0) {
-                        if(db.data.length < 20){
-                            newLists.push(...db.data)
+                        newPage++
+                        newLists.push(...db.data)
+                        if(db.data.length < 10){
                             this.setData({
                                 newList: newLists,
-                                nowPage: newPage,
-                                loading: false,
                                 isLoding: false
                             })
                         }else{
-                            newPage++
-                            newLists.push(...db.data)
                             this.setData({
                                 newList: newLists,
                                 nowPage: newPage,
@@ -68,24 +66,20 @@ Page({
             XHR.getToForum({method:'replies', page: newPage},
                 (db) => {
                     if(db.status === 0) {
-                        if(db.data.length < 20){
-                            newLists.push(...db.data)
+                        newPage++
+                        newLists.push(...db.data)
+                        if(db.data.length < 10){
                             this.setData({
                                 eliteList: newLists,
-                                eNowPage: newPage,
-                                loads: false,
                                 isLoding_M: false
                             })
                         }else{
-                            newPage++
-                            newLists.push(...db.data)
                             this.setData({
                                 eliteList: newLists,
                                 eNowPage: newPage,
                                 loads: true
                             })
                         }
-                        
                     }
                 }
             )

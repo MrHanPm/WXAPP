@@ -50,7 +50,7 @@
         </view>
     </block>
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
-    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
+    <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
 </scroll-view>
 </view>
 <view hidden="{{activeIndex == '0' ? true : false}}" class="viewBox">
@@ -97,8 +97,8 @@
             </view>
         </view>
     </block>
-    <template is="loMore" data="{{txt: eliteList.length > 0 ? true : false, isShow: isLoding}}" />
-    <template is="noMore" data="{{txt:'已经看完了，大人赏个回帖吧~',isShow: isLoding}}" />
+    <template is="loMore" data="{{txt: eliteList.length > 0 ? true : false, isShow: elisLoding}}" />
+    <template is="noMore" data="{{txt:'～我是有底线的～',isShow: elisLoding}}" />
 </scroll-view>
 </view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>

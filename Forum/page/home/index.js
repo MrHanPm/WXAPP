@@ -26,13 +26,22 @@ Page({
     onPullDownRefresh(){
         this.setData({
             nowPage:1,
-            newList:[]
+            isLoding: true,
+            loading: true,
+            newList:[],
+            hotNews: []
         })
         this.upData()
     },
     onLoad:function() {
         this.upData()
         this.GETUSERINFO()
+    },
+    onShow:function(){
+        this.onPullDownRefresh()
+        if(APPS.HASLOGIN){    // 判断是否登录，是否更新数据
+            this.GETUSERINFO()
+        }
     },
     upData:function() {
         let newPage = this.data.nowPage
@@ -46,12 +55,21 @@ Page({
                         newPage++
                         newNews.push(...db.data.hotnews)
                         newLists.push(...db.data.threadlist)
-                        this.setData({
-                            hotNews: newNews,
-                            newList: newLists,
-                            nowPage: newPage,
-                            loading: true
-                        })
+
+                        if(db.data.threadlist.length < 20){
+                            this.setData({
+                                hotNews: newNews,
+                                newList: newLists,
+                                isLoding: false
+                            })
+                        }else{
+                            this.setData({
+                                hotNews: newNews,
+                                newList: newLists,
+                                nowPage: newPage,
+                                loading: true
+                            })
+                        }
                         wx.stopPullDownRefresh()
                     }
                 }
@@ -195,12 +213,7 @@ Page({
             url: '../bindTel/index'
         })
     },
-    onShow:function(){
-        if(APPS.HASLOGIN){    // 判断是否登录，是否更新数据
-            this.GETUSERINFO()
-            this.getCarList()
-        }
-    },
+    
     ShareBox(){
         if(this.data.ShareBox){
             this.setData({

@@ -101,22 +101,6 @@ padding-right: 26rpx;
     color: #999999;
     font-size: 28rpx;
 }
-.noDataBox{
-  margin: 55% auto 0;
-  width: 140px;
-  color: #c8c8cd;
-  text-align: center;
-}
-.noDataBox:before{
-  content: '\e616';
-  font-family: 'forum';
-  font-size: 64px;
-  display: block;
-}
-.noDataBox:after{
-  content: '～没有数据～';
-  display: block;
-}
 
 
 .ShareBoxBg{
@@ -562,7 +546,9 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
 
 .noNullBox{
     width: 100%;
-    height: 100%;
+    height: 228rpx;
+    padding-top: 50%;
+    margin-top: -114rpx;
     text-align: center;
 }
 .noNullBox:before{
@@ -571,13 +557,13 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     color: #c8c8cd;
     display: block;
     font-size: 120rpx;
-    margin-top:250rpx;
 }
 .noNullBox:after{
-    content: '～暂无数据～';
+    content: '～没有数据～';
     color: #c8c8cd;
     font-size: 32rpx;
 }
+
 /*----选中样式----*/
 
 .footer .blueAct,.mi_dre .blueAct{

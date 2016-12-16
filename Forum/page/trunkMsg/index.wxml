@@ -54,7 +54,10 @@
     </block>
 
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
+    <view hidden="{{newList.length === 0 ? true : false}}">
     <template is="noMore" data="{{txt:'～我是有底线滴～',isShow: isLoding}}" />
+    </view>
+    <template is="isNull" data="{{isNull: newList.length === 0 ? false : true}}"/>
 </scroll-view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
 <view class="to-return" bindtap="toBack">返回</view>

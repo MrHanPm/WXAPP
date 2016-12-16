@@ -43,7 +43,10 @@
         </view>
     </block>
     <template is="loMore" data="{{txt: newList.length > 0 ? true : false, isShow: isLoding}}" />
+    <view hidden="{{newList.length === 0 ? true : false}}">
     <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
+    </view>
+    <template is="isNull" data="{{isNull: newList.length === 0 ? false : true}}"/>
 </scroll-view>
 </view>
 <view hidden="{{activeIndex == '0' ? true : false}}" class="viewBox">
@@ -75,7 +78,10 @@
         </view>
     </block>
     <template is="loMore" data="{{txt: eliteList.length > 0 ? true : false, isShow: isLoding_M}}" />
+    <view hidden="{{eliteList.length === 0 ? true : false}}">
     <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding_M}}" />
+    </view>
+    <template is="isNull" data="{{isNull: eliteList.length === 0 ? false : true}}"/>
 </scroll-view>
 </view>
 <view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>

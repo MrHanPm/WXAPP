@@ -25,28 +25,27 @@ Page({
           this.setData({loading: false})
           XHR.getHotList({page: newPage,tagid:Tid},
               (db) => {
-                  if(db.status === 0) {
-                    if(db.data.club.threads > 0) {
-                      newPage++
-                      newLists.push(...db.data.threadlist)
-                      this.setData({
-                          newList: newLists,
-                          nowPage: newPage,
-                          Trunk: db.data.club,
-                          loading: true,
-                          isLoding: db.data.threadlist.length < 20 ? false : true
-                      })
-                    }else{
-                      newPage++
-                      newLists.push(...db.data.threadlist)
-                      this.setData({
-                          newList: newLists,
-                          nowPage: newPage,
-                          loading: true,
-                          isLoding: db.data.threadlist.length < 20 ? false : true
-                      })
-                    }
+                if(db.status === 0) {
+                  newPage++
+                  newLists.push(...db.data.threadlist)
+                  if(db.data.club.threads) {
+                    this.setData({
+                        Trunk: db.data.club
+                    })
                   }
+                  if(db.data.threadlist.length < 20) {
+                    this.setData({
+                        newList: newLists,
+                        isLoding: false
+                    })
+                  }else{
+                    this.setData({
+                        newList: newLists,
+                        nowPage: newPage,
+                        loading: true
+                    })
+                  }
+                }
               }
           )
       }

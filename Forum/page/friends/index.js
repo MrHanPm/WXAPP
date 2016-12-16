@@ -2,19 +2,30 @@ const XHR = require('../../requests/request.js')
 
 Page({
   data:{
-      subLoding: false,
-      subDisb: false,
+      subLoding: false, // 按钮加载状态
+      subDisb: false,  // 按钮是否可用
 
-      viewTab: false,
+      toisLoding: true, // 主帖是否有更多
+      toloding: true, // 主帖是否加载
+
+      isLoding:true, // 回帖是否有更多
+      loding: true, // 回帖是否加载
+
+      viewTab: false,  // 切换主贴和回帖视角
       userInfo:{},
-      toForum:[],  // 回帖
-      goForum:[]   // 主贴
+      uid:'',
+      toForum:[],  // 主贴
+      toPage: 1,
+
+      goForum:[],   // 回帖
+      goPage: 1
 
   },
   onLoad:function(options){
     let uid = options.id
     let toJson = {method:'posts', uid:uid}
     let goJson = {method:'replies', uid:uid}
+    this.setData({uid:uid})
     this.userMsg(uid)
     this.userForum(toJson)
     this.userForum(goJson)
@@ -29,18 +40,70 @@ Page({
         }
     )
   },
+  toloadMore(){
+    let toJson = {method:'posts', uid:this.data.uid}
+    this.userForum(toJson)
+  },
+  loadMore(){
+    let goJson = {method:'replies', uid:this.data.uid}
+    this.userForum(goJson)
+  },
   userForum:function (obj) {
-    XHR.getToForum(obj,
-      (db) => {
-        if(db.status === 0) {
-          if(obj.method == 'posts') {
-            this.setData({toForum: db.data})
-          } else {
-            this.setData({goForum: db.data})
+    if(obj.method == 'posts') {
+      if(this.data.toloding){
+        let toForum = this.data.toForum
+        let toPage = this.data.toPage
+        obj.page = toPage
+        this.setData({toloding:false})
+        XHR.getToForum(obj,
+          (db) => {
+            if(db.status === 0) {
+              toPage++
+              toForum.push(...db.data)
+              if(db.data.length < 10) {
+                this.setData({
+                  toForum: toForum,
+                  toisLoding:false
+                })
+              } else {
+                this.setData({
+                  toForum: toForum,
+                  toloding: true,
+                  toPage: toPage
+                })
+              }
+            }
           }
-        }
+        )
       }
-    )
+    }else{
+      if(this.data.loding){
+        let goForum = this.data.goForum
+        let goPage = this.data.goPage
+        obj.page = goPage
+        this.setData({loding:false})
+        XHR.getToForum(obj,
+          (db) => {
+            if(db.status === 0) {
+              goPage++
+              goForum.push(...db.data)
+              if(db.data.length  < 10) {
+                this.setData({
+                  goForum: goForum,
+                  isLoding: false
+                })
+              } else {
+                this.setData({
+                  goForum: goForum,
+                  loding: true,
+                  goPage: goPage
+                })
+              }
+            }
+          }
+        )
+      }
+    }
   },
   checkView:function(e){
     let v = e.target.dataset.v
@@ -64,7 +127,7 @@ Page({
     XHR.addDelFriend({operation:'add',newbuddyid:e.target.dataset.uid},
       (db) => {
         if(db.status === 0){
-          userInfo.isfriend = 1
+          userInfo.wefans = 1
           this.setData({
             subLoding: false,
             subDisb: false,
@@ -93,7 +156,7 @@ Page({
     XHR.addDelFriend({operation:'delete',newbuddyid:e.target.dataset.uid},
       (db) => {
         if(db.status === 0){
-          userInfo.isfriend = 0
+          userInfo.wefans = 0
           this.setData({
             subLoding: false,
             subDisb: false,

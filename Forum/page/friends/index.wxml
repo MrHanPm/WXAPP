@@ -27,7 +27,7 @@
 </view>
 
 <view class="friends-front" hidden="{{viewTab ? false : true}}">
-    <scroll-view scroll-y="true">
+    <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="toloadMore">
         <block wx:for="{{toForum}}">
             <view class="friends-content">
                 <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
@@ -37,14 +37,15 @@
                 </view>
             </view>
         </block>
-        <template is="loMore" data="{{txt: toForum.length > 0 ? true : false}}" />
-        <view hidden="{{toForum.length !== 0}}">
-        <template is="isNull" />
+        <template is="loMore" data="{{txt: toForum.length > 0 ? true : false, isShow: toisLoding}}" />
+        <view hidden="{{toForum.length === 0 ? true : false}}">
+        <template is="noMore" data="{{txt:'～我是有底线的～',isShow: toisLoding}}" />
         </view>
+        <template is="isNull" data="{{isNull: toForum.length === 0 ? false : true}}"/>
     </scroll-view>
 </view>
 <view class="friends-front" hidden="{{viewTab ? true : false}}">
-    <scroll-view scroll-y="true">
+    <scroll-view scroll-y="true" lower-threshold="134" bindscrolltolower="loadMore">
         <block wx:for="{{goForum}}">
             <view class="friends-content">
                 <text class="content-title" data-tid="{{item.tid}}" bindtap="goMsg">{{item.subject}}</text>
@@ -54,11 +55,12 @@
                 </view>
             </view>
         </block>
-        <template is="loMore" data="{{txt: goForum.length > 0 ? true : false}}" />
-        <view hidden="{{goForum.length !== 0}}">
-        <template is="isNull" />
+        <template is="loMore" data="{{txt: goForum.length > 0 ? true : false, isShow: isLoding}}" />
+        <view hidden="{{goForum.length === 0 ? true : false}}">
+        <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
         </view>
+        <template is="isNull" data="{{isNull: goForum.length === 0 ? false : true}}"/>
     </scroll-view>
 </view>
-<button wx:if="{{userInfo.isfriend == '0'}}" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="addFriend">添加关注</button>
-<button wx:if="{{userInfo.isfriend == '1'}}" type="warn" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="delFriend">取消关注</button>
+<button wx:if="{{userInfo.wefans == '0'}}" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="addFriend">添加关注</button>
+<button wx:if="{{userInfo.wefans > 0}}" type="warn" class="friends-add" data-uid="{{userInfo.uid}}" loading="{{subLoding}}" disabled="{{subDisb}}" bindtap="delFriend">取消关注</button>

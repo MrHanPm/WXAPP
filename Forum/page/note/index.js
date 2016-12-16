@@ -48,55 +48,63 @@ Page({
         this.upData(options.id)
     },
     upData:function(tid) {
-        let tids
-        if(tid) {
-            tids = tid
-        } else {
-            tids = this.data.tid
-        }
         let newPage = this.data.nowPage
         let newpostlist = this.data.postlist
         if (this.data.loading) {
             this.setData({loading: false})
-            XHR.getDetail({tid: tid, page: newPage,items:21,sort:this.data.sortV},
+            XHR.getDetail({tid: tid, page: newPage,sort:this.data.sortV},
                 (db) => {
                     if(db.status === 0) {
                         newPage++
                         let da = `${db.data.thread.pid}`
                         let Dlist = db.data.postlist
                         newpostlist.push(...Dlist)
-                        this.setData({
-                            thread: db.data.thread,
-                            postlist: newpostlist,
-                            hots: db.data.hots,
-                            comments: db.data.comments[da],
-                            nowPage:newPage,
-                            loading: true,
-                            isLoding: Dlist.length >= 20 ? true : false
-                        })
+                        if(Dlist.length < 20){
+                            this.setData({
+                                thread: db.data.thread,
+                                postlist: newpostlist,
+                                hots: db.data.hots,
+                                comments: db.data.comments[da],
+                                isLoding: false
+                            })
+                        }else{
+                            this.setData({
+                                thread: db.data.thread,
+                                postlist: newpostlist,
+                                hots: db.data.hots,
+                                comments: db.data.comments[da],
+                                nowPage:newPage,
+                                loading: true,
+                            })
+                        }
                     }
                 }
             )
         }
     },
     upDataActiv:function(tid) {
-        let tids = tid
         let newPage = this.data.nowPage
         let newpostlist = this.data.postlist
         if (this.data.loading) {
             this.setData({loading: false})
-            XHR.getDetail({tid: tid, page: newPage,items:21,sort:this.data.sortV},
+            XHR.getDetail({tid: tid, page: newPage,sort:this.data.sortV},
                 (db) => {
                     if(db.status === 0) {
                         newPage++
                         let Dlist = db.data.postlist
                         newpostlist.push(...Dlist)
-                        this.setData({
-                            postlist: newpostlist,
-                            nowPage:newPage,
-                            loading: true,
-                            isLoding: Dlist.length >= 20 ? true : false
-                        })
+                        if(Dlist.length < 20){
+                            this.setData({
+                                postlist: newpostlist,
+                                isLoding: false
+                            })
+                        }else{
+                            this.setData({
+                                postlist: newpostlist,
+                                nowPage:newPage,
+                                loading: true,
+                            })
+                        }
                     }
                 }
             )
@@ -111,12 +119,16 @@ Page({
                 sortV:'fanxu',
                 postlist: [],
                 nowPage: 1,
+                loading: true,
+                isLoding: true,
                 sortX: false
             })
         }else{
             this.setData({
                 sortV:'',
                 postlist: [],
+                loading: true,
+                isLoding: true,
                 nowPage: 1,
                 sortX: true
             })

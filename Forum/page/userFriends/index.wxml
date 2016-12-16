@@ -27,11 +27,10 @@
     </view>
 </block>
 <template is="loMore" data="{{txt: dataList.length > 0 ? true : false, isShow: isLoding}}" />
-<view hidden="{{dataList.length !== 0}}">
-    <template is="isNull" />
-</view>
-<view hidden="{{dataList.length === 0}}">
+<template is="isNull" data="{{isNull: dataList.length === 0 ? false : true}}"/>
+<view hidden="{{dataList.length === 0 ? true : false}}">
 <template is="noMore" data="{{txt:'～我是有底线的～',isShow: isLoding}}" />
 </view>
 </scroll-view>
-<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop" style="right:48rpx"></view>
+<view class="go-top {{showFA ? 'visible' : ''}}" bindtap="goTop"></view>
+<view class="to-return" bindtap="toBack">返回</view>

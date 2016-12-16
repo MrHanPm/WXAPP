@@ -3,17 +3,18 @@ let addId // 临时储存点击id
 Page({
     data: {
         loading: true,     // 延时加载数据
+        elloading: true,     // 延时加载数据精华
         scrollTop: '',
         showFA: false,     // 火箭图标
         isLoding: true,    // 是否加载
+        elisLoding: true,  // 是否加载精华
         activeIndex: 0,
         ShareBox: true,  // 分享引导
 
         nowPage: 1,
         eNowPage: 1,
         newList:[],
-        eliteList:[],
-        loads: true,
+        eliteList:[]
     },
     onLoad:function(options) {
         this.setData({activeIndex: options.id})
@@ -37,11 +38,18 @@ Page({
                     if(db.status === 0) {
                         newPage++
                         newLists.push(...db.data)
-                        this.setData({
-                            newList: newLists,
-                            nowPage: newPage,
-                            loading: true
-                        })
+                        // if(db.data.length < 10) {
+                        //     this.setData({
+                        //         newList: newLists,
+                        //         isLoding: false
+                        //     })
+                        // }else{
+                            this.setData({
+                                newList: newLists,
+                                nowPage: newPage,
+                                loading: true
+                            })
+                        // }
                     }
                 }
             )
@@ -50,18 +58,25 @@ Page({
     upElite:function() {
         let newPage = this.data.eNowPage
         let newLists = this.data.eliteList
-        if (this.data.loads) {
-            this.setData({loads: false})
+        if (this.data.elloading) {
+            this.setData({elloading: false})
             XHR.getElite({page: newPage},
                 (db) => {
                     if(db.status === 0) {
                         newPage++
                         newLists.push(...db.data)
-                        this.setData({
-                            eliteList: newLists,
-                            eNowPage: newPage,
-                            loads: true
-                        })
+                        if(db.data.length < 20) {
+                            this.setData({
+                                eliteList: newLists,
+                                elisLoding: false
+                            })
+                        }else{
+                            this.setData({
+                                eliteList: newLists,
+                                eNowPage: newPage,
+                                elloading: true
+                            })
+                        }
                     }
                 }
             )

@@ -21,16 +21,14 @@ Page({
             XHR.getFriendsForum({page: newPage},
                 (db) => {
                     if(db.status === 0) {
-                        if(db.data.length < 20){
-                            newNews.push(...db.data)
+                        newPage++
+                        newNews.push(...db.data)
+                        if(db.data.length < 10){
                             this.setData({
                                 dataList: newNews,
-                                loading: false,
                                 isLoding: false
                             })
                         }else{
-                            newPage++
-                            newNews.push(...db.data)
                             this.setData({
                                 dataList: newNews,
                                 nowPage: newPage,
@@ -69,5 +67,8 @@ Page({
         wx.redirectTo({
             url: `../note/index?id=${e.target.dataset.tid}`
         })
-    }
+    },
+    toBack:function() {
+        wx.navigateBack({delta:1})
+    },
 })

@@ -2,19 +2,9 @@
   <view class="noMor" hidden="{{isShow ? true : false}}">{{txt}}</view>
 </template>
 
-
-<template name="countPP">
-  <view class="noMor">～共{{txt}}位联系人～</view>
-</template>
-
-
-<template name="noData">
-  <view class="noDataBox"></view>
-</template>
-
 <!--空数据-->
 <template name="isNull">
-  <view class="noNullBox"></view>
+  <view class="noNullBox" hidden="{{isNull}}"></view>
 </template>
 
 <template name="loMore">

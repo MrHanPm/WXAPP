@@ -46,4 +46,7 @@ Page({
             }
         )
     },
+    toBack:function() {
+        wx.navigateBack({delta:1})
+    },
 })

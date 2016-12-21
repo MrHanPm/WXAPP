@@ -46,6 +46,17 @@ Page({
     onLoad:function(options) {
         this.setData({tid: options.id})
         this.upData(options.id)
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          id: options.id,
+          dp:'/note/index',        // 页面路径
+          dt:'\u8d34\u5b50\u8be6\u60c5\u9875',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     upData:function(tid) {
         let newPage = this.data.nowPage
@@ -104,6 +115,16 @@ Page({
                                 nowPage:newPage,
                                 loading: true,
                             })
+                            XHR.GA({
+                                v:1,
+                                tid:'UA-77901546-9',
+                                cid:APPS.SESSIONID,
+                                t:'event',
+                                dp:`/note/index/id=${tid}`,
+                                ec:'\u8bba\u575b',
+                                ea:'\u52a0\u8f7d\u4e0b\u4e00\u9875',
+                                el:'',
+                              })
                         }
                     }
                 }
@@ -146,30 +167,55 @@ Page({
     rcmdAdd:function(e) {
         let tid = e.target.dataset.tid
         let pid = e.target.dataset.pid
+        let types = e.target.dataset.type
         let oldId = addId
         addId = pid
         
         let idx = e.target.dataset.idx
         let dis = e.target.dataset.dis
-        let newL = this.data.postlist
-        // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true' && oldId !== addId) {
+        let newL
+        if( types== 'hots'){
+            newL = this.data.hots
+        }else{
+            newL = this.data.postlist
+        }
+        console.log( dis, idx, tid,'sssssssssss')
+        if(dis == 'null' && oldId !== addId) {
             XHR.getLaud({tid: tid,pid: pid},
                 (db) => {
                     if(db.status === 0) {
                         if(db.data.recommend_count) {
-                           newL[idx]['recommend_add'] = db.data.recommend_count 
+                           newL[idx]['recommend_count'] = db.data.recommend_count 
+                           newL[idx]['id'] = '123123'
                         }
-                        newL[idx]['rcmd'] = true
-                        this.setData({
-                            postlist: newL
-                        })
+                        if( types== 'hots'){
+                            this.setData({hots: newL})
+                        }else{
+                            this.setData({postlist: newL})
+                        }
+                        XHR.GA({
+                            v:1,
+                            tid:'UA-77901546-9',
+                            cid:APPS.SESSIONID,
+                            t:'event',
+                            dp:'/note/index',
+                            ec:'\u8bba\u575b',
+                            ea:'\u70b9\u8d5e\u5e16\u5b50',
+                            el:'',
+                          })
                     } else {
                         // icon: 'info',
-                        wx.showToast({
-                          title: db.data,
+                        // wx.showToast({
+                        //   title: db.data,
                           
-                          duration: 2000
+                        //   duration: 2000
+                        // })
+                        wx.showModal({
+                          title: '提示',
+                          content: db.data,
+                          showCancel: false,
+                          success: function(res) {
+                          }
                         })
                     }
                 }
@@ -183,17 +229,27 @@ Page({
         addId = tid
         let newL = this.data.thread
         // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true'&& oldId !== addId) {
+        if(dis == '0' && oldId !== addId) {
             XHR.getLaud({tid: tid},
                 (db) => {
                     if(db.status === 0) {
                         if(db.data.recommend_count) {
                            newL['recommend_add'] = db.data.recommend_count 
                         }
-                        newL['rcmd'] = true
+                        newL['recommend'] = 2
                         this.setData({
                             thread: newL
                         })
+                        XHR.GA({
+                            v:1,
+                            tid:'UA-77901546-9',
+                            cid:APPS.SESSIONID,
+                            t:'event',
+                            dp:'/note/index',
+                            ec:'\u8bba\u575b',
+                            ea:'\u70b9\u8d5e\u5e16\u5b50',
+                            el:'',
+                          })
                     } else {
                         // icon: 'info',
                         wx.showToast({
@@ -215,7 +271,7 @@ Page({
         var that = this
         setTimeout(() => {
             that.postWrite()
-        }, 300);
+        }, 500);
     },
     postWrite:function(){
         if(this.checkForm()){
@@ -247,6 +303,16 @@ Page({
                             inputValue: ''
                         })
                         this.sortActiv()
+                        XHR.GA({
+                            v:1,
+                            tid:'UA-77901546-9',
+                            cid:APPS.SESSIONID,
+                            t:'event',
+                            dp:'/note/index',
+                            ec:'\u8bba\u575b',
+                            ea:'\u56de\u590d\u5e16\u5b50\u6210\u529f',
+                            el:'',
+                          })
                     }
                 }
             )
@@ -317,6 +383,16 @@ Page({
         if(this.data.ShareBox){
             this.setData({
                 ShareBox: false
+            })
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'event',
+              dp:'/note/index',
+              ec:'\u5206\u4eab\u6210\u529f\u002d\u5c0f\u7a0b\u5e8f',
+              ea:'\u5206\u4eab\u6210\u529f\u002d\u5c0f\u7a0b\u5e8f',
+              el:'',
             })
         }else{
             this.setData({

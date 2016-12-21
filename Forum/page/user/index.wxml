@@ -4,7 +4,7 @@
         <view class="mi_personal-name">{{isUserInfo ? userInfo.username : userInfo.nickName}}</view>
         <view hidden="{{isUserInfo?false:true}}" class="level all-grade{{userInfo.score.level}}"></view>
     </view>
-    <view class="mi_sign">已签到</view>
+    <view hidden="{{userInfo.signed>0?false:true}}" class="mi_sign">已签到</view>
     <view class="mi_w-back">
         <image class="mi_w-back-img" src="../../resources/image/w-back.png"></image>
     </view>

@@ -47,6 +47,16 @@ Page({
             }
         }
     )
+    XHR.GA({
+      v:1,
+      tid:'UA-77901546-9',
+      cid:APPS.SESSIONID,
+      t:'pageview',
+      dh:'bbs.360che.com',
+      dp:'/trunk/index',        // 页面路径
+      dt:'\u5361\u8f66\u5217\u8868\u9875',    // 页面标题
+      cd1: APPS.SESSIONID // 用户识别码
+    })
   },
   goTop:function(e) {
       let that = this
@@ -68,14 +78,35 @@ Page({
           if(inx == 'false'){
             htoTrunk[dix].isfav = true
             this.setData({htoTrunk:htoTrunk})
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'event',
+              dp:'/home/index',
+              ec:'\u8bba\u575b',
+              ea:'\u70b9\u51fb\u5173\u6ce8\u8bba\u575b',
+              el:htoTrunk[dix].info,
+            })
           }else{
             clubList[inx][dix].isfav = true
             this.setData({clubList:clubList})
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'event',
+              dp:'/home/index',
+              ec:'\u8bba\u575b',
+              ea:'\u70b9\u51fb\u5173\u6ce8\u8bba\u575b',
+              el:clubList[inx][dix].name,
+            })
           }
+
         }else{
           wx.showModal({
             title: '提示',
-            content:'最多只能关注10个哦～',
+            content: db.data,
             showCancel: false,
             success: function(res) {
               // if (res.confirm) {
@@ -104,7 +135,7 @@ Page({
           }
         }else{
           wx.showModal({
-            title: '最多只能关注10个哦～',
+            title: '最多只能关注5个哦～',
             showCancel: false,
             success: function(res) {
               // if (res.confirm) {

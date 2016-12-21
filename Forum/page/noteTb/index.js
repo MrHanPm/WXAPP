@@ -1,4 +1,5 @@
 const XHR = require('../../requests/request.js')
+var APPS = getApp()
 let addId // 临时储存点击id
 Page({
     data: {
@@ -24,8 +25,30 @@ Page({
     onReady:function(){
         if (this.data.activeIndex == '0') {
             wx.setNavigationBarTitle({title: '十大热贴'})
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'pageview',
+              dh:'bbs.360che.com',
+              id: this.data.activeIndex,
+              dp:'/noteTb/index',
+              dt:'\u5341\u5927\u70ed\u8d34',
+              cd1: APPS.SESSIONID 
+            })
         } else {
             wx.setNavigationBarTitle({title: '精华'})
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'pageview',
+              dh:'bbs.360che.com',
+              id: this.data.activeIndex,
+              dp:'/noteTb/index',
+              dt:'\u7cbe\u534e',
+              cd1: APPS.SESSIONID 
+            })
         }
     },
     upData:function() {
@@ -50,6 +73,18 @@ Page({
                                 loading: true
                             })
                         // }
+                        if(this.data.nowPage >= 2){
+                            XHR.GA({
+                                v:1,
+                                tid:'UA-77901546-9',
+                                cid:APPS.SESSIONID,
+                                t:'event',
+                                dp:'/noteTb/index',
+                                ec:'\u8bba\u575b',
+                                ea:'\u5341\u5927\u70ed\u8d34\u52a0\u8f7d\u4e0b\u4e00\u9875',
+                                el:'',
+                            })
+                        }
                     }
                 }
             )
@@ -76,6 +111,18 @@ Page({
                                 eNowPage: newPage,
                                 elloading: true
                             })
+                            if(this.data.eNowPage >= 2){
+                                XHR.GA({
+                                    v:1,
+                                    tid:'UA-77901546-9',
+                                    cid:APPS.SESSIONID,
+                                    t:'event',
+                                    dp:'/noteTb/index',
+                                    ec:'\u8bba\u575b',
+                                    ea:'\u7cbe\u534e\u52a0\u8f7d\u4e0b\u4e00\u9875',
+                                    el:'',
+                                })
+                            }
                         }
                     }
                 }
@@ -96,14 +143,14 @@ Page({
             newL = this.data.eliteList
         }
         // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true' && oldId !== addId) {
+        if(dis < 0 && oldId !== addId) {
             XHR.getLaud({tid: tid},
                 (db) => {
                     if(db.status === 0) {
                         if(db.data.recommend_count) {
                            newL[idx]['recommend_add'] = db.data.recommend_count 
                         }
-                        newL[idx]['rcmd'] = true
+                        newL[idx]['liked'] = 2
                         if( nowIndex == '0'){
                             this.setData({
                                 newList: newL
@@ -113,6 +160,16 @@ Page({
                                 eliteList: newL
                             })
                         }
+                        XHR.GA({
+                            v:1,
+                            tid:'UA-77901546-9',
+                            cid:APPS.SESSIONID,
+                            t:'event',
+                            dp:'/noteTb/index',
+                            ec:'\u8bba\u575b',
+                            ea:'\u70b9\u8d5e\u5e16\u5b50',
+                            el:''
+                          })
                     }else{
                         wx.showToast({
                           title: db.data,

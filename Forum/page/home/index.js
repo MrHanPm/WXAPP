@@ -36,9 +36,20 @@ Page({
     onLoad:function() {
         this.upData()
         this.GETUSERINFO()
+
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          dp:'/home/index',        // 页面路径
+          dt:'\u9996\u9875',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     onShow:function(){
-        this.onPullDownRefresh()
+        // this.onPullDownRefresh()
         if(APPS.HASLOGIN){    // 判断是否登录，是否更新数据
             this.GETUSERINFO()
         }
@@ -69,6 +80,18 @@ Page({
                                 nowPage: newPage,
                                 loading: true
                             })
+                            if(this.data.nowPage >= 2){
+                                XHR.GA({
+                                    v:1,
+                                    tid:'UA-77901546-9',
+                                    cid:APPS.SESSIONID,
+                                    t:'event',
+                                    dp:'/home/index',
+                                    ec:'\u8bba\u575b',
+                                    ea:'\u52a0\u8f7d\u4e0b\u4e00\u9875',
+                                    el:'',
+                                })
+                            }
                         }
                         wx.stopPullDownRefresh()
                     }
@@ -124,21 +147,38 @@ Page({
         let dis = e.target.dataset.dis
         let newL = this.data.newList
         // console.log( dis, idx, tid,'sssssssssss')
-        if(dis !== 'true' && oldId !== addId) {
+        if(dis < 0 && oldId !== addId) {
             XHR.getLaud({tid: tid},
                 (db) => {
                     if(db.status === 0) {
                         if(db.data.recommend_count) {
                            newL[idx]['recommend_add'] = db.data.recommend_count 
                         }
-                        newL[idx]['rcmd'] = true
+                        newL[idx]['liked'] = 2
                         this.setData({
                             newList: newL
                         })
+                        XHR.GA({
+                            v:1,
+                            tid:'UA-77901546-9',
+                            cid:APPS.SESSIONID,
+                            t:'event',
+                            dp:'/home/index',
+                            ec:'\u8bba\u575b',
+                            ea:'\u70b9\u8d5e\u5e16\u5b50',
+                            el:'',
+                          })
                     }else{
-                        wx.showToast({
-                          title: db.data,
-                          duration: 2000
+                        // wx.showToast({
+                        //   title: ,
+                        //   duration: 2000
+                        // })
+                        wx.showModal({
+                          title: '提示',
+                          content: db.data,
+                          showCancel: false,
+                          success: function(res) {
+                          }
                         })
                     }
                 }
@@ -155,6 +195,17 @@ Page({
                         userInfo: usInf,
                         signDay: db.data.resign
                     })
+                    this.GETUSERINFO()
+                    XHR.GA({
+                        v:1,
+                        tid:'UA-77901546-9',
+                        cid:APPS.SESSIONID,
+                        t:'event',
+                        dp:'/home/index',
+                        ec:'\u8bba\u575b',
+                        ea:`已签到${db.data.resign}天`,
+                        el:'',
+                      })
                 }else{
                     wx.showModal({
                       title: '提示',
@@ -207,6 +258,16 @@ Page({
                url: '../bindTel/index'
             })
         }
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'event',
+          dp:'/home/index',
+          ec:'\u8bba\u575b',
+          ea:'\u70b9\u51fb\u53d1\u5e16\u6309\u94ae',
+          el:'',
+        })
     },
     bindTel:function (){
         wx.redirectTo({
@@ -219,12 +280,21 @@ Page({
             this.setData({
                 ShareBox: false
             })
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'event',
+              dp:'/home/index',
+              ec:'\u5206\u4eab\u6210\u529f\u002d\u5c0f\u7a0b\u5e8f',
+              ea:'\u5206\u4eab\u6210\u529f\u002d\u5c0f\u7a0b\u5e8f',
+              el:'',
+            })
         }else{
             this.setData({
                 ShareBox: true
             })
         }
-        
     }
 })
 

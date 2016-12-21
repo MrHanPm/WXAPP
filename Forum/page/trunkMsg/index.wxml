@@ -44,11 +44,11 @@
             </view>
             </navigator>
             <view class="footer">
-                <text class="prise {{item.rcmd ? 'blueAct' : ''}}"
-                        data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.rcmd}}"
+                <text class="prise {{item.liked > 0 ? 'blueAct' : ''}}"
+                        data-idx="{{index}}" data-tid="{{item.tid}}" data-dis="{{item.liked}}"
                         bindtap="rcmdAdd">{{item.recommend_add > 0 ? item.recommend_add : "点赞"}}</text>
                 <text class="discuss" bindtap="goMsg" data-tid="{{item.tid}}">{{item.replies > 0 ? item.replies : "回复"}}</text>
-                <text class="share" bindtap="ShareBox">{{item.sharetimes > 0 ? item.sharetimes : "转发"}}</text>
+                <text class="share" bindtap="ShareBox">{{item.shareCount > 0 ? item.shareCount : "转发"}}</text>
             </view>
         </view>
     </block>

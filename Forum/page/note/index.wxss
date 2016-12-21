@@ -59,7 +59,15 @@
 .blueAct text,.blueAct .icon{color: #3B5998;}
 scroll-view{padding-bottom: 101rpx;box-sizing: border-box;}
 
-
+.first_loding{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    z-index: 2999;
+}
 
 
 .mi_box{
@@ -277,7 +285,7 @@ image{ max-width: 100%;}
     width: 100%;
 }
 .txt_input{
-    width: 100%;
+    width: 90%;
     display: block;
     height: 160rpx;
     margin: 20rpx auto 0;

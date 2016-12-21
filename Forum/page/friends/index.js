@@ -1,5 +1,5 @@
 const XHR = require('../../requests/request.js')
-
+var APPS = getApp()
 Page({
   data:{
       subLoding: false, // 按钮加载状态
@@ -29,6 +29,17 @@ Page({
     this.userMsg(uid)
     this.userForum(toJson)
     this.userForum(goJson)
+    XHR.GA({
+      v:1,
+      tid:'UA-77901546-9',
+      cid:APPS.SESSIONID,
+      t:'pageview',
+      id: options.id,
+      dh:'bbs.360che.com',
+      dp:'/friends/index',        // 页面路径
+      dt: '\u597d\u53cb\u4e2d\u5fc3',    // 页面标题
+      cd1: APPS.SESSIONID // 用户识别码
+    })
   },
   userMsg:function (uid) {
     let usIf = wx.getStorageSync('_USERINFO')

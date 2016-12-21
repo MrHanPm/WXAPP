@@ -1,4 +1,5 @@
 const XHR = require('../../requests/request.js')
+var APPS = getApp()
 let addId // 临时储存点击id
 Page({
     data: {
@@ -23,6 +24,16 @@ Page({
         this.setData({activeIndex: options.id})
         this.upData()
         this.upElite()
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          dp:'/userNote/index',        // 页面路径
+          dt:'\u6211\u7684\u5e16\u5b50\u5217\u8868',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     onReady:function(){
         // if (this.data.activeIndex == '0') {

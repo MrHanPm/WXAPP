@@ -40,7 +40,16 @@ Page({
     }else{
       this.getCarList()
     }
-    
+    XHR.GA({
+      v:1,
+      tid:'UA-77901546-9',
+      cid:APPS.SESSIONID,
+      t:'pageview',
+      dh:'bbs.360che.com',
+      dp:'/postForum/index',        // 页面路径
+      dt:'\u53d1\u8d34\u9875',    // 页面标题
+      cd1: APPS.SESSIONID // 用户识别码
+    })
     // this.setData({
     //     USERINFO: APPS.USERINFO.userInfo
     // })
@@ -129,6 +138,16 @@ Page({
           (db) => {
               if(db.status === 0){
                   wx.navigateBack()
+                  XHR.GA({
+                    v:1,
+                    tid:'UA-77901546-9',
+                    cid:APPS.SESSIONID,
+                    t:'event',
+                    dp:'/postForum/index',
+                    ec:'\u8bba\u575b',
+                    ea:'\u53d1\u5e16\u6210\u529f',
+                    el:'',
+                  })
               }else{
                   this.ALT(db.data)
               }
@@ -172,37 +191,45 @@ Page({
   chooseImage:function(){
     var that = this
     let imageList = this.data.imageList
-    wx.chooseImage({
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album'],
-      success: function (res) {
-        imageList.push(...res.tempFilePaths)
-        that.uploadImg(res.tempFilePaths)
-        that.setData({
-          imageList:imageList
-        })
-        // console.log(res.tempFilePaths)
-      }
-    })
+    let counts = 9 - imageList
+    if(imageList < 9){
+      wx.chooseImage({
+        count: counts,
+        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'],
+        success: function (res) {
+          imageList.push(...res.tempFilePaths)
+          that.uploadImg(res.tempFilePaths)
+          imageList.splice(9,imageList.length - 9)
+          that.setData({
+            imageList:imageList
+          })
+          // console.log(res.tempFilePaths)
+        }
+      })
+    }
   },
   addChooseImage:function(){
     var that = this
     let imageList = this.data.imageList
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['camera'],
-      success: function (res) {
-        imageList.push(...res.tempFilePaths)
-        that.uploadImg(res.tempFilePaths)
-        that.setData({
-          imageList: imageList,
-          showForm: false, // 是否显示遮层
-          showSmal: true, // 是否显示表情
-          showPic: false, // 是否显示图片选择
-        })
-      }
-    })
+    if(imageList < 9){
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['camera'],
+        success: function (res) {
+          imageList.push(...res.tempFilePaths)
+          that.uploadImg(res.tempFilePaths)
+          imageList.splice(9,imageList.length - 9)
+          that.setData({
+            imageList: imageList,
+            showForm: false, // 是否显示遮层
+            showSmal: true, // 是否显示表情
+            showPic: false, // 是否显示图片选择
+          })
+        }
+      })
+    }
   },
   uploadImg(obj){
     var that = this

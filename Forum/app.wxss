@@ -301,7 +301,8 @@ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACeco
     border: 2rpx solid #ffc320;
     margin-left: 10rpx;
     position: relative;
-    top: -4rpx;
+    top: -2rpx;
+    border-radius: 6rpx;
 }
 .header .browse{
     float: right;

@@ -74,7 +74,16 @@ Page({
                 this.showTopTip('网络错误！稍后重试～')
               }
             )
-
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:res.code,
+              t:'pageview',
+              dh:'bbs.360che.com',
+              dp:'/index',        // 页面路径
+              dt:'初始化加载',    // 页面标题
+              cd1:'null'   // 用户识别码
+            })
           }
         })
     }

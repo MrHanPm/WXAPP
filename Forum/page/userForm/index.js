@@ -9,6 +9,16 @@ Page({
     onLoad:function() {
         
         this.getCarList()
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          dp:'/userForm/index',        // 页面路径
+          dt:'\u6211\u5173\u6ce8\u7684\u8f66\u578b\u9875',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     getCarList:function(){
         XHR.getCarTypeList('',

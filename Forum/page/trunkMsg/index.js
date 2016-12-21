@@ -17,6 +17,16 @@ Page({
   onLoad:function(options){
     this.setData({Tid:options.id})
     this.upData(options.id)
+    XHR.GA({
+      v:1,
+      tid:'UA-77901546-9',
+      cid:APPS.SESSIONID,
+      t:'pageview',
+      dh:'bbs.360che.com',
+      dp:'/trunkMsg/index',        // 页面路径
+      dt:'\u5361\u8f66\u4e13\u9898\u9875',    // 页面标题
+      cd1: APPS.SESSIONID // 用户识别码
+    })
   },
   upData:function(Tid) {
       let newPage = this.data.nowPage
@@ -85,6 +95,16 @@ Page({
         if(db.status === 0){
             Trunk.followed = true
             this.setData({Trunk: Trunk})
+            XHR.GA({
+              v:1,
+              tid:'UA-77901546-9',
+              cid:APPS.SESSIONID,
+              t:'event',
+              dp:'/home/index',
+              ec:'\u8bba\u575b',
+              ea:'\u70b9\u51fb\u5173\u6ce8\u8bba\u575b',
+              el:Trunk.club.tagname,
+            })
         }else{
 
         }
@@ -112,14 +132,14 @@ Page({
       let dis = e.target.dataset.dis
       let newL = this.data.newList
       // console.log( dis, idx, tid,'sssssssssss')
-      if(dis !== 'true' && oldId !== addId) {
+      if(dis < 0 && oldId !== addId) {
           XHR.getLaud({tid: tid},
               (db) => {
                   if(db.status === 0) {
                       if(db.data.recommend_count) {
                          newL[idx]['recommend_add'] = db.data.recommend_count 
                       }
-                      newL[idx]['rcmd'] = true
+                      newL[idx]['liked'] = true
                       this.setData({
                           newList: newL
                       })
@@ -139,6 +159,16 @@ Page({
   goAddForum:function(e) {
       wx.redirectTo({
          url: `../postForum/index?id=${e.target.dataset.id}`
+      })
+      XHR.GA({
+        v:1,
+        tid:'UA-77901546-9',
+        cid:APPS.SESSIONID,
+        t:'event',
+        dp:'/trunkMsg/index',
+        ec:'\u8bba\u575b',
+        ea:'\u70b9\u51fb\u53d1\u5e16\u6309\u94ae',
+        el:'',
       })
   },
   ShareBox(){

@@ -142,6 +142,13 @@ function addDelFriend(data, susCb, errCb, comCb ) {
 function addFavorties(data, susCb, errCb, comCb ) {
     xhr(null, API.addFavorties(), data, susCb, errCb, comCb)
 }
+/**---------------统计-------------------**/
+
+function GA(data){
+    xhr('get','https://www.google-analytics.com/collect',data)
+}
+
+
 /**---------------FORM-------------------**/
 
 module.exports = {
@@ -160,5 +167,6 @@ module.exports = {
     addFavorties: addFavorties,
     getPhoneMsg: getPhoneMsg,
     getFriendsForum:getFriendsForum,
-    postWrite: postWrite
+    postWrite: postWrite,
+    GA:GA
 };

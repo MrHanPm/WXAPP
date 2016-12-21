@@ -34,6 +34,16 @@ Page({
         this.setData({
             USERINFO: APPS.USERINFO.userInfo
         })
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          dp:'/bindTel/index',        // 页面路径
+          dt:'绑定手机页',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     bindKeyInput: function (e) {
         this.setData({

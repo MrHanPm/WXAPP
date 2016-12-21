@@ -12,7 +12,8 @@
 .mi_personal-photo{
     width: 160rpx;
     height: 160rpx;
-    border-radius: 50%;  
+    border-radius: 50%;
+    border:4rpx solid rgba(255,255,255,.2);
 }
 .mi_personal-name{
     font-family: PingFangSC-Regular;
@@ -23,7 +24,6 @@
     margin-top: 26rpx;
 }
 .level{
-    width: 130rpx;
     margin-top: 20rpx;
 }
 .mi_sign{

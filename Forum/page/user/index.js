@@ -1,3 +1,4 @@
+const XHR = require('../../requests/request.js')
 var APPS = getApp()
 
 Page({
@@ -27,6 +28,16 @@ Page({
           url: '../index'
       })
     }
+    XHR.GA({
+      v:1,
+      tid:'UA-77901546-9',
+      cid:APPS.SESSIONID,
+      t:'pageview',
+      dh:'bbs.360che.com',
+      dp:'/user/index',        // 页面路径
+      dt:'\u6211\u7684\u9875',    // 页面标题
+      cd1: APPS.SESSIONID // 用户识别码
+    })
   },
   GetPercent(num, total) { 
     num = parseFloat(num)

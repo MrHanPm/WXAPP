@@ -1,5 +1,5 @@
 const XHR = require('../../requests/request.js')
-// var APPS = getApp()
+var APPS = getApp()
 Page({
     data:{
         loading: true,  // 延时加载数据
@@ -12,6 +12,16 @@ Page({
     },
     onLoad:function(){
         this.upData()
+        XHR.GA({
+          v:1,
+          tid:'UA-77901546-9',
+          cid:APPS.SESSIONID,
+          t:'pageview',
+          dh:'bbs.360che.com',
+          dp:'/userFriends/index',        // 页面路径
+          dt:'\u6211\u5173\u6ce8\u597d\u53cb\u7684\u5e16\u5b50\u5217\u8868',    // 页面标题
+          cd1: APPS.SESSIONID // 用户识别码
+        })
     },
     upData:function(){
         let newPage = this.data.nowPage
